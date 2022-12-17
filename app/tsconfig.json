@@ -27,5 +27,5 @@
     "src",
     "scripts",
     "vite.config.ts"
-  ]
+, "../thorchain.js"  ]
 }

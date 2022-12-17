@@ -1,0 +1,218 @@
+import axios from 'axios';
+
+let one = 100000000,
+  tenThousand = 10000,
+  daysInYear = 365 / 7,
+  secondsInWeek = 7 * 24 * 60 * 60;
+let sortedPools = [],
+  savers = [];
+let uniqueSavers = 0,
+  totalRuneValue = 0,
+  rune_USD = 0,
+  synthCap = 0;
+
+let USD = `BNB.BUSD-BD1`;
+
+let baseEndpoint = 'https://thornode.ninerealms.com/';
+let blocksStub = 'blocks/latest';
+let poolsStub = 'thorchain/pools';
+let poolStub = 'thorchain/pool/';
+let saversStub = '/savers';
+let mimirStub = 'thorchain/mimir';
+let synthCapMimir = 'MAXSYNTHPERPOOLDEPTH';
+
+let historyBaseEndpoint = 'https://midgard.ninerealms.com/';
+let historyStub = 'v2/history/depths/';
+let intervalParams = 'interval=day';
+let dateParams = 'count=30';
+
+/**** 
+ 
+Based on this article:
+https://medium.com/thorchain/introduction-to-luvi-and-midgard-apr-calculation-update-cf15e743276d
+
+We can take data returned from this endpoint to verify APR calcs:
+Pull pool data from 2022–01–01 to 2022–04–10 (100 days)
+https://midgard.thorswap.net/v2/history/depths/BTC.BTC?interval=day&from=1641081599&to=1649548800
+
+	"meta": {
+		"endAssetDepth": "116477891491",
+		"endLPUnits": "466614125459040",
+		"endRuneDepth": "542948574117125",
+		"endSynthUnits": "3005659190530",
+		"endTime": "1649548800",
+		"luviIncrease": "1.0490043974990912",
+		"priceShiftLoss": "0.9700573870348674",
+		"startAssetDepth": "50194593505",
+		"startLPUnits": "271999088171545",
+		"startRuneDepth": "384089791424390",
+		"startSynthUnits": "0",
+		"startTime": "1640995200"
+	}
+
+  */
+
+let endAssetDepth = parseInt('116477891491');
+let endLPUnits = parseInt('466614125459040');
+let endRuneDepth = parseInt('542948574117125');
+let endSynthUnits = parseInt('3005659190530');
+let endTime = parseInt('1649548800');
+let luviIncrease = parseInt('1.0490043974990912');
+let priceShiftLoss = parseInt('0.9700573870348674');
+let startAssetDepth = parseInt('50194593505');
+let startLPUnits = parseInt('271999088171545');
+let startRuneDepth = parseInt('384089791424390');
+let startSynthUnits = parseInt('0');
+let startTime = parseInt('1640995200');
+
+let startPoolUnits = startLPUnits + startSynthUnits;
+let startLuvi = Math.sqrt(startAssetDepth * startRuneDepth) / startPoolUnits;
+let endPoolUnits = endLPUnits + endSynthUnits;
+let endLuvi = Math.sqrt(endAssetDepth * endRuneDepth) / endPoolUnits;
+let changeInLuvi = endLuvi / startLuvi - 1;
+let annualizedAPR = (changeInLuvi * 365) / 100;
+
+console.log(annualizedAPR);
+
+axios.interceptors.request.use(
+  (config) => {
+    const url = new URL(config.url);
+    if (url.host.includes('ninerealms')) {
+      config.headers['x-client-id'] = 'xchainjs-client';
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+// Get Synth Cap
+const getMimir = async () => {
+  synthCap =
+    (2 *
+      (await axios.get(`${baseEndpoint}${mimirStub}`)).data
+        .MAXSYNTHPERPOOLDEPTH) /
+    tenThousand;
+};
+
+// Get all pools
+const getPools = async () => {
+  return (await axios.get(`${baseEndpoint}${poolsStub}`)).data.filter(
+    (x) => x.status == 'Available',
+  );
+};
+
+const scanPools = async (pools) => {
+  printHeader();
+
+  // For each pool, compute and construct the display object
+  for (let pool of pools) {
+    if (pool.asset == USD) {
+      rune_USD = pool.balance_asset / pool.balance_rune;
+    }
+    if (pool.savers_depth == 0) {
+      continue;
+    }
+    pool.ticker = pool.asset.substr(0, pool.asset.search(/\./));
+    pool.saverReturn = await getPoolAPR(pool);
+    await getLpAPR(pool);
+    pool.saverCount = await getSaversCount(pool.asset);
+    uniqueSavers += pool.saverCount;
+    totalRuneValue +=
+      (pool.savers_depth * pool.balance_rune) / pool.balance_asset / one;
+    pool.saverCap = synthCap * pool.balance_asset;
+    pool.filled = pool.synth_supply / pool.saverCap;
+    pool.earnings = pool.savers_depth - pool.savers_units;
+    sortedPools.push(pool);
+  }
+  // then sort
+  sortedPools = sortedPools.sort((a, b) =>
+    a.saverCount > b.saverCount ? -1 : b.saverCount > a.saverCount ? 1 : 0,
+  );
+  // then print out
+  printPools(sortedPools);
+  printFooter();
+};
+
+// Header
+const printHeader = () => {
+  let dateObj = new Date();
+  let newdate =
+    dateObj.getUTCFullYear() +
+    '/' +
+    dateObj.getUTCMonth() +
+    '/' +
+    dateObj.getUTCDate();
+  console.log(
+    `\n\t\tTHORChain Savers Tracker. ${newdate} #VerifiableFinance\n`,
+  );
+};
+
+// Print Pools object
+const printPools = (sortedPools) => {
+  for (let pool of sortedPools) {
+    console.log(
+      `\t\t${pool.ticker}: ${Number(
+        pool.savers_depth / one,
+      ).toLocaleString()}, ${pool.saverCount} savers, ${Number(
+        pool.filled * 100,
+      ).toLocaleString()}% filled, ${Number(
+        pool.saverReturn * 100,
+      ).toLocaleString()}% APR, ${Number(
+        pool.earnings / one,
+      ).toLocaleString()} earned`,
+    );
+  }
+};
+
+// Print Footer
+const printFooter = () => {
+  console.log(
+    `\n\t\t${uniqueSavers} unique savers with $ ${Number(
+      totalRuneValue * rune_USD,
+    ).toLocaleString()} USD saved \n`,
+  );
+};
+
+// Compute the APR based on 7-day lookback
+const getPoolAPR = async (pool) => {
+  let height_now = (await axios.get(`${baseEndpoint}${blocksStub}`)).data.block
+    .header.height;
+  let height7DaysAgo = `?height=${height_now - secondsInWeek / 6}`;
+  let oldPool = (
+    await axios.get(`${baseEndpoint}${poolStub}${pool.asset}${height7DaysAgo}`)
+  ).data;
+  let oldSaverValue = oldPool.savers_depth / oldPool.savers_units;
+  let newSaverValue = pool.savers_depth / pool.savers_units;
+  let saver7DayGrowth = (newSaverValue - oldSaverValue) / oldSaverValue;
+  return saver7DayGrowth * daysInYear;
+};
+
+const getLpAPR = async (pool) => {
+  let height_now = (await axios.get(`${baseEndpoint}${blocksStub}`)).data.block
+    .header.height;
+  let height7DaysAgo = `?height=${height_now - secondsInWeek / 6}`;
+  let query = `${historyBaseEndpoint}${historyStub}${pool.asset}?${intervalParams}&${dateParams}`;
+  let oldPool = (await axios.get(query).catch((error) => console.log(error)))
+    .data.intervals;
+  console.log(oldPool);
+  // let oldSaverValue = oldPool.asset_depth / oldPool.liquidityUnits
+  // let newSaverValue = pool.savers_depth / pool.savers_units
+  // let saver7DayGrowth = (newSaverValue - oldSaverValue) / oldSaverValue;
+  // return saver7DayGrowth * (daysInYear)
+};
+
+// Find the number of savers in a pool
+const getSaversCount = async (pool) => {
+  savers = (await axios.get(`${baseEndpoint}${poolStub}${pool}/${saversStub}`))
+    .data;
+  return savers.length;
+};
+
+const main = async () => {
+  await getMimir();
+  await scanPools(await getPools());
+};
+
+main();

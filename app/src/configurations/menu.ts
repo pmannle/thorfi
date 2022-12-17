@@ -1,4 +1,3 @@
-import { useDeploymentTarget } from '@anchor-protocol/app-provider';
 import { useMemo } from 'react';
 
 export interface RouteMenu {
@@ -26,26 +25,8 @@ const borrow: RouteMenu = {
   title: 'BORROW',
 };
 
-const bAsset: RouteMenu = {
-  to: '/basset',
-  title: 'bASSET',
-};
-
-const govern: RouteMenu = {
-  to: `/gov`,
-  title: 'GOVERN',
-};
-
 const useMenus = (): RouteMenu[] => {
-  const {
-    target: { isEVM },
-  } = useDeploymentTarget();
-  return useMemo(() => {
-    if (isEVM) {
-      return [dashboard, myPage, earn, borrow, govern];
-    }
-    return [dashboard, myPage, earn, borrow, bAsset, govern];
-  }, [isEVM]);
+  return [dashboard, myPage, earn, borrow];
 };
 
 export { useMenus };

@@ -8,7 +8,6 @@ import {
   DropdownContainer,
   DropdownBox,
 } from 'components/Header/desktop/DropdownContainer';
-import { useBuyUstDialog } from 'pages/earn/components/useBuyUstDialog';
 import { useWallet } from '@terra-money/wallet-provider';
 import { useAirdropElement } from 'components/Header/airdrop';
 import { useVestingClaimNotification } from 'components/Header/vesting/VestingClaimNotification';
@@ -26,8 +25,6 @@ const TerraWalletSelector = () => {
   const [vestingClaimNotificationElement] = useVestingClaimNotification();
 
   const [openSendDialog, sendDialogElement] = useSendDialog();
-
-  const [openBuyUstDialog, buyUstDialogElement] = useBuyUstDialog();
 
   const connectWallet = useCallback(() => {
     if (availableConnectTypes.length > 1) {
@@ -75,10 +72,6 @@ const TerraWalletSelector = () => {
                     openSendDialog({});
                     onClose();
                   }}
-                  onBuyUST={() => {
-                    openBuyUstDialog({});
-                    onClose();
-                  }}
                 />
               )}
             </DropdownBox>
@@ -86,7 +79,6 @@ const TerraWalletSelector = () => {
         )}
 
         {sendDialogElement}
-        {buyUstDialogElement}
       </>
     </WalletSelector>
   );

@@ -180,14 +180,6 @@ function DashboardBase({ className }: DashboardProps) {
         <div className="content-layout">
           <TitleContainerAndExchangeRate>
             <PageTitle title="DASHBOARD" />
-            {moneyMarketEpochState && (
-              <div>
-                1 <small>aUST</small> <TokenIcon token="aust" />{' '}
-                <small>≈</small>{' '}
-                {formatUST(moneyMarketEpochState.exchange_rate)}{' '}
-                <small>UST</small> <TokenIcon token="ust" />
-              </div>
-            )}
           </TitleContainerAndExchangeRate>
 
           <div className="summary-section">

@@ -54,5 +54,17 @@
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2",
     "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "@xchainjs/xchain-client": "^0.13.3",
+    "@xchainjs/xchain-crypto": "^0.2.6",
+    "@xchainjs/xchain-midgard": "^0.4.0",
+    "@xchainjs/xchain-thorchain-query": "^0.1.9",
+    "@xchainjs/xchain-thornode": "^0.1.4",
+    "@xchainjs/xchain-util": "^0.11.0",
+    "axios": "^1.2.1",
+    "axios-retry": "^3.3.1",
+    "bignumber.js": "^9.1.1",
+    "node-fetch": "^3.3.0"
   }
 }

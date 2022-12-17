@@ -44,7 +44,7 @@ export function TerraWithdrawDialog(props: DialogProps<{}, void>) {
       <ViewAddressWarning>
         <ActionButton
           className="button"
-          disabled={!availablePost || !connected || !withdraw || !availablePost}
+          /* disabled={!availablePost || !connected || !withdraw || !availablePost} */
           onClick={() => proceed(withdrawAmount, txFee)}
         >
           Proceed

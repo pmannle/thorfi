@@ -56,91 +56,10 @@ export function TerraApp({ chainOptions }: TerraAppProps) {
           <AstroportGuideBanner />
           <Routes>
             <Route index={true} element={<Dashboard />} />
-
             <Route path="/earn" element={<Earn />} />
-
             <Route path="/borrow" element={<Borrow />} />
-
-            <Route path="/basset" element={<BAssetMain />} />
-
-            <Route path="/basset/bluna" element={<BlunaConvert />}>
-              <Route path="" element={<Navigate to="mint" />} />
-              <Route path="mint" element={<BLunaMint />} />
-              <Route path="burn" element={<BLunaBurn />} />
-              <Route path="*" element={<Navigate to="mint" />} />
-            </Route>
-
-            <Route path="/basset/withdraw" element={<BlunaWithdraw />} />
-
-            <Route path="/basset/claim" element={<BAssetClaim />} />
-
-            <Route path="/basset/wh/:tokenSymbol" element={<WormholeConvert />}>
-              <Route path="" element={<Navigate to="to-basset" />} />
-              <Route path="to-basset" element={<WormholeConvertToBAsset />} />
-              <Route path="to-wbasset" element={<WormholeConvertToWBAsset />} />
-              <Route path="*" element={<Navigate to="to-basset" />} />
-            </Route>
-
-            <Route path="/airdrop" element={<Airdrop />} />
-
-            <Route path={`/anc/vesting/claim`} element={<AncVestingClaim />} />
-
-            <Route path={`/gov/`} element={<GovernanceMain />} />
-
-            <Route path={`/poll/create`} element={<PollCreate />} />
-            <Route
-              path={`/poll/create/modify-anc-distribution`}
-              element={<PollCreateModifyANCDistribution />}
-            />
-            <Route
-              path={`/poll/create/modify-borrow-interest`}
-              element={<PollCreateModifyBorrowInterest />}
-            />
-            <Route
-              path={`/poll/create/modify-collateral-attribute`}
-              element={<PollCreateModifyCollateralAttribute />}
-            />
-            <Route
-              path={`/poll/create/modify-market-parameters`}
-              element={<PollCreateModifyMarketParameters />}
-            />
-            <Route
-              path={`/poll/create/spend-community-pool`}
-              element={<PollCreateSpendCommunityPool />}
-            />
-            <Route
-              path={`/poll/create/text-proposal`}
-              element={<PollCreateTextProposal />}
-            />
-            <Route
-              path={`/poll/create/register-collateral-attributes`}
-              element={<PollCreateRegisterCollateralAttributes />}
-            />
-            <Route path={`/poll/:id`} element={<PollDetail />} />
-
-            <Route path={`/trade/*`} element={<Trade />} />
-
-            <Route
-              path={`/${ancUstLpPathname}/*`}
-              element={<RewardsAncUstLp />}
-            />
-
-            <Route
-              path={`/${ancGovernancePathname}/*`}
-              element={<RewardsAncGovernance />}
-            />
-            <Route path={`/claim/all`} element={<ClaimAll />} />
-            <Route
-              path={`/claim/${ancUstLpPathname}`}
-              element={<ClaimAncUstLp />}
-            />
-            <Route
-              path={`/claim/${ustBorrowPathname}`}
-              element={<ClaimUstBorrow />}
-            />
             <Route path="/mypage" element={<Mypage />} />
             <Route path="/terms" element={<TermsOfService />} />
-
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>

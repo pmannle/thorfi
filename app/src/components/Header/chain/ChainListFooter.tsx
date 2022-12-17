@@ -1,16 +1,13 @@
-import { useDeploymentTarget } from '@anchor-protocol/app-provider';
+import { Chain } from '@anchor-protocol/app-provider';
 import { UIElementProps } from '@libs/ui';
 import React from 'react';
 import styled from 'styled-components';
 
 function ChainListFooterBase({ className }: UIElementProps) {
-  const {
-    target: { chain },
-  } = useDeploymentTarget();
   return (
     <p className={className}>
       You are currently connected to the{' '}
-      <span className="highlight">{chain}</span> network.
+      <span className="highlight">{Chain.Terra}</span> network.
     </p>
   );
 }

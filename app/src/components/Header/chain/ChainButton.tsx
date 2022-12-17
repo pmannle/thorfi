@@ -1,7 +1,7 @@
 import React, { DOMAttributes } from 'react';
 import { UIElementProps } from '@libs/ui';
 import styled from 'styled-components';
-import { useDeploymentTarget } from '@anchor-protocol/app-provider';
+import { Chain } from '@anchor-protocol/app-provider';
 
 interface ChainButtonProps
   extends UIElementProps,
@@ -9,13 +9,10 @@ interface ChainButtonProps
 
 const ChainButtonBase = (props: ChainButtonProps) => {
   const { className, onClick } = props;
-  const {
-    target: { chain },
-  } = useDeploymentTarget();
   return (
     <button className={className} onClick={onClick}>
       <div className="button-nowrap">
-        <div className="chain-name">{chain}</div>
+        <div className="chain-name">{Chain.Terra}</div>
       </div>
     </button>
   );

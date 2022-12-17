@@ -1,8 +1,5 @@
 import { BorrowBorrower, borrowRepayForm } from '@anchor-protocol/app-fns';
-import {
-  BorrowMarketWithDisplay,
-  useDeploymentTarget,
-} from '@anchor-protocol/app-provider';
+import { BorrowMarketWithDisplay } from '@anchor-protocol/app-provider';
 import { useFixedFee, useUstTax } from '@libs/app-provider';
 import { UST } from '@libs/types';
 import { useForm } from '@libs/use-form';
@@ -17,8 +14,6 @@ export function useBorrowRepayForm(
   fallbackBorrowMarket: BorrowMarketWithDisplay,
   fallbackBorrowBorrower: BorrowBorrower,
 ) {
-  const { target } = useDeploymentTarget();
-
   const { connected } = useAccount();
 
   const fixedFee = useFixedFee();
@@ -53,7 +48,6 @@ export function useBorrowRepayForm(
   return useForm(
     borrowRepayForm,
     {
-      target,
       maxTaxUUSD: maxTax,
       taxRate: taxRate,
       userUSTBalance: uUST,

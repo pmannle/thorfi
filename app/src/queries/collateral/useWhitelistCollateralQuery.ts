@@ -13,10 +13,6 @@ import { useAnchorWebapp } from '../../@anchor-protocol/app-provider/contexts/co
 import { ANCHOR_QUERY_KEY } from '../../@anchor-protocol/app-provider/env';
 import { QueryClient, wasmFetch } from '@libs/query-client';
 import { WhitelistWasmQuery } from './types';
-import {
-  DeploymentTarget,
-  useDeploymentTarget,
-} from '@anchor-protocol/app-provider';
 import { NetworkInfo } from '@terra-money/wallet-provider';
 
 const fetchWhitelistCollateral = async (
@@ -63,10 +59,9 @@ const mapTokenInformation = (
 
 const mapBridgedAssets = async (
   whitelist: WhitelistCollateral[],
-  target: DeploymentTarget,
   network: NetworkInfo,
 ): Promise<WhitelistCollateral[]> => {
-  const map = await bridgeAssetsQuery(whitelist, target, network);
+  const map = await bridgeAssetsQuery(whitelist, network);
 
   return whitelist.map((collateral) => {
     return {
@@ -78,7 +73,6 @@ const mapBridgedAssets = async (
 
 async function whitelistCollateralQuery(
   overseerContract: HumanAddr,
-  target: DeploymentTarget,
   network: NetworkInfo,
   tokenInformation: Record<string, CW20TokenDisplayInfo> | undefined,
   queryClient: QueryClient,
@@ -90,7 +84,6 @@ async function whitelistCollateralQuery(
 
   return await mapBridgedAssets(
     mapTokenInformation(whitelist, tokenInformation ?? {}),
-    target,
     network,
   );
 }
@@ -100,8 +93,6 @@ const queryFn = createQueryFn(whitelistCollateralQuery);
 export function useWhitelistCollateralQuery(): UseQueryResult<
   WhitelistCollateral[]
 > {
-  const { target } = useDeploymentTarget();
-
   const { network } = useNetwork();
 
   const { queryClient, contractAddress } = useAnchorWebapp();
@@ -112,7 +103,6 @@ export function useWhitelistCollateralQuery(): UseQueryResult<
     [
       ANCHOR_QUERY_KEY.WHITELIST_COLLATERAL,
       contractAddress.moneyMarket.overseer,
-      target,
       network,
       tokens && tokens[network.name],
       queryClient,

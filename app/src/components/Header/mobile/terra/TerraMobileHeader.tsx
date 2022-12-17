@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { ConnectType, useWallet } from '@terra-money/wallet-provider';
 import { useAccount } from 'contexts/account';
-import { useBuyUstDialog } from 'pages/earn/components/useBuyUstDialog';
 import { useSendDialog } from 'pages/send/useSendDialog';
 import { useWalletDialog } from './useWalletDialog';
 import { useAirdropElement } from 'components/Header/airdrop';
@@ -15,7 +14,6 @@ export function TerraMobileHeader() {
   const { connect, isChromeExtensionCompatibleBrowser } = useWallet();
   const [openWalletDialog, walletDialogElement] = useWalletDialog();
   const [openSendDialog, sendDialogElement] = useSendDialog();
-  const [openBuyUstDialog, buyUstDialogElement] = useBuyUstDialog();
 
   const toggleWallet = useCallback(() => {
     if (status === 'connected') {
@@ -33,7 +31,6 @@ export function TerraMobileHeader() {
   }, [
     connect,
     isChromeExtensionCompatibleBrowser,
-    openBuyUstDialog,
     openSendDialog,
     openWalletDialog,
     status,
@@ -70,7 +67,6 @@ export function TerraMobileHeader() {
       />
       {walletDialogElement}
       {sendDialogElement}
-      {buyUstDialogElement}
     </>
   );
 }

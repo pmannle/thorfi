@@ -26,7 +26,8 @@ export function useEarnWithdrawForm(): EarnWithdrawFormReturn {
 
   const { totalDeposit } = useMemo(() => {
     return {
-      totalDeposit: computeTotalDeposit(uaUST, data?.moneyMarketEpochState),
+      totalDeposit: '0' as UST,
+      // computeTotalDeposit(uaUST, data?.moneyMarketEpochState),
     };
   }, [data?.moneyMarketEpochState, uaUST]);
 

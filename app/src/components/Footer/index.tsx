@@ -17,7 +17,6 @@ import c from 'color';
 import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useDeploymentTarget } from '@anchor-protocol/app-provider';
 import { BlockInfo } from './BlockInfo';
 import { Chain } from '@anchor-protocol/app-provider';
 import { EvmBlockInfo } from './EvmBlockInfo';
@@ -31,10 +30,6 @@ export interface FooterProps {
 function FooterBase({ className, style }: FooterProps) {
   const { network } = useNetwork();
   const { data: lastSyncedHeight = 0 } = useLastSyncedHeightQuery();
-
-  const {
-    target: { isEVM },
-  } = useDeploymentTarget();
 
   const { themeColor, switchable, updateTheme } = useTheme();
 
@@ -55,8 +50,6 @@ function FooterBase({ className, style }: FooterProps) {
               blockNumber={lastSyncedHeight}
             />
           </a>
-
-          {isEVM && <EvmBlockInfo />}
         </div>
 
         {appVersion && <p>{appVersion}</p>}

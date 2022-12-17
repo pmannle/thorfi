@@ -1,4 +1,4 @@
-import { useDeploymentTarget } from '@anchor-protocol/app-provider';
+import { Chain } from '@anchor-protocol/app-provider';
 import {
   CW20TokenDisplayInfos,
   cw20TokenDisplayInfosQuery,
@@ -11,12 +11,8 @@ import { TERRA_QUERY_KEY } from '../../env';
 const queryFn = createQueryFn(cw20TokenDisplayInfosQuery);
 
 export function useCW20TokenDisplayInfosQuery(): UseQueryResult<CW20TokenDisplayInfos> {
-  const {
-    target: { chain },
-  } = useDeploymentTarget();
-
   const result = useAnchorQuery(
-    [TERRA_QUERY_KEY.CW20_TOKEN_DISPLAY_INFOS, chain],
+    [TERRA_QUERY_KEY.CW20_TOKEN_DISPLAY_INFOS, Chain.Terra],
     queryFn,
     {
       keepPreviousData: false,

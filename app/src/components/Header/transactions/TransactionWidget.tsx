@@ -5,7 +5,6 @@ import styled, { useTheme } from 'styled-components';
 import { TransactionButton } from './TransactionButton';
 import { DropdownBox, DropdownContainer } from '../desktop/DropdownContainer';
 import { TransactionList } from './TransactionList';
-import { Chain, useDeploymentTarget } from '@anchor-protocol/app-provider';
 import { useBackgroundTransactions } from 'tx/evm/storage/useBackgroundTransactions';
 import { BorderButton } from '@libs/neumorphism-ui/components/BorderButton';
 import { useNavigate } from 'react-router-dom';
@@ -18,17 +17,13 @@ const TransactionWidgetBase = (props: UIElementProps & { color?: string }) => {
   const [open, setOpen] = useState(false);
   const { backgroundTransactions } = useBackgroundTransactions();
 
-  const {
-    target: { chain },
-  } = useDeploymentTarget();
-
   const navigate = useNavigate();
   const restoreTx = useCallback(() => {
     setOpen(false);
     navigate('/bridge/restore');
   }, [navigate, setOpen]);
 
-  if (backgroundTransactions.length === 0 || chain === Chain.Terra) {
+  if (backgroundTransactions.length === 0) {
     return null;
   }
 

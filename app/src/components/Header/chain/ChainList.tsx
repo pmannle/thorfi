@@ -4,11 +4,8 @@ import { FlatButton } from '@libs/neumorphism-ui/components/FlatButton';
 import { ButtonList } from '../shared';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
 import { ChainListFooter } from './ChainListFooter';
-import {
-  DEPLOYMENT_TARGETS,
-  useDeploymentTarget,
-} from '@anchor-protocol/app-provider';
 import styled from 'styled-components';
+import { Chain } from '@anchor-protocol/app-provider';
 
 interface ChainListProps extends UIElementProps {
   onClose: () => void;
@@ -17,32 +14,24 @@ interface ChainListProps extends UIElementProps {
 function ChainListBase(props: ChainListProps) {
   const { className, onClose } = props;
 
-  const {
-    target: { chain },
-    updateTarget,
-  } = useDeploymentTarget();
-
   return (
     <ButtonList
       className={className}
       title="Switch Chain"
       footer={<ChainListFooter />}
     >
-      {DEPLOYMENT_TARGETS.filter((t) => t.chain !== chain).map((target) => (
-        <FlatButton
-          key={target.chain}
-          className="button"
-          onClick={() => {
-            updateTarget(target);
-            onClose();
-          }}
-        >
-          <IconSpan>
-            {target.chain}
-            <img src={target.icon} alt={target.chain} />
-          </IconSpan>
-        </FlatButton>
-      ))}
+      <FlatButton
+        key={Chain.Terra}
+        className="button"
+        onClick={() => {
+          onClose();
+        }}
+      >
+        <IconSpan>
+          {Chain.Terra}
+          <img src={'/assets/terra-network-logo.png'} alt={Chain.Terra} />
+        </IconSpan>
+      </FlatButton>
     </ButtonList>
   );
 }

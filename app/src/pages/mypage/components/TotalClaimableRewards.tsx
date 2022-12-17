@@ -46,10 +46,9 @@ function TotalClaimableRewardsBase({ className }: TotalClaimableRewardsProps) {
       <header>
         <h4>
           <IconSpan>
-            TOTAL CLAIMABLE REWARDS{' '}
+            TOTAL CLAIMABLE INTEREST EARNED{' '}
             <InfoTooltip>
-              Total number of claimable ANC and ASTRO from UST Borrow and LP
-              staking
+              Total amount of earned interest available for withdrawal.
             </InfoTooltip>
           </IconSpan>
         </h4>

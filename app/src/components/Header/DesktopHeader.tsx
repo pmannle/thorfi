@@ -1,4 +1,3 @@
-import { DeploymentSwitch } from 'components/layouts/DeploymentSwitch';
 import { useMenus, RouteMenu } from 'configurations/menu';
 import { screen } from 'env';
 import React from 'react';
@@ -7,8 +6,6 @@ import styled, { createGlobalStyle } from 'styled-components';
 import LogoAvax from './assets/LogoAvax.svg';
 import LogoEth from './assets/LogoEth.svg';
 import LogoTerra from './assets/LogoTerra.svg';
-import { ChainSelector } from './chain/ChainSelector';
-import { DesktopNotification } from './desktop/DesktopNotification';
 import { TransactionWidget } from './transactions/TransactionWidget';
 import { EvmWalletSelector } from './wallet/evm/EvmWalletSelector';
 import { TerraWalletSelector } from './wallet/terra/TerraWalletSelector';
@@ -26,13 +23,7 @@ function DesktopHeaderBase({ className }: DesktopHeaderProps) {
         href="https://anchorprotocol.com/"
         target="_blank"
         rel="noreferrer"
-      >
-        <DeploymentSwitch
-          terra={() => <img src={LogoTerra} alt="terraLogo" />}
-          ethereum={() => <img src={LogoEth} alt="ethLogo" />}
-          avalanche={() => <img src={LogoAvax} alt="avaxLogo" />}
-        />
-      </a>
+      ></a>
 
       <nav className="menu">
         {menus.map((itemMenu) => (
@@ -42,15 +33,9 @@ function DesktopHeaderBase({ className }: DesktopHeaderProps) {
 
       <div />
 
-      <DesktopNotification className="notification" />
-
       <section className="wallet">
         <TransactionWidget className="transaction-widget" />
-        <ChainSelector className="chain-selector" />
-        <DeploymentSwitch
-          terra={() => <TerraWalletSelector />}
-          ethereum={() => <EvmWalletSelector />}
-        />
+        <TerraWalletSelector></TerraWalletSelector>
       </section>
 
       <GlobalStyle />

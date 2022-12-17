@@ -1,4 +1,3 @@
-import { useDeploymentTarget } from '@anchor-protocol/app-provider';
 import { Tab } from '@libs/neumorphism-ui/components/Tab';
 import { PaddedLayout } from 'components/layouts/PaddedLayout';
 import { PageTitle, TitleContainer } from 'components/primitives/PageTitle';
@@ -34,16 +33,9 @@ const TAB_ITEMS: Item[] = [
 function MypageBase({ className }: MypageProps) {
   const isSmallLayout = useMediaQuery({ query: '(max-width: 1000px)' });
 
-  const {
-    target: { isNative },
-  } = useDeploymentTarget();
-
   const tabItems = useMemo(() => {
-    if (isNative === false) {
-      return TAB_ITEMS.filter((item) => item.value !== 'rewards');
-    }
     return TAB_ITEMS;
-  }, [isNative]);
+  }, []);
 
   const [tab, setTab] = useState<Item>(() => tabItems[0]);
 
@@ -68,14 +60,6 @@ function MypageBase({ className }: MypageProps) {
           keyFunction={({ value }) => value}
         />
       )}
-
-      {isNative &&
-        (isSmallLayout || tab.value === 'all' || tab.value === 'rewards') && (
-          <>
-            <h2>REWARDS</h2>
-            <Rewards />
-          </>
-        )}
 
       {(isSmallLayout || tab.value === 'all' || tab.value === 'earn') && (
         <>

@@ -8,12 +8,5 @@ import { EvmMobileHeader } from './mobile/evm/EvmMobileHeader';
 export function Header() {
   const isMobile = useMediaQuery({ maxWidth: 900 });
 
-  return isMobile ? (
-    <DeploymentSwitch
-      terra={() => <TerraMobileHeader />}
-      ethereum={() => <EvmMobileHeader />}
-    />
-  ) : (
-    <DesktopHeader />
-  );
+  return isMobile ? <TerraMobileHeader /> : <DesktopHeader />;
 }

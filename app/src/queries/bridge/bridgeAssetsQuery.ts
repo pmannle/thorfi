@@ -23,22 +23,15 @@ export type BridgeAssets = Map<CW20Addr, CW20Addr | ERC20Addr>;
 
 export function bridgeAssetsQuery(
   whitelist: WhitelistCollateral[] | undefined,
-  target: DeploymentTarget,
   network: NetworkInfo,
 ): Promise<BridgeAssets | undefined> {
   if (whitelist === undefined) {
     return Promise.resolve(undefined);
   }
 
-  if (target.isNative) {
-    // this will make the code easier later on
-    // if we can always rely on this bridge being set
-    return Promise.resolve(bridgeTerraAssetsQuery(whitelist));
-  }
-
-  if (target.isEVM) {
-    return bridgeEvmAssetsQuery(whitelist, target, network);
-  }
+  // this will make the code easier later on
+  // if we can always rely on this bridge being set
+  return Promise.resolve(bridgeTerraAssetsQuery(whitelist));
 
   throw Error("Oops, something isn't supported here.");
 }

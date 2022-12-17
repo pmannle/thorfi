@@ -12,15 +12,12 @@ import { UIElementProps } from '@libs/ui';
 import {
   DeploymentTarget,
   DEPLOYMENT_TARGETS,
-  useDeploymentTarget,
 } from '@anchor-protocol/app-provider';
 import { FlatButton } from '../@libs/neumorphism-ui/components/FlatButton';
 import { ButtonList } from './Header/shared';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
 
 function EvmUnsupportedNetworkBase({ className }: UIElementProps) {
-  const { updateTarget } = useDeploymentTarget();
-
   const { disconnect } = useWeb3React();
 
   const { connectionType, activate } = useEvmWallet();
@@ -29,7 +26,6 @@ function EvmUnsupportedNetworkBase({ className }: UIElementProps) {
     return async () => {
       if (target.isEVM === false || connectionType === ConnectType.None) {
         // if we arent connected to a wallet then just update the target
-        updateTarget(target);
         return;
       }
 
@@ -41,8 +37,6 @@ function EvmUnsupportedNetworkBase({ className }: UIElementProps) {
       if (error) {
         disconnect();
       }
-
-      updateTarget(target);
     };
   };
 

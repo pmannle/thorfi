@@ -74,5 +74,6 @@ export function createBlockObserver(
   endpoint: string,
   chainID: string,
 ): BlockObserver {
+  console.log('endpoint: ', endpoint);
   return new BlockObserverImpl(endpoint, chainID);
 }

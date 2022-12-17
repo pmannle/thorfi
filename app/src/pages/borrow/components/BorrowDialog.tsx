@@ -4,10 +4,7 @@ import {
   computeBorrowAmountToLtv,
   computeLtvToBorrowAmount,
 } from '@anchor-protocol/app-fns';
-import {
-  useBorrowBorrowForm,
-  useDeploymentTarget,
-} from '@anchor-protocol/app-provider';
+import { useBorrowBorrowForm } from '@anchor-protocol/app-provider';
 import {
   formatUST,
   formatUSTInput,
@@ -85,10 +82,6 @@ function BorrowDialogBase(props: BorrowDialogProps) {
     fallbackBorrowMarket,
     fallbackBorrowBorrower,
   } = props;
-
-  const {
-    target: { isNative },
-  } = useDeploymentTarget();
 
   const { availablePost, connected } = useAccount();
 
@@ -222,11 +215,9 @@ function BorrowDialogBase(props: BorrowDialogProps) {
             </IconSpan>
           </p>
         </h1>
-
         {!!states.invalidTxFee && (
           <MessageBox>{states.invalidTxFee}</MessageBox>
         )}
-
         <NumberInput
           className="amount"
           value={states.borrowAmount}
@@ -241,7 +232,6 @@ function BorrowDialogBase(props: BorrowDialogProps) {
             endAdornment: <InputAdornment position="end">UST</InputAdornment>,
           }}
         />
-
         <div
           className="wallet"
           aria-invalid={
@@ -264,7 +254,6 @@ function BorrowDialogBase(props: BorrowDialogProps) {
             </span>
           </span>
         </div>
-
         <figure className="graph">
           <LTVGraph
             disabled={!connected || states.max.lte(0)}
@@ -276,7 +265,6 @@ function BorrowDialogBase(props: BorrowDialogProps) {
             onStep={ltvStepFunction}
           />
         </figure>
-
         {states.nextLtv?.gt(ANCHOR_SAFE_RATIO) && (
           <MessageBox
             level="error"
@@ -288,32 +276,28 @@ function BorrowDialogBase(props: BorrowDialogProps) {
             collateral may be immediately liquidated to repay part of the loan.
           </MessageBox>
         )}
-
         {states.nextLtv?.gt(states.currentLtv ?? 0) && (
           <EstimatedLiquidationPrice>
             {states.estimatedLiquidationPrice}
           </EstimatedLiquidationPrice>
         )}
-
-        {isNative === false ||
-          (false && (
-            <>
-              <PageDivider />
-              <BorrowCollateralInput
-                collateral={states.collateral}
-                onCollateralChange={onCollateralChanged}
-                maxCollateralAmount={states.maxCollateralAmount}
-                warningMessage={states.invalidCollateralAmount}
-                amount={states.collateralAmount}
-                onAmountChange={(collateralAmount) => {
-                  input({
-                    collateralAmount,
-                  });
-                }}
-              />
-            </>
-          ))}
-
+        (false && (
+        <>
+          <PageDivider />
+          <BorrowCollateralInput
+            collateral={states.collateral}
+            onCollateralChange={onCollateralChanged}
+            maxCollateralAmount={states.maxCollateralAmount}
+            warningMessage={states.invalidCollateralAmount}
+            amount={states.collateralAmount}
+            onAmountChange={(collateralAmount) => {
+              input({
+                collateralAmount,
+              });
+            }}
+          />
+        </>
+        ))
         {states.txFee &&
           states.txFee.gt(0) &&
           states.receiveAmount &&
@@ -329,7 +313,6 @@ function BorrowDialogBase(props: BorrowDialogProps) {
               </TxFeeListItem>
             </TxFeeList>
           )}
-
         <ViewAddressWarning>
           <ActionButton
             className="proceed"
@@ -353,7 +336,6 @@ function BorrowDialogBase(props: BorrowDialogProps) {
             Proceed
           </ActionButton>
         </ViewAddressWarning>
-
         {confirmElement}
       </Dialog>
     </Modal>

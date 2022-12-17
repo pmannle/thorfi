@@ -91,11 +91,11 @@ export function TotalDepositSection({ className }: TotalDepositSectionProps) {
       </div>
 
       <aside className="total-deposit-buttons">
-        <ActionButton disabled={true} onClick={openDeposit}>
+        <ActionButton /* disabled={true} */ onClick={openDeposit}>
           Deposit
         </ActionButton>
         <BorderButton
-          disabled={!connected || !moneyMarketEpochState || Big(uaUST).lte(0)}
+          /* disabled={!connected || !moneyMarketEpochState || Big(uaUST).lte(0)} */
           onClick={openWithdraw}
         >
           Withdraw

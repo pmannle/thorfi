@@ -32,7 +32,6 @@ export interface BorrowBorrowFormInput {
 }
 
 export interface BorrowBorrowFormDependency {
-  target: DeploymentTarget;
   fixedFee: u<UST>;
   userUSTBalance: u<UST>;
   marketBorrowerInfo: moneyMarket.market.BorrowerInfoResponse;
@@ -70,7 +69,6 @@ export interface BorrowBorrowFormStates extends BorrowBorrowFormInput {
 export interface BorrowBorrowFormAsyncStates {}
 
 export const borrowBorrowForm = ({
-  target,
   fixedFee,
   userUSTBalance,
   marketBorrowerInfo,
@@ -88,10 +86,9 @@ export const borrowBorrowForm = ({
 
   const apr = computeBorrowAPR(borrowRate, blocksPerYear);
 
-  const invalidTxFee =
-    connected && target.isNative
-      ? validateTxFee(userUSTBalance, fixedFee)
-      : undefined;
+  const invalidTxFee = connected
+    ? validateTxFee(userUSTBalance, fixedFee)
+    : undefined;
 
   return ({
     borrowAmount,
@@ -133,9 +130,11 @@ export const borrowBorrowForm = ({
         )
       : null;
 
-    const txFee = target.isNative
-      ? computeBorrowTxFee(borrowAmount, { taxRate, maxTaxUUSD }, fixedFee)
-      : (Big(0) as u<UST<Big>>);
+    const txFee = computeBorrowTxFee(
+      borrowAmount,
+      { taxRate, maxTaxUUSD },
+      fixedFee,
+    );
 
     const receiveAmount = computeBorrowReceiveAmount(borrowAmount, txFee);
 

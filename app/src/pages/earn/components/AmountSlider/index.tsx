@@ -6,7 +6,7 @@ import {
 import { HorizontalGraphSlider } from '@libs/neumorphism-ui/components/HorizontalGraphSlider';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
 import { Tooltip } from '@libs/neumorphism-ui/components/Tooltip';
-import { Rate } from '@libs/types';
+import { Rate, UST } from '@libs/types';
 import { InfoOutlined } from '@material-ui/icons';
 import React, { useCallback } from 'react';
 import { useTheme } from 'styled-components';
@@ -129,7 +129,8 @@ export const AmountSlider = ({
         },
         {
           variant: 'value',
-          label: `${formatRate(valueRatio.toFixed(2) as Rate)}%`,
+          label: '0' as UST,
+          // `${formatRate(valueRatio.toFixed(2) as Rate)}%`,
           color:
             value > allowed ? theme.colors.negative : theme.colors.positive,
           value: Math.min(value, max) / max,

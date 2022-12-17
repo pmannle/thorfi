@@ -1,7 +1,6 @@
 import {
   ANCHOR_QUERY_KEY,
   useAnchorWebapp,
-  useDeploymentTarget,
   useNetwork,
 } from '@anchor-protocol/app-provider';
 import { createQueryFn } from '@libs/react-query-utils';
@@ -14,14 +13,12 @@ const queryFn = createQueryFn(bridgeAssetsQuery);
 export function useBridgeAssetsQuery(
   whitelist: WhitelistCollateral[] | undefined,
 ): UseQueryResult<BridgeAssets | undefined> {
-  const { target } = useDeploymentTarget();
-
   const { network } = useNetwork();
 
   const { queryErrorReporter } = useAnchorWebapp();
 
   const bridgeAssets = useQuery(
-    [ANCHOR_QUERY_KEY.BRIDGE_ASSETS, whitelist, target, network],
+    [ANCHOR_QUERY_KEY.BRIDGE_ASSETS, whitelist, network],
     queryFn,
     {
       refetchOnMount: false,

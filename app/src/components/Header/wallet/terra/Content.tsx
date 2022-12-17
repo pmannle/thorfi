@@ -20,7 +20,6 @@ interface ContentProps extends UIElementProps {
   onClose: Action;
   onDisconnectWallet: Action;
   onSend: Action;
-  onBuyUST: Action;
 }
 
 const ContentBase = (props: ContentProps) => {

@@ -6,7 +6,6 @@ import {
   useBAssetInfoAndBalanceTotalQuery,
   useBorrowBorrowerQuery,
   useBorrowMarketQuery,
-  useDeploymentTarget,
   useEarnEpochStatesQuery,
   useRewardsAncGovernanceRewardsQuery,
 } from '@anchor-protocol/app-provider';
@@ -45,10 +44,6 @@ interface Item {
 }
 
 function TotalValueBase({ className }: TotalValueProps) {
-  const {
-    target: { isNative },
-  } = useDeploymentTarget();
-
   const { theme } = useTheme();
 
   const { connected } = useAccount();
@@ -222,14 +217,6 @@ function TotalValueBase({ className }: TotalValueProps) {
             <Sub> UST</Sub>
           </p>
         </div>
-        {isNative && (
-          <div>
-            <BorderButton onClick={() => openSend({})} disabled={!connected}>
-              <Send />
-              Send
-            </BorderButton>
-          </div>
-        )}
       </header>
 
       <div className="values">

@@ -12,10 +12,6 @@ export const ChainLogo = (props: UIElementProps) => {
       terra={() => (
         <img className={className} src={LogoTerra} alt="terraLogo" />
       )}
-      ethereum={() => <img className={className} src={LogoEth} alt="ethLogo" />}
-      avalanche={() => (
-        <img className={className} src={LogoAvax} alt="avaxLogo" />
-      )}
     />
   );
 };

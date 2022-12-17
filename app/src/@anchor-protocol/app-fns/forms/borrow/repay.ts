@@ -28,7 +28,6 @@ export interface BorrowRepayFormInput {
 }
 
 export interface BorrowRepayFormDependency {
-  target: DeploymentTarget;
   fixedFee: u<UST>;
   userUSTBalance: u<UST>;
   marketBorrowerInfo: moneyMarket.market.BorrowerInfoResponse;
@@ -67,7 +66,6 @@ export interface BorrowRepayFormStates extends BorrowRepayFormInput {
 export interface BorrowRepayFormAsyncStates {}
 
 export const borrowRepayForm = ({
-  target,
   fixedFee,
   userUSTBalance,
   marketBorrowerInfo,
@@ -108,10 +106,9 @@ export const borrowRepayForm = ({
     fixedFee,
   );
 
-  const invalidTxFee =
-    connected && target.isNative
-      ? validateTxFee(userUSTBalance, fixedFee)
-      : undefined;
+  const invalidTxFee = connected
+    ? validateTxFee(userUSTBalance, fixedFee)
+    : undefined;
 
   const bAssetLtvsAvg = computebAssetLtvsAvg(bAssetLtvs);
 
@@ -143,9 +140,11 @@ export const borrowRepayForm = ({
         )
       : null;
 
-    const txFee = target.isNative
-      ? computeRepayTxFee(repayAmount, { taxRate, maxTaxUUSD }, fixedFee)
-      : (Big(0) as u<UST<Big>>);
+    const txFee = computeRepayTxFee(
+      repayAmount,
+      { taxRate, maxTaxUUSD },
+      fixedFee,
+    );
 
     const totalOutstandingLoan = computeRepayTotalOutstandingLoan(
       repayAmount,

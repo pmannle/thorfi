@@ -23,12 +23,12 @@ export const DEPLOYMENT_TARGETS = [
   //   isNative: false,
   //   isEVM: true,
   // },
-  {
-    chain: Chain.Avalanche,
-    icon: '/assets/avalanche-logo.svg',
-    isNative: false,
-    isEVM: true,
-  },
+  // {
+  //   chain: Chain.Avalanche,
+  //   icon: '/assets/avalanche-logo.svg',
+  //   isNative: false,
+  //   isEVM: true,
+  // },
 ];
 
 export interface DeploymentTarget {
