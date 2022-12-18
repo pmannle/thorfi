@@ -28,7 +28,6 @@ function MobileHeaderBase({
   setOpen,
   isActive,
   toggleWallet,
-  airdropElement,
   vestingClaimNotificationElement,
   className,
   viewAddressButtonElement,
@@ -88,9 +87,6 @@ function MobileHeaderBase({
           />
         </section>
 
-        {airdropElement && (
-          <section className="airdrop">{airdropElement}</section>
-        )}
         {vestingClaimNotificationElement}
       </header>
 
@@ -182,11 +178,6 @@ export const MobileHeader = styled(MobileHeaderBase)`
         }
       }
     }
-  }
-
-  .airdrop {
-    padding-bottom: 20px;
-    background-color: ${({ theme }) => theme.sectionBackgroundColor};
   }
 
   // ---------------------------------------------

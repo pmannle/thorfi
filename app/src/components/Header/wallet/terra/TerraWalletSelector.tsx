@@ -9,7 +9,6 @@ import {
   DropdownBox,
 } from 'components/Header/desktop/DropdownContainer';
 import { useWallet } from '@terra-money/wallet-provider';
-import { useAirdropElement } from 'components/Header/airdrop';
 import { useVestingClaimNotification } from 'components/Header/vesting/VestingClaimNotification';
 
 const TerraWalletSelector = () => {
@@ -19,8 +18,6 @@ const TerraWalletSelector = () => {
     useWallet();
 
   const [open, setOpen] = useState(false);
-
-  const airdropElement = useAirdropElement(open, false);
 
   const [vestingClaimNotificationElement] = useVestingClaimNotification();
 
@@ -51,11 +48,6 @@ const TerraWalletSelector = () => {
       onClose={onClose}
     >
       <>
-        {airdropElement && (
-          <DropdownContainer>
-            <DropdownBox>{airdropElement}</DropdownBox>
-          </DropdownContainer>
-        )}
         {vestingClaimNotificationElement}
         {open && (
           <DropdownContainer>

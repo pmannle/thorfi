@@ -2,7 +2,6 @@
 // @see ~/scripts/create-index.ts
 export * from './env';
 export * from './types';
-export * from './caches/airdropStage';
 export * from './forms/borrow/borrow';
 export * from './forms/borrow/provideCollateral';
 export * from './forms/borrow/redeemCollateral';
@@ -61,8 +60,6 @@ export * from './logics/earn/computeApr';
 export * from './logics/earn/computeApy';
 export * from './logics/earn/computeTotalDeposit';
 export * from './models/collaterals';
-export * from './queries/airdrop/check';
-export * from './queries/airdrop/isClaimed';
 export * from './queries/anc/balance';
 export * from './queries/anc/lpStakingState';
 export * from './queries/anc/price';
@@ -105,7 +102,6 @@ export * from './queries/rewards/ancGovernanceRewards';
 export * from './queries/rewards/ancUstLpRewards';
 export * from './queries/rewards/claimableUstBorrowRewards';
 export * from './queries/rewards/ustBorrowRewards';
-export * from './tx/airdrop/claim';
 export * from './tx/anc/ancUstLpProvide';
 export * from './tx/anc/ancUstLpStake';
 export * from './tx/anc/ancUstLpUnstake';

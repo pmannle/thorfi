@@ -8,7 +8,7 @@ import { Rate, u, UST } from '@anchor-protocol/types';
 import {
   useAnchorWebapp,
   useEarnEpochStatesQuery,
-  useMarketAncQuery,
+  useMarketSaversQuery,
   useMarketBuybackQuery,
   useMarketCollateralsQuery,
   useMarketDepositAndBorrowQuery,
@@ -86,7 +86,7 @@ function DashboardBase({ className }: DashboardProps) {
 
   const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
   const { data: marketUST } = useMarketUstQuery();
-  const { data: marketANC } = useMarketAncQuery();
+  const { data: marketANC } = useMarketSaversQuery();
   const ancPriceRelevantHistory = useMemo(() => {
     const history = marketANC?.history;
     if (!history) return;

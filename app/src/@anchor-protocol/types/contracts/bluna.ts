@@ -30,17 +30,6 @@ export namespace bluna {
       }>;
     }
 
-    export interface IsClaimed {
-      is_claimed: {
-        stage: number;
-        address: HumanAddr;
-      };
-    }
-
-    export interface IsClaimedResponse {
-      is_claimed: boolean;
-    }
-
     /**
      * @see https://anchor-protocol.gitbook.io/anchor-2/smart-contracts/bluna/airdrop-registry#config-1
      */

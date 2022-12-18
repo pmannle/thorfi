@@ -1,4 +1,3 @@
-import { MarketAncData, marketAncQuery } from '@anchor-protocol/app-fns';
 import {
   MarketSaversData,
   marketSaversQuery,

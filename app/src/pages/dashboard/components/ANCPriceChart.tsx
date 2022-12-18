@@ -1,6 +1,6 @@
 import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
 import { MarketAncHistory } from '@anchor-protocol/app-fns';
-import { MarketSaversHistory } from '@anchor-protocol/app-fns/queries/market/marketSaversQuery';
+import { MarketSaversHistory } from '@anchor-protocol/app-fns/queries/market/midgard';
 import { rulerLightColor, rulerShadowColor } from '@libs/styled-neumorphism';
 import big from 'big.js';
 import { Chart } from 'chart.js';
@@ -10,7 +10,7 @@ import { ChartTooltip } from './ChartTooltip';
 import { mediumDay, xTimestampAxis } from './internal/axisUtils';
 
 export interface ANCPriceChartProps {
-  data: MarketAncHistory[];
+  data: MarketSaversHistory[];
   theme: DefaultTheme;
   isMobile: boolean;
 }
