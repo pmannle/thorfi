@@ -8,14 +8,15 @@ import React, { Component, createRef } from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 import { ChartTooltip } from './ChartTooltip';
 import { mediumDay, xTimestampAxis } from './internal/axisUtils';
+import { formatRate } from '@libs/formatter';
 
-export interface ANCPriceChartProps {
+export interface SaverAPRChartProps {
   data: MarketSaversHistory[];
   theme: DefaultTheme;
   isMobile: boolean;
 }
 
-export class ANCPriceChart extends Component<ANCPriceChartProps> {
+export class SaverAPRChart extends Component<SaverAPRChartProps> {
   private canvasRef = createRef<HTMLCanvasElement>();
   private tooltipRef = createRef<HTMLDivElement>();
   private chart!: Chart;
@@ -38,7 +39,7 @@ export class ANCPriceChart extends Component<ANCPriceChartProps> {
     this.chart?.destroy();
   }
 
-  shouldComponentUpdate(nextProps: Readonly<ANCPriceChartProps>): boolean {
+  shouldComponentUpdate(nextProps: Readonly<SaverAPRChartProps>): boolean {
     return (
       this.props.data !== nextProps.data ||
       this.props.theme !== nextProps.theme ||
@@ -50,13 +51,13 @@ export class ANCPriceChart extends Component<ANCPriceChartProps> {
     this.createChart();
   }
 
-  componentDidUpdate(prevProps: Readonly<ANCPriceChartProps>) {
+  componentDidUpdate(prevProps: Readonly<SaverAPRChartProps>) {
     if (prevProps.data !== this.props.data) {
       this.chart.data.labels = xTimestampAxis(
         this.props.data.map(({ timestamp }) => timestamp),
       );
-      this.chart.data.datasets[0].data = this.props.data.map(({ anc_price }) =>
-        big(anc_price).toNumber(),
+      this.chart.data.datasets[0].data = this.props.data.map(
+        ({ annualizedAPR }) => formatRate(annualizedAPR),
       );
     }
 
@@ -151,9 +152,9 @@ export class ANCPriceChart extends Component<ANCPriceChartProps> {
                   const i = tooltip.dataPoints[0].dataIndex;
                   const isLast = i === this.props.data.length - 1;
                   const item = this.props.data[i];
-                  const price = formatUSTWithPostfixUnits(item.annualizedAPR);
+                  const price = formatRate(item.annualizedAPR);
                   const date = isLast ? 'Now' : mediumDay(item.timestamp);
-                  div1.innerHTML = `${price} UST <span>${date}</span>`;
+                  div1.innerHTML = `${price} % <span>${date}</span>`;
                 } catch {}
               }
 
@@ -209,8 +210,8 @@ export class ANCPriceChart extends Component<ANCPriceChartProps> {
         ),
         datasets: [
           {
-            data: this.props.data.map(({ anc_price }) =>
-              big(anc_price).toNumber(),
+            data: this.props.data.map(({ annualizedAPR }) =>
+              big(annualizedAPR).toNumber(),
             ),
             borderColor: this.props.theme.colors.secondary,
             borderWidth: 2,

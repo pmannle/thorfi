@@ -14,6 +14,7 @@ import {
   useMarketDepositAndBorrowQuery,
   useMarketStableCoinQuery,
   useMarketUstQuery,
+  convertDataToAPR,
 } from '@anchor-protocol/app-provider';
 import { formatRate } from '@libs/formatter';
 import { HorizontalScrollTable } from '@libs/neumorphism-ui/components/HorizontalScrollTable';
@@ -33,16 +34,45 @@ import { screen } from 'env';
 import { fixHMR } from 'fix-hmr';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
-import { ANCPriceChart } from './components/ANCPriceChart';
+import { SaverAPRChart } from './components/SaverAPRChart';
 import { findPrevDay } from './components/internal/axisUtils';
 import { StablecoinChart } from './components/StablecoinChart';
 import { TotalValueLockedDoughnutChart } from './components/TotalValueLockedDoughnutChart';
 import { CollateralMarket } from './components/CollateralMarket';
 import { useAssetPriceInUstQuery } from 'queries';
 import { useDepositApy } from 'hooks/useDepositApy';
+import { EnumTypeDefinitionNode } from 'graphql';
+import { useSaversPoolStatsQuery } from '@anchor-protocol/app-provider/queries/market/saversPoolStats';
+import { MarketSaversData } from '@anchor-protocol/app-fns/queries/market/midgard';
 
 export interface DashboardProps {
   className?: string;
+}
+
+interface Interval {
+  FiveMin: '5min';
+  Hour: 'hour';
+  Day: 'day';
+  Week: 'month';
+  Quarter: 'quarter';
+  Year: 'year';
+}
+
+const Interval: Interval = {
+  FiveMin: '5min',
+  Hour: 'hour',
+  Day: 'day',
+  Week: 'month',
+  Quarter: 'quarter',
+  Year: 'year',
+};
+
+export interface SaversQuery {
+  pool: string;
+  interval: Interval;
+  count: number;
+  lookback: number; // 7 days
+  endpoint: string;
 }
 
 const EMPTY_ARRAY: any[] = [];
@@ -75,20 +105,49 @@ function DashboardBase({ className }: DashboardProps) {
 
   const stableCoinLegacy = useMemo(() => {
     if (!borrowRate || !epochState) {
-      return undefined;
+      return 0;
     }
 
     return {
       depositRate: depositApy,
-      borrowRate: big(borrowRate.rate).mul(blocksPerYear) as Rate<Big>,
+      borrowRate: big(0) as Rate<Big>,
     };
   }, [blocksPerYear, borrowRate, epochState, depositApy]);
 
   const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
   const { data: marketUST } = useMarketUstQuery();
-  const { data: marketANC } = useMarketSaversQuery();
+  const { data: marketSaversStats } = useSaversPoolStatsQuery();
+
+  const [pool, setPool] = useState('BTC.BTC');
+
+  let initialQueryKeys = {
+    interval: 'day',
+    count: 365,
+    lookback: 7, // 7 days
+    endpoint: `./savers_data/BTC.BTC_savers.json`,
+  };
+  const [queryKeys, setQueryKeys] = useState(initialQueryKeys);
+  const [marketSavers, setMarketSavers] = useState<MarketSaversData>();
+  const { data: marketSaversData } = useMarketSaversQuery(queryKeys);
+
+  useEffect(() => {
+    setQueryKeys({
+      interval: 'day',
+      count: 365,
+      lookback: 7, // 7 days
+      endpoint: `./savers_data/${pool}_savers.json`,
+    });
+  }, [pool]);
+
+  useEffect(() => {
+    if (marketSaversData) {
+      setMarketSavers(marketSaversData);
+    }
+  }, [marketSaversData]);
+
   const ancPriceRelevantHistory = useMemo(() => {
-    const history = marketANC?.history;
+    const history = marketSavers?.history;
+
     if (!history) return;
 
     const currentDate = new Date();
@@ -98,7 +157,7 @@ function DashboardBase({ className }: DashboardProps) {
     return history
       .filter(({ timestamp }) => timestamp >= yearAgoTimestamp)
       .sort((a, b) => a.timestamp - b.timestamp);
-  }, [marketANC?.history]);
+  }, [marketSavers?.history, pool]);
 
   const { data: marketDepositAndBorrow } = useMarketDepositAndBorrowQuery();
   const { data: marketCollaterals } = useMarketCollateralsQuery();
@@ -113,9 +172,7 @@ function DashboardBase({ className }: DashboardProps) {
     return {
       totalDeposit: marketDepositAndBorrow?.now.total_ust_deposits,
       totalCollaterals: marketCollaterals?.now.total_value,
-      totalValueLocked: big(
-        marketDepositAndBorrow?.now.total_ust_deposits,
-      ).plus(marketCollaterals?.now.total_value) as u<UST<Big>>,
+      totalValueLocked: big(0) as u<UST<Big>>,
       yieldReserve: marketUST.overseer_ust_balance,
     };
   }, [marketCollaterals?.now, marketDepositAndBorrow?.now, marketUST]);
@@ -123,28 +180,24 @@ function DashboardBase({ className }: DashboardProps) {
   const { data: ancPriceUST } = useAssetPriceInUstQuery('anc');
 
   const ancPrice = useMemo(() => {
-    if (!marketANC || marketANC.history.length === 0) {
-      return undefined;
+    if (!marketSavers || marketSavers.history.length === 0) {
+      return 0;
     }
 
-    const last = marketANC.now;
+    const last = marketSavers.now;
     const lastPrice = ancPriceUST ?? last.anc_price;
     const last1DayBefore =
-      marketANC.history.find(findPrevDay(last.timestamp)) ??
-      marketANC.history[marketANC.history.length - 2] ??
-      marketANC.history[marketANC.history.length - 1];
+      marketSavers.history.find(findPrevDay(last.timestamp)) ??
+      marketSavers.history[marketSavers.history.length - 2] ??
+      marketSavers.history[marketSavers.history.length - 1];
 
     return {
-      ancPriceDiff: big(big(lastPrice).minus(last1DayBefore.anc_price)).div(
-        last1DayBefore.anc_price,
-      ) as Rate<Big>,
+      ancPriceDiff: big(0) as Rate<Big>,
       ancPrice: lastPrice,
-      circulatingSupply: last.anc_circulating_supply,
-      ancMarketCap: big(lastPrice).mul(last.anc_circulating_supply) as u<
-        UST<Big>
-      >,
+      circulatingSupply: 0,
+      ancMarketCap: big(0) as u<UST<Big>>,
     };
-  }, [marketANC, ancPriceUST]);
+  }, [marketSavers, ancPriceUST]);
 
   const stableCoin = useMemo(() => {
     if (
@@ -152,7 +205,7 @@ function DashboardBase({ className }: DashboardProps) {
       !marketDepositAndBorrow ||
       marketDepositAndBorrow.history.length === 0
     ) {
-      return undefined;
+      return 0;
     }
 
     const last = marketDepositAndBorrow.now;
@@ -163,13 +216,9 @@ function DashboardBase({ className }: DashboardProps) {
     return {
       totalDeposit: last.total_ust_deposits,
       totalBorrow: last.total_borrowed,
-      totalDepositDiff: big(
-        big(last.total_ust_deposits).minus(last1DayBefore.total_ust_deposits),
-      ).div(last1DayBefore.total_ust_deposits) as Rate<Big>,
-      totalBorrowDiff: big(
-        big(last.total_borrowed).minus(last1DayBefore.total_borrowed),
-      ).div(last1DayBefore.total_borrowed) as Rate<Big>,
-      borrowAPR: big(marketUST.borrow_rate).mul(blocksPerYear) as Rate<Big>,
+      totalDepositDiff: big(0) as Rate<Big>,
+      totalBorrowDiff: big(0) as Rate<Big>,
+      borrowAPR: big(0) as Rate<Big>,
       borrowAPRDiff: 'TODO: API not ready...',
     };
   }, [blocksPerYear, marketDepositAndBorrow, marketUST]);
@@ -263,11 +312,17 @@ function DashboardBase({ className }: DashboardProps) {
               <header>
                 <div>
                   <h2>
-                    ANC PRICE
+                    SAVERS POOL RATE
+                    {marketSaversStats &&
+                      Object.keys(marketSaversStats).map((asset) => (
+                        <div key={asset} onClick={() => setPool(asset)}>
+                          {asset}
+                        </div>
+                      ))}
                     {ancPrice && (
-                      <span data-negative={big(ancPrice.ancPriceDiff).lt(0)}>
-                        {big(ancPrice.ancPriceDiff).gte(0) ? '+' : ''}
-                        {formatRate(ancPrice.ancPriceDiff)}%
+                      <span data-negative={big(0).lt(0)}>
+                        {big(0).gte(0) ? '+' : ''}
+                        {formatRate(0)}%
                       </span>
                     )}
                   </h2>
@@ -281,12 +336,12 @@ function DashboardBase({ className }: DashboardProps) {
                 <div>
                   <h3>Circulating Supply</h3>
                   <p>
-                    {ancPrice
+                    {/* {ancPrice
                       ? formatUTokenIntegerWithoutPostfixUnits(
                           ancPrice.circulatingSupply,
                         )
-                      : 0}
-                    <span>ANC</span>
+                      : 0} */}{' '}
+                    0<span>ANC</span>
                   </p>
                 </div>
                 <div>
@@ -303,7 +358,7 @@ function DashboardBase({ className }: DashboardProps) {
               </header>
               <figure>
                 <div>
-                  <ANCPriceChart
+                  <SaverAPRChart
                     data={ancPriceRelevantHistory ?? EMPTY_ARRAY}
                     theme={theme}
                     isMobile={isMobile}
@@ -366,10 +421,8 @@ function DashboardBase({ className }: DashboardProps) {
                   <i style={{ backgroundColor: theme.colors.secondary }} />{' '}
                   TOTAL DEPOSIT
                   {stableCoin && (
-                    <span
-                      data-negative={big(stableCoin.totalDepositDiff).lt(0)}
-                    >
-                      {big(stableCoin.totalDepositDiff).gte(0) ? '+' : ''}
+                    <span data-negative={big(0).lt(0)}>
+                      {big(0).gte(0) ? '+' : ''}
                       {formatRate(stableCoin.totalDepositDiff)}%
                     </span>
                   )}
@@ -390,8 +443,8 @@ function DashboardBase({ className }: DashboardProps) {
                   <i style={{ backgroundColor: theme.textColor }} /> TOTAL
                   BORROW
                   {stableCoin && (
-                    <span data-negative={big(stableCoin.totalBorrowDiff).lt(0)}>
-                      {big(stableCoin.totalBorrowDiff).gte(0) ? '+' : ''}
+                    <span data-negative={big(0).lt(0)}>
+                      {big(0).gte(0) ? '+' : ''}
                       {formatRate(stableCoin.totalBorrowDiff)}%
                     </span>
                   )}

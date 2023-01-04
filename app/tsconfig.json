@@ -21,7 +21,8 @@
     "noEmit": true,
     "watch": false,
     "jsx": "react",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "noImplicitAny": false
   },
   "include": [
     "src",

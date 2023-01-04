@@ -2,24 +2,23 @@ import { ANC } from '@anchor-protocol/types';
 import { JSDateTime, u, UST } from '@libs/types';
 import { dedupeTimestamp } from './utils/dedupeTimestamp';
 
+import { Midgard } from '@xchainjs/xchain-thorchain-query';
+import {
+  MidgardApi,
+  Configuration,
+  MIDGARD_API_TS_URL,
+  MIDGARD_API_9R_URL,
+} from '@xchainjs/xchain-midgard';
+import { BigNumber } from 'bignumber.js';
+
 export interface MarketSaversHistory {
-  anc_price: UST;
-  anc_circulating_supply: u<ANC>;
-  timestamp: JSDateTime;
-  height: number;
-  pool_anc_amount: u<ANC>;
-  pool_ust_amount: u<UST>;
-  govern_total_share: '20083749357366';
-  investor_team_anc_holding: '300000000000000';
-  shuttle_anc_holding: '4131371012544';
-  airdrop_anc_holding: '99080578291262';
-  gov_share_index: '175970058944';
-  govern_total_deposit: '0';
-  staking_contract_lp_balance: '53778063712753';
-  govern_anc_holding: '20259719416310';
-  distributor_anc_holding: '394116591121952';
-  community_anc_holding: '99978000000000';
-  lp_total_supply: '53834637172380';
+  endTime: any; // "1663891200",
+  saversDepth: any; //  "0",
+  saversUnits: any; // "0",
+  startTime: any; // "1663804800"
+  anc_price: any; // "0.19157015216479695"
+  annualizedAPR: any;
+  timestamp: any;
 }
 
 export interface MarketSaversData {
@@ -27,26 +26,39 @@ export interface MarketSaversData {
   history: MarketSaversHistory[];
 }
 
-export interface MarketSaversQueryParams {
-  endpoint: string;
-}
+/**** 
 
-export async function marketSaversQuery({
-  endpoint,
-}: MarketSaversQueryParams): Promise<MarketSaversData> {
-  const now: MarketSaversHistory = await fetch(`${endpoint}/v1/anc`)
-    .then((res) => res.json())
-    .then((data: MarketSaversHistory) => ({
-      ...data,
-      timestamp: Date.now() as JSDateTime,
-    }));
+Use Savers Units to calculate APR, following how APR is calculated read this article:
+https://dev.thorchain.org/thorchain-dev/saving-guide/quickstart-guide#historical-data-and-performance
 
-  const history: MarketSaversHistory[] = await fetch(`${endpoint}/v1/anc/1d`)
-    .then((res) => res.json())
-    .then((data: MarketSaversHistory[]) => [...data.reverse(), now]);
+***/
+
+const getHistory = async (endpoint: string) => {
+  const baseUrl = MIDGARD_API_9R_URL;
+  const apiconfig = new Configuration({ basePath: baseUrl });
+  const midgardApi = new MidgardApi(apiconfig);
+
+  /*
+    let response = await midgardApi
+      .getDepthHistory(pool, interval, count)
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+    */
+
+  let response = await import(endpoint);
+
+  return response;
+};
+
+export async function marketSaversQuery(query: any): Promise<MarketSaversData> {
+  const results: any = await getHistory(query);
+  const history: any = results.intervals;
+  const now = history[history.length - 1];
 
   return {
     now,
-    history: dedupeTimestamp(history, 'timestamp'),
+    history,
   };
 }
