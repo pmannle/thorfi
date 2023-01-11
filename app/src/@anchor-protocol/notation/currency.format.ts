@@ -118,7 +118,7 @@ export function formatUST(n: UST<BigSource>): string {
   if (big(n).gt(0) && big(n).lt(0.001)) {
     return '<0.001';
   }
-  return d3Formatter(n);
+  return d2Formatter(n);
 }
 
 export function formatUSTWithPostfixUnits(n: UST<BigSource>): string {

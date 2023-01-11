@@ -74,6 +74,8 @@ export const StyledTermsOfService = styled(TermsOfServiceBase)`
       font-size: 1.42857143em;
       margin-bottom: 2.95em;
     }
+
+    flex-direction: column;
   }
 
   h1.title {

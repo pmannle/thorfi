@@ -16,7 +16,6 @@ export interface MarketSaversHistory {
   saversDepth: any; //  "0",
   saversUnits: any; // "0",
   startTime: any; // "1663804800"
-  anc_price: any; // "0.19157015216479695"
   annualizedAPR: any;
   timestamp: any;
 }

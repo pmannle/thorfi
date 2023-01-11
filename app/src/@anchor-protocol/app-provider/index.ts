@@ -40,7 +40,7 @@ export * from './queries/gov/polls';
 export * from './queries/gov/state';
 export * from './queries/gov/voteAvailable';
 export * from './queries/gov/voters';
-export * from './queries/market/midgard';
+export * from './queries/market/saversHistory';
 export * from './queries/market/bAsset';
 export * from './queries/market/buyback';
 export * from './queries/market/collaterals';

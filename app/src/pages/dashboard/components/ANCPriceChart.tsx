@@ -1,6 +1,6 @@
 import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
 import { MarketAncHistory } from '@anchor-protocol/app-fns';
-import { MarketSaversHistory } from '@anchor-protocol/app-fns/queries/market/midgard';
+import { MarketSaversHistory } from '@anchor-protocol/app-fns/queries/market/saversHistory';
 import { rulerLightColor, rulerShadowColor } from '@libs/styled-neumorphism';
 import big from 'big.js';
 import { Chart } from 'chart.js';

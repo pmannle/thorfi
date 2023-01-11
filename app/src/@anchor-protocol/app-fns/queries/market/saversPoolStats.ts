@@ -3,6 +3,9 @@ import { reset } from 'numeral';
 
 export interface SaversPoolData {
   [asset: string]: {
+    totalEarned: any;
+    saversDepthUSD: any;
+    totalAnnualisedReturn: any;
     asset: string;
     filled: number;
     saversCount: number;

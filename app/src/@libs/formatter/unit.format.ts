@@ -94,3 +94,6 @@ export const formatPercentage = (n: Percent<BigSource>) =>
 
 export const formatRate = (n: Rate<BigSource>) =>
   percentageFormatter(big(n).mul(100));
+
+export const formatAssetName = (s: string) =>
+  s.substring(s.lastIndexOf('.') + 1);

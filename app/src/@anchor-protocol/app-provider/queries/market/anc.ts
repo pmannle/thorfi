@@ -2,7 +2,7 @@ import { MarketAncData, marketAncQuery } from '@anchor-protocol/app-fns';
 import {
   MarketSaversData,
   marketSaversQuery,
-} from '@anchor-protocol/app-fns/queries/market/midgard';
+} from '@anchor-protocol/app-fns/queries/market/saversHistory';
 import { createQueryFn } from '@libs/react-query-utils';
 import { useQuery, UseQueryResult } from 'react-query';
 import { useAnchorWebapp } from '../../contexts/context';

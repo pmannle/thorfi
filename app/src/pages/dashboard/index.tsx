@@ -1,14 +1,15 @@
 import {
+  formatTokenIntegerWithoutPostfixUnits,
   formatUST,
   formatUTokenInteger,
   formatUTokenIntegerWithoutPostfixUnits,
 } from '@anchor-protocol/notation';
 import { TokenIcon } from '@anchor-protocol/token-icons';
-import { Rate, u, UST } from '@anchor-protocol/types';
+import { Rate, u, UST, SaversQuery } from '@anchor-protocol/types';
 import {
   useAnchorWebapp,
   useEarnEpochStatesQuery,
-  useMarketSaversQuery,
+  useSaversHistoryQuery,
   useMarketBuybackQuery,
   useMarketCollateralsQuery,
   useMarketDepositAndBorrowQuery,
@@ -16,7 +17,12 @@ import {
   useMarketUstQuery,
   convertDataToAPR,
 } from '@anchor-protocol/app-provider';
-import { formatRate } from '@libs/formatter';
+import {
+  formatAssetName,
+  formatRate,
+  formatThousandsDecimal2,
+  formatUTokenDecimal2,
+} from '@libs/formatter';
 import { HorizontalScrollTable } from '@libs/neumorphism-ui/components/HorizontalScrollTable';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
 import { InfoTooltip } from '@libs/neumorphism-ui/components/InfoTooltip';
@@ -32,7 +38,7 @@ import { Footer } from 'components/Footer';
 import { PageTitle, TitleContainer } from 'components/primitives/PageTitle';
 import { screen } from 'env';
 import { fixHMR } from 'fix-hmr';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
 import { SaverAPRChart } from './components/SaverAPRChart';
 import { findPrevDay } from './components/internal/axisUtils';
@@ -43,36 +49,13 @@ import { useAssetPriceInUstQuery } from 'queries';
 import { useDepositApy } from 'hooks/useDepositApy';
 import { EnumTypeDefinitionNode } from 'graphql';
 import { useSaversPoolStatsQuery } from '@anchor-protocol/app-provider/queries/market/saversPoolStats';
-import { MarketSaversData } from '@anchor-protocol/app-fns/queries/market/midgard';
+import { MarketSaversData } from '@anchor-protocol/app-fns/queries/market/saversHistory';
+import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
+import { Box } from '@material-ui/core';
+import { CosmosChain } from '@xchainjs/xchain-util';
 
 export interface DashboardProps {
   className?: string;
-}
-
-interface Interval {
-  FiveMin: '5min';
-  Hour: 'hour';
-  Day: 'day';
-  Week: 'month';
-  Quarter: 'quarter';
-  Year: 'year';
-}
-
-const Interval: Interval = {
-  FiveMin: '5min',
-  Hour: 'hour',
-  Day: 'day',
-  Week: 'month',
-  Quarter: 'quarter',
-  Year: 'year',
-};
-
-export interface SaversQuery {
-  pool: string;
-  interval: Interval;
-  count: number;
-  lookback: number; // 7 days
-  endpoint: string;
 }
 
 const EMPTY_ARRAY: any[] = [];
@@ -127,8 +110,8 @@ function DashboardBase({ className }: DashboardProps) {
     endpoint: `./savers_data/BTC.BTC_savers.json`,
   };
   const [queryKeys, setQueryKeys] = useState(initialQueryKeys);
-  const [marketSavers, setMarketSavers] = useState<MarketSaversData>();
-  const { data: marketSaversData } = useMarketSaversQuery(queryKeys);
+  const [saversHistory, setMarketSavers] = useState<MarketSaversData>();
+  const { data: saversHistoricalData } = useSaversHistoryQuery(queryKeys);
 
   useEffect(() => {
     setQueryKeys({
@@ -140,13 +123,23 @@ function DashboardBase({ className }: DashboardProps) {
   }, [pool]);
 
   useEffect(() => {
-    if (marketSaversData) {
-      setMarketSavers(marketSaversData);
+    if (saversHistoricalData) {
+      setMarketSavers(saversHistoricalData);
     }
-  }, [marketSaversData]);
+  }, [saversHistoricalData]);
 
-  const ancPriceRelevantHistory = useMemo(() => {
-    const history = marketSavers?.history;
+  const saverStats = useMemo(() => {
+    if (!marketSaversStats) {
+      return 0;
+    }
+
+    return Object.values(marketSaversStats).filter(
+      (stats) => stats.asset === pool,
+    )[0];
+  }, [pool, marketSaversStats]);
+
+  const saversRateRelevantHistory = useMemo(() => {
+    const history = saversHistory?.history;
 
     if (!history) return;
 
@@ -157,7 +150,7 @@ function DashboardBase({ className }: DashboardProps) {
     return history
       .filter(({ timestamp }) => timestamp >= yearAgoTimestamp)
       .sort((a, b) => a.timestamp - b.timestamp);
-  }, [marketSavers?.history, pool]);
+  }, [saversHistory?.history, pool]);
 
   const { data: marketDepositAndBorrow } = useMarketDepositAndBorrowQuery();
   const { data: marketCollaterals } = useMarketCollateralsQuery();
@@ -178,26 +171,6 @@ function DashboardBase({ className }: DashboardProps) {
   }, [marketCollaterals?.now, marketDepositAndBorrow?.now, marketUST]);
 
   const { data: ancPriceUST } = useAssetPriceInUstQuery('anc');
-
-  const ancPrice = useMemo(() => {
-    if (!marketSavers || marketSavers.history.length === 0) {
-      return 0;
-    }
-
-    const last = marketSavers.now;
-    const lastPrice = ancPriceUST ?? last.anc_price;
-    const last1DayBefore =
-      marketSavers.history.find(findPrevDay(last.timestamp)) ??
-      marketSavers.history[marketSavers.history.length - 2] ??
-      marketSavers.history[marketSavers.history.length - 1];
-
-    return {
-      ancPriceDiff: big(0) as Rate<Big>,
-      ancPrice: lastPrice,
-      circulatingSupply: 0,
-      ancMarketCap: big(0) as u<UST<Big>>,
-    };
-  }, [marketSavers, ancPriceUST]);
 
   const stableCoin = useMemo(() => {
     if (
@@ -308,109 +281,119 @@ function DashboardBase({ className }: DashboardProps) {
               </section>
             </Section>
 
-            <Section className="anc-price">
-              <header>
-                <div>
-                  <h2>
-                    SAVERS POOL RATE
+            <Section className="apr-chart">
+              <header style={{ flexDirection: 'column' }}>
+                <Box
+                  style={{ display: 'grid', gridTemplateColumns: '1fr 8fr' }}
+                >
+                  <h2 style={{ display: 'inline-flex' }}>
+                    <div
+                      style={{ flexDirection: 'column', marginRight: '20px' }}
+                    >
+                      <div>SAVERS</div>
+                      <div>POOLS</div>
+                    </div>
+                  </h2>
+                  <div className="apr-chart-buttons">
                     {marketSaversStats &&
                       Object.keys(marketSaversStats).map((asset) => (
-                        <div key={asset} onClick={() => setPool(asset)}>
-                          {asset}
-                        </div>
+                        <ActionButton
+                          key={asset}
+                          className="asset-button"
+                          style={{
+                            backgroundColor:
+                              asset === pool
+                                ? theme.colors.positive
+                                : 'inherit',
+                          }}
+                          onClick={() => setPool(asset)}
+                        >
+                          {formatAssetName(asset)}
+                        </ActionButton>
                       ))}
-                    {ancPrice && (
-                      <span data-negative={big(0).lt(0)}>
-                        {big(0).gte(0) ? '+' : ''}
-                        {formatRate(0)}%
-                      </span>
-                    )}
-                  </h2>
-                  <p className="amount">
-                    <AnimateNumber format={formatUST}>
-                      {ancPrice ? ancPrice.ancPrice : (0 as u<UST<number>>)}
-                    </AnimateNumber>
-                    <span>UST</span>
-                  </p>
-                </div>
-                <div>
-                  <h3>Circulating Supply</h3>
-                  <p>
-                    {/* {ancPrice
-                      ? formatUTokenIntegerWithoutPostfixUnits(
-                          ancPrice.circulatingSupply,
-                        )
-                      : 0} */}{' '}
-                    0<span>ANC</span>
-                  </p>
-                </div>
-                <div>
-                  <h3>ANC Market Cap</h3>
-                  <p>
-                    {ancPrice
-                      ? formatUTokenIntegerWithoutPostfixUnits(
-                          ancPrice.ancMarketCap,
-                        )
-                      : 0}
-                    <span>UST</span>
-                  </p>
-                </div>
+                  </div>
+                </Box>
+                <hr className="heavy-ruler" />
+
+                <Section
+                  className="asset-chart current-apr"
+                  style={{
+                    border: 'none',
+                    width: '100%',
+                    boxShadow: 'none',
+                    padding: 0,
+                  }}
+                >
+                  <section style={{ padding: 0 }}>
+                    <div>
+                      <section>
+                        <h2>
+                          {saverStats && formatAssetName(saverStats.asset)}{' '}
+                          CURRENT APR (7 day)
+                        </h2>
+                        {saverStats && (
+                          <div>
+                            <p>
+                              <AnimateNumber format={formatUST}>
+                                {saverStats.totalAnnualisedReturn
+                                  ? (saverStats.totalAnnualisedReturn as u<
+                                      UST<number>
+                                    >)
+                                  : (0 as u<UST<number>>)}
+                              </AnimateNumber>
+                              <span>%</span>
+                            </p>
+                          </div>
+                        )}
+                      </section>
+                      <hr />
+                      <section>
+                        <h3>Pool Depth</h3>
+                        {saverStats && (
+                          <div>
+                            <p>
+                              <span>$</span>
+                              <AnimateNumber format={formatUTokenDecimal2}>
+                                {saverStats.saversDepthUSD
+                                  ? (saverStats.saversDepthUSD as u<
+                                      UST<number>
+                                    >)
+                                  : (0 as u<UST<number>>)}
+                              </AnimateNumber>
+                            </p>
+                          </div>
+                        )}
+                      </section>
+                      <hr />
+                      <section>
+                        <h3>Cap Filled</h3>
+                        {saverStats && (
+                          <div>
+                            <p>
+                              <AnimateNumber format={formatUST}>
+                                {saverStats.filled
+                                  ? (saverStats.filled as u<UST<number>>)
+                                  : (0 as u<UST<number>>)}
+                              </AnimateNumber>
+                              <span>%</span>
+                            </p>
+                          </div>
+                        )}
+                        <p></p>
+                      </section>
+                    </div>
+                  </section>
+                </Section>
               </header>
               <figure>
                 <div>
                   <SaverAPRChart
-                    data={ancPriceRelevantHistory ?? EMPTY_ARRAY}
+                    data={saversRateRelevantHistory ?? EMPTY_ARRAY}
                     theme={theme}
                     isMobile={isMobile}
                   />
                 </div>
               </figure>
-            </Section>
-
-            <Section className="anc-buyback">
-              <section>
-                <h2>ANC BUYBACK (72HR)</h2>
-                <div>
-                  <p>
-                    {marketBuyback72hrs
-                      ? formatUTokenIntegerWithoutPostfixUnits(
-                          marketBuyback72hrs.buyback_amount,
-                        )
-                      : 0}
-                    <span>ANC</span>
-                  </p>
-                  <p>
-                    {marketBuyback72hrs
-                      ? formatUTokenIntegerWithoutPostfixUnits(
-                          marketBuyback72hrs.offer_amount,
-                        )
-                      : 0}
-                    <span>UST</span>
-                  </p>
-                </div>
-              </section>
-              <hr />
-              <section>
-                <h2>ANC BUYBACK (TOTAL)</h2>
-                <div>
-                  <p>
-                    {marketBuybackTotal
-                      ? formatUTokenIntegerWithoutPostfixUnits(
-                          marketBuybackTotal.buyback_amount,
-                        )
-                      : 0}
-                    <span>ANC</span>
-                  </p>
-                  <p>
-                    {marketBuybackTotal
-                      ? formatUTokenIntegerWithoutPostfixUnits(
-                          marketBuybackTotal.offer_amount,
-                        )
-                      : 0}
-                    <span>UST</span>
-                  </p>
-                </div>
-              </section>
             </Section>
           </div>
 
@@ -727,10 +710,10 @@ const StyledDashboard = styled(DashboardBase)`
     }
   }
 
-  .anc-price {
+  .apr-chart {
     header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
 
       > div:first-child {
         flex: 1;
@@ -756,23 +739,29 @@ const StyledDashboard = styled(DashboardBase)`
       }
 
       margin-bottom: 15px;
+
+      .asset-button {
+        border-radius: 20px;
+        padding: 0px 20px;
+        margin: 0px 4px;
+        height: 27px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
     }
 
     figure {
       > div {
         width: 100%;
-        height: 220px;
+        height: 300px;
       }
     }
   }
 
-  .anc-buyback > .NeuSection-content {
+  .asset-chart > .NeuSection-content {
     display: flex;
     justify-content: space-between;
 
     max-width: 1000px;
-
-    padding: 40px 60px;
 
     hr {
       ${vRuler};
@@ -791,11 +780,11 @@ const StyledDashboard = styled(DashboardBase)`
           word-break: keep-all;
           white-space: nowrap;
 
-          span {
+          /* span {
             font-size: 0.666666666666667em;
             margin-left: 5px;
             color: ${({ theme }) => theme.dimTextColor};
-          }
+          } */
 
           &:first-child {
             margin-right: 20px;
@@ -803,6 +792,25 @@ const StyledDashboard = styled(DashboardBase)`
         }
       }
     }
+  }
+
+  .current-apr > .NeuSection-content {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .current-apr > .NeuSection-content > section {
+    width: 100%;
+  }
+
+  .current-apr > .NeuSection-content > section > div {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  section.current-apr > div > section > div > section > h3 {
+    margin-bottom: 8px;
   }
 
   .stablecoin {
@@ -942,6 +950,13 @@ const StyledDashboard = styled(DashboardBase)`
       grid-gap: 40px;
       margin-bottom: 40px;
 
+      hr.heavy-ruler {
+        ${hHeavyRuler};
+        margin-top: 4px;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+
       .NeuSection-root {
         margin-bottom: 0;
       }
@@ -963,14 +978,39 @@ const StyledDashboard = styled(DashboardBase)`
         }
       }
 
-      .anc-price {
+      .apr-chart {
         grid-column: 2/4;
-        grid-row: 1/5;
+        grid-row: 1/6;
       }
 
-      .anc-buyback {
+      .apr-chart-buttons {
+        display: grid;
+        grid-template-columns: repeat(8, 60px);
+      }
+
+      .asset-chart {
         grid-column: 2/4;
         grid-row: 5/6;
+      }
+    }
+  }
+
+  // align apr-buttons
+  @media (min-width: 1450px) {
+    .summary-section {
+      .apr-chart-buttons {
+        display: grid;
+        grid-template-columns: repeat(8, 70px);
+      }
+    }
+  }
+
+  // align apr-buttons
+  @media (min-width: 1500px) {
+    .summary-section {
+      .apr-chart-buttons {
+        display: grid;
+        grid-template-columns: repeat(8, 75px);
       }
     }
   }
@@ -988,6 +1028,8 @@ const StyledDashboard = styled(DashboardBase)`
           margin-left: 40px;
           margin-right: 40px;
         }
+
+        padding: 0;
       }
     }
 
@@ -1031,7 +1073,9 @@ const StyledDashboard = styled(DashboardBase)`
 
     .summary-section {
       .total-value-locked {
-        display: block;
+        align-items: stretch !important;
+        flex-direction: row;
+        display: flex;
 
         hr {
           ${hHeavyRuler};
@@ -1048,7 +1092,7 @@ const StyledDashboard = styled(DashboardBase)`
         }
       }
 
-      .anc-price {
+      .apr-chart {
         header {
           display: block;
 
@@ -1063,7 +1107,7 @@ const StyledDashboard = styled(DashboardBase)`
             align-items: center;
 
             h3 {
-              margin: 0;
+              margin: 0 0 8px 0;
             }
 
             p {
@@ -1097,7 +1141,7 @@ const StyledDashboard = styled(DashboardBase)`
         }
       }
 
-      .anc-buyback > .NeuSection-content {
+      .asset-chart > .NeuSection-content {
         display: block;
 
         section {
@@ -1209,7 +1253,7 @@ const StyledDashboard = styled(DashboardBase)`
   }
 
   @media (min-width: 1400px) and (max-width: 1500px) {
-    .anc-buyback > .NeuSection-content {
+    .asset-chart > .NeuSection-content {
       section {
         div {
           p {

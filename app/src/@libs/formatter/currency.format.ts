@@ -35,6 +35,7 @@ export const iFormatter = formatInteger({ delimiter: true });
 // constants
 // ---------------------------------------------
 const M = 1000000;
+const K = 1000;
 
 // ---------------------------------------------
 // specific format functions
@@ -81,8 +82,16 @@ export function formatNumeric(
 // ---------------------------------------------
 // print decimal points
 export function formatUTokenDecimal2(n: u<Token<BigSource>>): string {
-  const bn = big(n).div(MICRO);
-  return bn.gte(M) ? d2Formatter(bn.div(M)) + 'M' : d2Formatter(bn);
+  const bn = big(n);
+  console.log(bn.toString());
+  return bn.gte(M)
+    ? d2Formatter(bn.div(M)) + 'M'
+    : d2Formatter(bn.div(K)) + 'K';
+}
+
+export function formatThousandsDecimal2(n: u<Token<BigSource>>): string {
+  const bn = big(n).div(K);
+  return bn.gte(K) ? d2Formatter(bn.div(100)) + 'K' : d2Formatter(bn);
 }
 
 // print only integers
