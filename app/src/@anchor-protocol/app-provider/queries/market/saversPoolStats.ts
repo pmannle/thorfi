@@ -28,7 +28,7 @@ export function transformStats(data: any) {
       totalEarned: currency(data[key].earned * (data[key].assetPrice / 1e8)),
       saversDepth: data[key].saversDepth, // "803801353792",
       saversDepthUSD: (data[key].saversDepth * data[key].assetPrice) / 1e8,
-      assetDepth: data[key].assetDepth, // "4417860874929",
+      assetDepth: data[key].assetDepth / 1e8, // "4417860874929",
       synthSupply: data[key].synthSupply, // "823563425829"
     };
     return result;
@@ -41,7 +41,7 @@ export function useSaversPoolStatsQuery(): UseQueryResult<
   const { indexerApiEndpoint, queryErrorReporter } = useAnchorWebapp();
 
   const result = useQuery([endpoint, endpoint], queryFn, {
-    refetchInterval: 1000 * 60 * 5,
+    refetchInterval: 1000,
     keepPreviousData: true,
     select: React.useCallback((data) => {
       let dataOut = transformStats(data);

@@ -3,7 +3,6 @@ import { JSDateTime, u, UST } from '@libs/types';
 import { dedupeTimestamp } from './utils/dedupeTimestamp';
 
 export interface MarketAncHistory {
-  anc_price: UST;
   anc_circulating_supply: u<ANC>;
   timestamp: JSDateTime;
   height: number;

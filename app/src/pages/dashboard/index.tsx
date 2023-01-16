@@ -18,6 +18,7 @@ import {
   convertDataToAPR,
 } from '@anchor-protocol/app-provider';
 import {
+  d2Formatter,
   formatAssetName,
   formatRate,
   formatThousandsDecimal2,
@@ -53,6 +54,7 @@ import { MarketSaversData } from '@anchor-protocol/app-fns/queries/market/savers
 import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
 import { Box } from '@material-ui/core';
 import { CosmosChain } from '@xchainjs/xchain-util';
+import { useLiquidityPoolsQuery } from '@anchor-protocol/app-provider/queries/market/liquidityPools';
 
 export interface DashboardProps {
   className?: string;
@@ -97,28 +99,32 @@ function DashboardBase({ className }: DashboardProps) {
     };
   }, [blocksPerYear, borrowRate, epochState, depositApy]);
 
-  const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
-  const { data: marketUST } = useMarketUstQuery();
-  const { data: marketSaversStats } = useSaversPoolStatsQuery();
-
-  const [pool, setPool] = useState('BTC.BTC');
-
   let initialQueryKeys = {
     interval: 'day',
     count: 365,
     lookback: 7, // 7 days
-    endpoint: `./savers_data/BTC.BTC_savers.json`,
+    // endpoint: `./savers_data/BTC.BTC_savers.json`,
+    endpoint: `v2/history/savers/BTC.BTC?interval=day&count=100`,
   };
+
+  const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
+  const { data: marketUST } = useMarketUstQuery();
+  const { data: marketSaversStats } = useSaversPoolStatsQuery();
+  const { data: liquidityPools } = useLiquidityPoolsQuery();
+
   const [queryKeys, setQueryKeys] = useState(initialQueryKeys);
   const [saversHistory, setMarketSavers] = useState<MarketSaversData>();
+
   const { data: saversHistoricalData } = useSaversHistoryQuery(queryKeys);
+  const [pool, setPool] = useState('BTC.BTC');
 
   useEffect(() => {
     setQueryKeys({
       interval: 'day',
       count: 365,
       lookback: 7, // 7 days
-      endpoint: `./savers_data/${pool}_savers.json`,
+      // endpoint: `./savers_data/${pool}_savers.json`,
+      endpoint: `v2/history/savers/${pool}?interval=day&count=70`,
     });
   }, [pool]);
 
@@ -128,7 +134,7 @@ function DashboardBase({ className }: DashboardProps) {
     }
   }, [saversHistoricalData]);
 
-  const saverStats = useMemo(() => {
+  const showSelectedPool = useMemo(() => {
     if (!marketSaversStats) {
       return 0;
     }
@@ -154,23 +160,48 @@ function DashboardBase({ className }: DashboardProps) {
 
   const { data: marketDepositAndBorrow } = useMarketDepositAndBorrowQuery();
   const { data: marketCollaterals } = useMarketCollateralsQuery();
-  const { data: marketBuybackTotal } = useMarketBuybackQuery('total');
-  const { data: marketBuyback72hrs } = useMarketBuybackQuery('72hrs');
 
-  const totalValueLocked = useMemo(() => {
-    if (!marketDepositAndBorrow?.now || !marketCollaterals?.now || !marketUST) {
-      return undefined;
+  const saverTotals = useMemo(() => {
+    if (!marketSaversStats || !liquidityPools) {
+      return 0;
     }
 
-    return {
-      totalDeposit: marketDepositAndBorrow?.now.total_ust_deposits,
-      totalCollaterals: marketCollaterals?.now.total_value,
-      totalValueLocked: big(0) as u<UST<Big>>,
-      yieldReserve: marketUST.overseer_ust_balance,
+    const totalSaversStats = {
+      saversCount: 0,
+      totalUSDSaved: 0,
+      totalEarn: 0,
+      meanAPR: 0,
+      totalFilled: 0,
     };
-  }, [marketCollaterals?.now, marketDepositAndBorrow?.now, marketUST]);
 
-  const { data: ancPriceUST } = useAssetPriceInUstQuery('anc');
+    const totalPoolDepthUSD = Object.values(marketSaversStats)
+      .map((d) => Number(d.assetDepth))
+      .reduce((a, b) => a + b, 0);
+
+    Object.values(marketSaversStats).forEach((saver, index) => {
+      let savers_units = Number(
+        Object.values(liquidityPools).filter(
+          (values) => values.asset == saver.asset,
+        )[0].savers_units,
+      );
+
+      totalSaversStats.saversCount += saver.saversCount;
+      totalSaversStats.totalUSDSaved += +saver.saversDepth * +saver.assetPrice;
+      totalSaversStats.totalEarn +=
+        (+saver.saversDepth - +savers_units) * +saver.assetPrice;
+      totalSaversStats.meanAPR += saver.saverReturn;
+      totalSaversStats.totalFilled +=
+        (+saver.synthSupply / 1e8) * +saver.assetPrice;
+    });
+
+    return {
+      saversCount: totalSaversStats?.saversCount,
+      totalCollaterals: marketCollaterals?.now.total_value,
+      totalValueSaved: big(totalSaversStats?.totalUSDSaved) as u<UST<Big>>,
+      totalEarned: big(totalSaversStats?.totalEarn / 1e8) as u<UST<Big>>,
+      meanAPR: big(totalSaversStats.meanAPR) as Rate<Big>,
+    };
+  }, [pool, marketSaversStats]);
 
   const stableCoin = useMemo(() => {
     if (
@@ -201,83 +232,59 @@ function DashboardBase({ className }: DashboardProps) {
       <main>
         <div className="content-layout">
           <TitleContainerAndExchangeRate>
-            <PageTitle title="DASHBOARD" />
+            <PageTitle title="ThorFi DASHBOARD" />
           </TitleContainerAndExchangeRate>
 
           <div className="summary-section">
             <Section className="total-value-locked">
               <section>
-                <h2>TOTAL VALUE LOCKED</h2>
+                <h2>TOTAL VALUE SAVED</h2>
                 <p className="amount">
+                  $
                   <AnimateNumber
                     format={formatUTokenIntegerWithoutPostfixUnits}
                   >
-                    {totalValueLocked
-                      ? totalValueLocked.totalValueLocked
+                    {saverTotals
+                      ? saverTotals.totalValueSaved
                       : (0 as u<UST<number>>)}
                   </AnimateNumber>
-                  <span>UST</span>
+                  <span>USD</span>
                 </p>
                 <figure>
                   <div className="chart">
                     <TotalValueLockedDoughnutChart
-                      totalDeposit={
-                        totalValueLocked?.totalDeposit ?? ('0' as u<UST>)
-                      }
+                      marketSaversStats={marketSaversStats}
+                      saverTotals={saverTotals}
+                      totalDeposit={saverTotals?.saversCount ?? ('0' as u<UST>)}
                       totalCollaterals={
-                        totalValueLocked?.totalCollaterals ?? ('1' as u<UST>)
+                        saverTotals?.totalCollaterals ?? ('1' as u<UST>)
                       }
                       totalDepositColor={theme.colors.secondary}
                       totalCollateralsColor={theme.textColor}
+                      setPool={setPool}
                     />
                   </div>
-                  <div>
-                    <h3>
-                      <i style={{ backgroundColor: theme.colors.secondary }} />{' '}
-                      Total Deposit
-                    </h3>
-                    <p>
-                      ${' '}
-                      <AnimateNumber
-                        format={formatUTokenIntegerWithoutPostfixUnits}
-                      >
-                        {totalValueLocked
-                          ? totalValueLocked.totalDeposit
-                          : (0 as u<UST<number>>)}
-                      </AnimateNumber>
-                    </p>
-                    <h3>
-                      <i style={{ backgroundColor: theme.textColor }} /> Total
-                      Collateral
-                    </h3>
-                    <p>
-                      ${' '}
-                      <AnimateNumber
-                        format={formatUTokenIntegerWithoutPostfixUnits}
-                      >
-                        {totalValueLocked
-                          ? totalValueLocked.totalCollaterals
-                          : (0 as u<UST<number>>)}
-                      </AnimateNumber>
-                    </p>
-                  </div>
                 </figure>
-              </section>
-
-              <hr />
-
-              <section>
-                <h2>YIELD RESERVE</h2>
-                <p className="amount">
-                  <AnimateNumber
-                    format={formatUTokenIntegerWithoutPostfixUnits}
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <h2
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'right',
+                      marginTop: '15px',
+                    }}
                   >
-                    {totalValueLocked
-                      ? totalValueLocked.yieldReserve
-                      : (0 as u<UST<number>>)}
-                  </AnimateNumber>
-                  <span>UST</span>
-                </p>
+                    TOTAL VALUE EARNED
+                  </h2>
+                  <p className="amount earned">
+                    $
+                    <AnimateNumber format={formatUST}>
+                      {saverTotals
+                        ? saverTotals.totalEarned
+                        : (0 as u<UST<number>>)}
+                    </AnimateNumber>
+                    <span>USD</span>
+                  </p>
+                </div>
               </section>
             </Section>
 
@@ -328,15 +335,16 @@ function DashboardBase({ className }: DashboardProps) {
                     <div>
                       <section>
                         <h2>
-                          {saverStats && formatAssetName(saverStats.asset)}{' '}
+                          {showSelectedPool &&
+                            formatAssetName(showSelectedPool.asset)}{' '}
                           CURRENT APR (7 day)
                         </h2>
-                        {saverStats && (
+                        {showSelectedPool && (
                           <div>
                             <p>
                               <AnimateNumber format={formatUST}>
-                                {saverStats.totalAnnualisedReturn
-                                  ? (saverStats.totalAnnualisedReturn as u<
+                                {showSelectedPool.totalAnnualisedReturn
+                                  ? (showSelectedPool.totalAnnualisedReturn as u<
                                       UST<number>
                                     >)
                                   : (0 as u<UST<number>>)}
@@ -349,13 +357,13 @@ function DashboardBase({ className }: DashboardProps) {
                       <hr />
                       <section>
                         <h3>Pool Depth</h3>
-                        {saverStats && (
+                        {showSelectedPool && (
                           <div>
                             <p>
                               <span>$</span>
                               <AnimateNumber format={formatUTokenDecimal2}>
-                                {saverStats.saversDepthUSD
-                                  ? (saverStats.saversDepthUSD as u<
+                                {showSelectedPool.saversDepthUSD
+                                  ? (showSelectedPool.saversDepthUSD as u<
                                       UST<number>
                                     >)
                                   : (0 as u<UST<number>>)}
@@ -363,16 +371,24 @@ function DashboardBase({ className }: DashboardProps) {
                             </p>
                           </div>
                         )}
+                        <h3 style={{ marginTop: '8px' }}>
+                          (
+                          {showSelectedPool &&
+                            d2Formatter(showSelectedPool.assetDepth)}{' '}
+                          {showSelectedPool &&
+                            formatAssetName(showSelectedPool.asset)}
+                          )
+                        </h3>
                       </section>
                       <hr />
                       <section>
                         <h3>Cap Filled</h3>
-                        {saverStats && (
+                        {showSelectedPool && (
                           <div>
                             <p>
                               <AnimateNumber format={formatUST}>
-                                {saverStats.filled
-                                  ? (saverStats.filled as u<UST<number>>)
+                                {showSelectedPool.filled
+                                  ? (showSelectedPool.filled as u<UST<number>>)
                                   : (0 as u<UST<number>>)}
                               </AnimateNumber>
                               <span>%</span>
@@ -669,18 +685,22 @@ const StyledDashboard = styled(DashboardBase)`
     }
   }
 
+  .earned {
+    display: flex;
+    justify-content: right;
+    align-items: baseline;
+  }
+
   .total-value-locked {
     figure {
-      margin-top: 39px;
+      margin-top: 15px;
 
       display: flex;
       align-items: center;
 
       > .chart {
-        width: 152px;
-        height: 152px;
-
-        margin-right: 44px;
+        width: 100%;
+        height: 100%;
       }
 
       > div {
@@ -706,6 +726,38 @@ const StyledDashboard = styled(DashboardBase)`
             margin-bottom: 27px;
           }
         }
+      }
+    }
+
+    .chartContainer {
+      margin: 0 auto;
+      max-width: 100%;
+      position: relative;
+    }
+
+    .chartInner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: absolute;
+      top: 22%;
+      right: 20%;
+      bottom: 20%;
+      left: 20%;
+      border-radius: 50%;
+      padding: 1.25em 0;
+      overflow: hidden;
+
+      > h2 {
+        display: flex;
+        justify-content: center;
+      }
+
+      > p {
+        display: flex;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: 500;
       }
     }
   }
@@ -961,7 +1013,7 @@ const StyledDashboard = styled(DashboardBase)`
         margin-bottom: 0;
       }
 
-      height: 586px;
+      height: 625px;
 
       display: grid;
       grid-template-columns: 500px 1fr 1fr;

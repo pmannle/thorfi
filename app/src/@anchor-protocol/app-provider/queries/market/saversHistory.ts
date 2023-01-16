@@ -33,7 +33,10 @@ export function convertDataToAPR(data: any, lookback: any) {
       return row;
     }
   });
+  console.log('history before: ', data.history);
+
   data.history = [...history.slice(lookback)];
+  console.log('history after: ', data.history);
   return data;
 }
 
@@ -47,14 +50,12 @@ export function useSaversHistoryQuery(
   const { indexerApiEndpoint, queryErrorReporter } = useAnchorWebapp();
 
   let result = useQuery({
-    queryKey: [queryKeys.endpoint, queryKeys.endpoint],
+    queryKey: [`saver_history-${queryKeys.asset}`, queryKeys.endpoint],
     queryFn,
-    select: React.useCallback(
-      (data) => convertDataToAPR(data, queryKeys.lookback),
-      [],
-    ),
-    refetchInterval: 1000 * 60 * 5,
-    keepPreviousData: true,
+    onSuccess: (data) => convertDataToAPR(data, queryKeys.lookback),
+    refetchInterval: false,
+    keepPreviousData: false,
+    // refetchInterval: 1000 * 60 * 5,
     onError: queryErrorReporter,
   });
 

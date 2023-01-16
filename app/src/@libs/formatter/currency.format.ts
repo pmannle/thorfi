@@ -83,7 +83,6 @@ export function formatNumeric(
 // print decimal points
 export function formatUTokenDecimal2(n: u<Token<BigSource>>): string {
   const bn = big(n);
-  console.log(bn.toString());
   return bn.gte(M)
     ? d2Formatter(bn.div(M)) + 'M'
     : d2Formatter(bn.div(K)) + 'K';

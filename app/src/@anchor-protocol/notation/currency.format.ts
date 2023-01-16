@@ -175,7 +175,7 @@ export function formatUTokenInteger(n: u<Token<BigSource>>): string {
 export function formatUTokenIntegerWithoutPostfixUnits(
   n: u<Token<BigSource>>,
 ): string {
-  const bn = big(n).div(MICRO);
+  const bn = big(n).div(1e8);
   return iFormatter(bn);
 }
 

@@ -10,6 +10,7 @@ import {
   MIDGARD_API_9R_URL,
 } from '@xchainjs/xchain-midgard';
 import { BigNumber } from 'bignumber.js';
+import { Headers } from 'node-fetch';
 
 export interface MarketSaversHistory {
   endTime: any; // "1663891200",
@@ -37,16 +38,31 @@ const getHistory = async (endpoint: string) => {
   const apiconfig = new Configuration({ basePath: baseUrl });
   const midgardApi = new MidgardApi(apiconfig);
 
-  /*
-    let response = await midgardApi
-      .getDepthHistory(pool, interval, count)
-      .catch((error) => {
-        console.log(error);
-        return error;
-      });
-    */
+  // let response = await midgardApi
+  //   .getDepthHistory(pool, interval, count)
+  //   .catch((error) => {
+  //     console.log(error);
+  //     return error;
+  //   });
 
-  let response = await import(endpoint);
+  // let response = await import(endpoint);
+  // return response;
+  let url =
+    'https://3814-2600-1700-4644-7a5f-6c1b-6cd9-dab1-4c2b.ngrok.io/' + endpoint;
+
+  let options = {
+    method: 'get',
+    headers: {
+      'ngrok-skip-browser-warning': '69420',
+    },
+  };
+
+  let response = await fetch(url, options).then((res) => {
+    if (!res.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return res.json();
+  });
 
   return response;
 };
