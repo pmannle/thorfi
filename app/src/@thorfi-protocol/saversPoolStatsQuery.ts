@@ -1,6 +1,3 @@
-import { aUST, bLuna, Rate, u, UST } from '@anchor-protocol/types';
-import { reset } from 'numeral';
-
 export interface SaversPoolData {
   [asset: string]: {
     totalEarned: any;

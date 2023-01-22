@@ -56,6 +56,8 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
+    "@material-ui/core": "latest",
+    "@material/slider": "^14.0.0",
     "@xchainjs/xchain-client": "^0.13.3",
     "@xchainjs/xchain-crypto": "^0.2.6",
     "@xchainjs/xchain-midgard": "^0.4.0",

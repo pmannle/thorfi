@@ -46,6 +46,7 @@
     "@ethersproject/contracts": "^5.5.0",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@material/slider": "^14.0.0",
     "@rocket-scripts/utils": "^3.2.0",
     "@rx-stream/pipe": "^0.7.1",
     "@rx-stream/react": "^0.7.1",

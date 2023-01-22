@@ -1,16 +1,9 @@
-import { ANC } from '@anchor-protocol/types';
-import { JSDateTime, u, UST } from '@libs/types';
-import { dedupeTimestamp } from './utils/dedupeTimestamp';
-
-import { Midgard } from '@xchainjs/xchain-thorchain-query';
+// import { Midgard } from '@xchainjs/xchain-thorchain-query';
 import {
   MidgardApi,
   Configuration,
-  MIDGARD_API_TS_URL,
   MIDGARD_API_9R_URL,
 } from '@xchainjs/xchain-midgard';
-import { BigNumber } from 'bignumber.js';
-import { Headers } from 'node-fetch';
 
 export interface MarketSaversHistory {
   endTime: any; // "1663891200",
@@ -19,11 +12,13 @@ export interface MarketSaversHistory {
   startTime: any; // "1663804800"
   annualizedAPR: any;
   timestamp: any;
+  asset: string;
 }
 
 export interface MarketSaversData {
   now: MarketSaversHistory;
   history: MarketSaversHistory[];
+  asset: MarketSaversHistory['asset'];
 }
 
 /**** 
@@ -33,7 +28,7 @@ https://dev.thorchain.org/thorchain-dev/saving-guide/quickstart-guide#historical
 
 ***/
 
-const getHistory = async (endpoint: string) => {
+const getHistory = async (endpoint: string, asset, interval, count) => {
   const baseUrl = MIDGARD_API_9R_URL;
   const apiconfig = new Configuration({ basePath: baseUrl });
   const midgardApi = new MidgardApi(apiconfig);
@@ -47,8 +42,8 @@ const getHistory = async (endpoint: string) => {
 
   // let response = await import(endpoint);
   // return response;
-  let url =
-    'https://3814-2600-1700-4644-7a5f-6c1b-6cd9-dab1-4c2b.ngrok.io/' + endpoint;
+
+  let url = `https://4ae2-108-214-22-208.ngrok.io/${endpoint}/${asset}?interval=${interval}&count=${count}`;
 
   let options = {
     method: 'get',
@@ -67,13 +62,19 @@ const getHistory = async (endpoint: string) => {
   return response;
 };
 
-export async function marketSaversQuery(query: any): Promise<MarketSaversData> {
-  const results: any = await getHistory(query);
-  const history: any = results.intervals;
-  const now = history[history.length - 1];
+export async function marketSaversQuery(
+  endpoint,
+  asset,
+  interval,
+  count,
+): Promise<MarketSaversData> {
+  const results: any = await getHistory(endpoint, asset, interval, count);
+  const history = results.intervals.slice(0, -1);
+  const now = results.intervals[results.intervals.length - 1];
 
   return {
     now,
     history,
+    asset,
   };
 }

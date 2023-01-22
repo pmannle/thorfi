@@ -1,8 +1,7 @@
-import { SaversPoolData } from '@anchor-protocol/app-fns/queries/market/saversPoolStats';
+import { SaversPoolData } from '@thorfi-protocol/saversPoolStatsQuery';
 import { formatUST } from '@anchor-protocol/notation';
 import { u, UST } from '@anchor-protocol/types';
 import { AnimateNumber } from '@libs/ui';
-import { ConsoleMessage } from 'puppeteer';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { DoughnutChart } from './DoughnutChart';

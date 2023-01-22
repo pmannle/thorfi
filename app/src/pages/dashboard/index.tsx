@@ -1,16 +1,14 @@
 import {
-  formatTokenIntegerWithoutPostfixUnits,
   formatUST,
   formatUTokenInteger,
   formatUTokenIntegerWithoutPostfixUnits,
 } from '@anchor-protocol/notation';
 import { TokenIcon } from '@anchor-protocol/token-icons';
-import { Rate, u, UST, SaversQuery } from '@anchor-protocol/types';
+import { Rate, u, UST } from '@anchor-protocol/types';
 import {
   useAnchorWebapp,
   useEarnEpochStatesQuery,
   useSaversHistoryQuery,
-  useMarketBuybackQuery,
   useMarketCollateralsQuery,
   useMarketDepositAndBorrowQuery,
   useMarketStableCoinQuery,
@@ -21,7 +19,6 @@ import {
   d2Formatter,
   formatAssetName,
   formatRate,
-  formatThousandsDecimal2,
   formatUTokenDecimal2,
 } from '@libs/formatter';
 import { HorizontalScrollTable } from '@libs/neumorphism-ui/components/HorizontalScrollTable';
@@ -39,22 +36,19 @@ import { Footer } from 'components/Footer';
 import { PageTitle, TitleContainer } from 'components/primitives/PageTitle';
 import { screen } from 'env';
 import { fixHMR } from 'fix-hmr';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled, { css, useTheme } from 'styled-components';
 import { SaverAPRChart } from './components/SaverAPRChart';
 import { findPrevDay } from './components/internal/axisUtils';
 import { StablecoinChart } from './components/StablecoinChart';
 import { TotalValueLockedDoughnutChart } from './components/TotalValueLockedDoughnutChart';
 import { CollateralMarket } from './components/CollateralMarket';
-import { useAssetPriceInUstQuery } from 'queries';
 import { useDepositApy } from 'hooks/useDepositApy';
-import { EnumTypeDefinitionNode } from 'graphql';
-import { useSaversPoolStatsQuery } from '@anchor-protocol/app-provider/queries/market/saversPoolStats';
-import { MarketSaversData } from '@anchor-protocol/app-fns/queries/market/saversHistory';
+import { useSaversPoolStatsQuery } from '@thorfi-protocol/saversPoolStats';
+import { MarketSaversData } from '@thorfi-protocol/saversHistoryQuery';
 import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
 import { Box } from '@material-ui/core';
-import { CosmosChain } from '@xchainjs/xchain-util';
-import { useLiquidityPoolsQuery } from '@anchor-protocol/app-provider/queries/market/liquidityPools';
+import { useLiquidityPoolsQuery } from '@thorfi-protocol/liquidityPools';
 
 export interface DashboardProps {
   className?: string;
@@ -99,64 +93,72 @@ function DashboardBase({ className }: DashboardProps) {
     };
   }, [blocksPerYear, borrowRate, epochState, depositApy]);
 
-  let initialQueryKeys = {
-    interval: 'day',
-    count: 365,
-    lookback: 7, // 7 days
-    // endpoint: `./savers_data/BTC.BTC_savers.json`,
-    endpoint: `v2/history/savers/BTC.BTC?interval=day&count=100`,
-  };
-
   const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
   const { data: marketUST } = useMarketUstQuery();
   const { data: marketSaversStats } = useSaversPoolStatsQuery();
   const { data: liquidityPools } = useLiquidityPoolsQuery();
 
-  const [queryKeys, setQueryKeys] = useState(initialQueryKeys);
-  const [saversHistory, setMarketSavers] = useState<MarketSaversData>();
+  const [pool, setPool] = useState('');
 
-  const { data: saversHistoricalData } = useSaversHistoryQuery(queryKeys);
-  const [pool, setPool] = useState('BTC.BTC');
+  const lookback = 7; // set lookback for APR to 7 days
 
-  useEffect(() => {
-    setQueryKeys({
-      interval: 'day',
-      count: 365,
-      lookback: 7, // 7 days
-      // endpoint: `./savers_data/${pool}_savers.json`,
-      endpoint: `v2/history/savers/${pool}?interval=day&count=70`,
-    });
-  }, [pool]);
-
-  useEffect(() => {
-    if (saversHistoricalData) {
-      setMarketSavers(saversHistoricalData);
+  const queriesArray = useMemo(() => {
+    if (!marketSaversStats) {
+      return [];
     }
-  }, [saversHistoricalData]);
+
+    let queriesArray = Object.values(marketSaversStats).map((stats) => {
+      return {
+        interval: 'day',
+        count: 100,
+        lookback: lookback,
+        // endpoint: `./savers_data/${pool}_savers.json`,
+        endpoint: `v2/history/savers`,
+        asset: stats.asset,
+      };
+    });
+
+    return queriesArray;
+  }, [marketSaversStats]);
+
+  const saversHistoricalData = useSaversHistoryQuery(queriesArray);
 
   const showSelectedPool = useMemo(() => {
     if (!marketSaversStats) {
       return 0;
     }
-
     return Object.values(marketSaversStats).filter(
       (stats) => stats.asset === pool,
     )[0];
   }, [pool, marketSaversStats]);
 
-  const saversRateRelevantHistory = useMemo(() => {
-    const history = saversHistory?.history;
+  const saversHistoryChartData = useMemo(() => {
+    let _pool = pool ? pool : setPool('BTC.BTC');
 
-    if (!history) return;
+    if (saversHistoricalData) {
+      let selectedPool = saversHistoricalData
+        .filter((saversPools) => saversPools.asset === _pool)
+        .map((saverPool) => {
+          let history = saverPool.history;
 
-    const currentDate = new Date();
-    const yearAgoDate = currentDate.setFullYear(currentDate.getFullYear() - 1);
-    const yearAgoTimestamp = yearAgoDate.valueOf();
+          if (!history) return;
 
-    return history
-      .filter(({ timestamp }) => timestamp >= yearAgoTimestamp)
-      .sort((a, b) => a.timestamp - b.timestamp);
-  }, [saversHistory?.history, pool]);
+          history = convertDataToAPR(history, lookback);
+
+          const currentDate = new Date();
+          const yearAgoDate = currentDate.setFullYear(
+            currentDate.getFullYear() - 1,
+          );
+          const yearAgoTimestamp = yearAgoDate.valueOf();
+
+          return history
+            .filter(({ endTime }) => endTime * 1000 >= yearAgoTimestamp)
+            .sort((a, b) => a.endTime - b.endTime);
+        });
+
+      return selectedPool[0];
+    }
+  }, [saversHistoricalData]);
 
   const { data: marketDepositAndBorrow } = useMarketDepositAndBorrowQuery();
   const { data: marketCollaterals } = useMarketCollateralsQuery();
@@ -404,7 +406,7 @@ function DashboardBase({ className }: DashboardProps) {
               <figure>
                 <div>
                   <SaverAPRChart
-                    data={saversRateRelevantHistory ?? EMPTY_ARRAY}
+                    data={saversHistoryChartData ?? EMPTY_ARRAY}
                     theme={theme}
                     isMobile={isMobile}
                   />

@@ -1,13 +1,12 @@
-import { MarketUstData, marketUstQuery } from '@anchor-protocol/app-fns';
 import {
   SaversPoolData,
   saversPoolStatsQuery,
-} from '@anchor-protocol/app-fns/queries/market/saversPoolStats';
+} from '@thorfi-protocol/saversPoolStatsQuery';
 import { currency, percent } from '@libs/formatter';
 import { createQueryFn } from '@libs/react-query-utils';
 import React from 'react';
 import { useQuery, UseQueryResult } from 'react-query';
-import { useAnchorWebapp } from '../../contexts/context';
+import { useAnchorWebapp } from '../@anchor-protocol/app-provider/contexts/context';
 
 const endpoint = `https://vanaheimex.com/api/saversExtraData`;
 
@@ -41,7 +40,7 @@ export function useSaversPoolStatsQuery(): UseQueryResult<
   const { indexerApiEndpoint, queryErrorReporter } = useAnchorWebapp();
 
   const result = useQuery([endpoint, endpoint], queryFn, {
-    refetchInterval: 1000,
+    refetchInterval: 1000 * 60 * 5,
     keepPreviousData: true,
     select: React.useCallback((data) => {
       let dataOut = transformStats(data);
