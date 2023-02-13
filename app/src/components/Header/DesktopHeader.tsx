@@ -1,3 +1,4 @@
+import WalletConnect from '@thorfi-protocol/WalletConnect';
 import { useMenus, RouteMenu } from 'configurations/menu';
 import { screen } from 'env';
 import React from 'react';
@@ -7,8 +8,8 @@ import LogoAvax from './assets/LogoAvax.svg';
 import LogoEth from './assets/LogoEth.svg';
 import LogoTerra from './assets/LogoTerra.svg';
 import { TransactionWidget } from './transactions/TransactionWidget';
-import { EvmWalletSelector } from './wallet/evm/EvmWalletSelector';
-import { TerraWalletSelector } from './wallet/terra/TerraWalletSelector';
+// import { EvmWalletSelector } from './wallet/evm/EvmWalletSelector';
+// import { TerraWalletSelector } from './wallet/terra/TerraWalletSelector';
 
 export interface DesktopHeaderProps {
   className?: string;
@@ -34,8 +35,9 @@ function DesktopHeaderBase({ className }: DesktopHeaderProps) {
       <div />
 
       <section className="wallet">
-        <TransactionWidget className="transaction-widget" />
-        <TerraWalletSelector></TerraWalletSelector>
+        {/* <TransactionWidget className="transaction-widget" /> */}
+        {/* <TerraWalletSelector></TerraWalletSelector> */}
+        <WalletConnect></WalletConnect>
       </section>
 
       <GlobalStyle />

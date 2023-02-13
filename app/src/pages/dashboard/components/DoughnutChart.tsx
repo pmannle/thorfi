@@ -1,6 +1,7 @@
 import { formatAssetName } from '@libs/formatter';
 import big, { Big } from 'big.js';
 import { Tooltip, Chart } from 'chart.js';
+import { rgb } from 'color';
 import React, { Component, createRef } from 'react';
 
 Tooltip.positioners.custom = function (elements, position) {
@@ -96,6 +97,7 @@ export class DoughnutChart extends Component<DoughnutChartProps> {
           tooltip: {
             enabled: true,
             position: 'custom',
+            backgroundColor: '#00000',
             callbacks: {
               label: function (context) {
                 let label = context.label || '';

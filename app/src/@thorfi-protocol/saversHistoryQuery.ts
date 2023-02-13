@@ -43,12 +43,13 @@ const getHistory = async (endpoint: string, asset, interval, count) => {
   // let response = await import(endpoint);
   // return response;
 
-  let url = `https://4ae2-108-214-22-208.ngrok.io/${endpoint}/${asset}?interval=${interval}&count=${count}`;
+  // let url = `https://4ae2-108-214-22-208.ngrok.io/${endpoint}/${asset}?interval=${interval}&count=${count}`;
+  let url = `https://midgard.ninerealms.com/${endpoint}/${asset}?interval=${interval}&count=${count}`;
 
   let options = {
     method: 'get',
     headers: {
-      'ngrok-skip-browser-warning': '69420',
+      // 'ngrok-skip-browser-warning': '69420',
     },
   };
 

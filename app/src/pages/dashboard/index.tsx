@@ -737,6 +737,11 @@ const StyledDashboard = styled(DashboardBase)`
       position: relative;
     }
 
+    .chartContainer > canvas {
+      position: relative;
+      z-index: 10;
+    }
+
     .chartInner {
       display: flex;
       flex-direction: column;
@@ -749,6 +754,7 @@ const StyledDashboard = styled(DashboardBase)`
       border-radius: 50%;
       padding: 1.25em 0;
       overflow: hidden;
+      z-indez: 5;
 
       > h2 {
         display: flex;

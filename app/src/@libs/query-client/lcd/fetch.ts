@@ -16,16 +16,6 @@ export type LcdFetcher = <Data>(
   requestInit?: Omit<RequestInit, 'method' | 'body'>,
 ) => Promise<Data>;
 
-export function defaultLcdFetcher<Data>(
-  endpoint: string,
-  requestInit?: RequestInit,
-): Promise<Data> {
-  return fetch(endpoint, { ...requestInit, cache: 'no-store' })
-    .then((res) => res.json())
-    .then((data) => {
-      if ('code' in data && data.code > 0) {
-        throw new LcdFetchError(data.code, data.txhash, data.raw_log);
-      }
-      return data;
-    });
+export function defaultLcdFetcher(endpoint: string, requestInit?: RequestInit) {
+  return null;
 }
