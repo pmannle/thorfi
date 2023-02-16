@@ -1,0 +1,612 @@
+{
+	"intervals": [
+		{
+			"endTime": "1663891200",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1663804800"
+		},
+		{
+			"endTime": "1663977600",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1663891200"
+		},
+		{
+			"endTime": "1664064000",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1663977600"
+		},
+		{
+			"endTime": "1664150400",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664064000"
+		},
+		{
+			"endTime": "1664236800",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664150400"
+		},
+		{
+			"endTime": "1664323200",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664236800"
+		},
+		{
+			"endTime": "1664409600",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664323200"
+		},
+		{
+			"endTime": "1664496000",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664409600"
+		},
+		{
+			"endTime": "1664582400",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664496000"
+		},
+		{
+			"endTime": "1664668800",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664582400"
+		},
+		{
+			"endTime": "1664755200",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664668800"
+		},
+		{
+			"endTime": "1664841600",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664755200"
+		},
+		{
+			"endTime": "1664928000",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664841600"
+		},
+		{
+			"endTime": "1665014400",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1664928000"
+		},
+		{
+			"endTime": "1665100800",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665014400"
+		},
+		{
+			"endTime": "1665187200",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665100800"
+		},
+		{
+			"endTime": "1665273600",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665187200"
+		},
+		{
+			"endTime": "1665360000",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665273600"
+		},
+		{
+			"endTime": "1665446400",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665360000"
+		},
+		{
+			"endTime": "1665532800",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665446400"
+		},
+		{
+			"endTime": "1665619200",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665532800"
+		},
+		{
+			"endTime": "1665705600",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665619200"
+		},
+		{
+			"endTime": "1665792000",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665705600"
+		},
+		{
+			"endTime": "1665878400",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665792000"
+		},
+		{
+			"endTime": "1665964800",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665878400"
+		},
+		{
+			"endTime": "1666051200",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1665964800"
+		},
+		{
+			"endTime": "1666137600",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666051200"
+		},
+		{
+			"endTime": "1666224000",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666137600"
+		},
+		{
+			"endTime": "1666310400",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666224000"
+		},
+		{
+			"endTime": "1666396800",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666310400"
+		},
+		{
+			"endTime": "1666483200",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666396800"
+		},
+		{
+			"endTime": "1666569600",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666483200"
+		},
+		{
+			"endTime": "1666656000",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666569600"
+		},
+		{
+			"endTime": "1666742400",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666656000"
+		},
+		{
+			"endTime": "1666828800",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666742400"
+		},
+		{
+			"endTime": "1666915200",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666828800"
+		},
+		{
+			"endTime": "1667001600",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1666915200"
+		},
+		{
+			"endTime": "1667088000",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1667001600"
+		},
+		{
+			"endTime": "1667174400",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1667088000"
+		},
+		{
+			"endTime": "1667260800",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1667174400"
+		},
+		{
+			"endTime": "1667347200",
+			"saversDepth": "0",
+			"saversUnits": "0",
+			"startTime": "1667260800"
+		},
+		{
+			"endTime": "1667433600",
+			"saversDepth": "4499941235",
+			"saversUnits": "4499941235",
+			"startTime": "1667347200"
+		},
+		{
+			"endTime": "1667520000",
+			"saversDepth": "54494894824",
+			"saversUnits": "54494894824",
+			"startTime": "1667433600"
+		},
+		{
+			"endTime": "1667606400",
+			"saversDepth": "54494894824",
+			"saversUnits": "54494894824",
+			"startTime": "1667520000"
+		},
+		{
+			"endTime": "1667692800",
+			"saversDepth": "54494894824",
+			"saversUnits": "54494894824",
+			"startTime": "1667606400"
+		},
+		{
+			"endTime": "1667779200",
+			"saversDepth": "54494894824",
+			"saversUnits": "54494894824",
+			"startTime": "1667692800"
+		},
+		{
+			"endTime": "1667865600",
+			"saversDepth": "54494894824",
+			"saversUnits": "54494894824",
+			"startTime": "1667779200"
+		},
+		{
+			"endTime": "1667952000",
+			"saversDepth": "54494894824",
+			"saversUnits": "54494894824",
+			"startTime": "1667865600"
+		},
+		{
+			"endTime": "1668038400",
+			"saversDepth": "54494894824",
+			"saversUnits": "54494894824",
+			"startTime": "1667952000"
+		},
+		{
+			"endTime": "1668124800",
+			"saversDepth": "54494894824",
+			"saversUnits": "54494894824",
+			"startTime": "1668038400"
+		},
+		{
+			"endTime": "1668211200",
+			"saversDepth": "28247443374",
+			"saversUnits": "28247443374",
+			"startTime": "1668124800"
+		},
+		{
+			"endTime": "1668297600",
+			"saversDepth": "28250735851",
+			"saversUnits": "28247443374",
+			"startTime": "1668211200"
+		},
+		{
+			"endTime": "1668384000",
+			"saversDepth": "28259428636",
+			"saversUnits": "28247443374",
+			"startTime": "1668297600"
+		},
+		{
+			"endTime": "1668470400",
+			"saversDepth": "9532498046855",
+			"saversUnits": "9524920499274",
+			"startTime": "1668384000"
+		},
+		{
+			"endTime": "1668556800",
+			"saversDepth": "14720365278024",
+			"saversUnits": "14706044927534",
+			"startTime": "1668470400"
+		},
+		{
+			"endTime": "1668643200",
+			"saversDepth": "17025229787462",
+			"saversUnits": "17004584726854",
+			"startTime": "1668556800"
+		},
+		{
+			"endTime": "1668729600",
+			"saversDepth": "27668324361804",
+			"saversUnits": "27628403307910",
+			"startTime": "1668643200"
+		},
+		{
+			"endTime": "1668816000",
+			"saversDepth": "35598988871627",
+			"saversUnits": "35541642913150",
+			"startTime": "1668729600"
+		},
+		{
+			"endTime": "1668902400",
+			"saversDepth": "38562363311033",
+			"saversUnits": "38493858171242",
+			"startTime": "1668816000"
+		},
+		{
+			"endTime": "1668988800",
+			"saversDepth": "39882723785607",
+			"saversUnits": "39805437772757",
+			"startTime": "1668902400"
+		},
+		{
+			"endTime": "1669075200",
+			"saversDepth": "40985800949407",
+			"saversUnits": "40897400473591",
+			"startTime": "1668988800"
+		},
+		{
+			"endTime": "1669161600",
+			"saversDepth": "41002679383951",
+			"saversUnits": "40908376509397",
+			"startTime": "1669075200"
+		},
+		{
+			"endTime": "1669248000",
+			"saversDepth": "41403913064044",
+			"saversUnits": "41301751333830",
+			"startTime": "1669161600"
+		},
+		{
+			"endTime": "1669334400",
+			"saversDepth": "47165095078052",
+			"saversUnits": "47041104177099",
+			"startTime": "1669248000"
+		},
+		{
+			"endTime": "1669420800",
+			"saversDepth": "46937713804115",
+			"saversUnits": "46795382006973",
+			"startTime": "1669334400"
+		},
+		{
+			"endTime": "1669507200",
+			"saversDepth": "56922672925306",
+			"saversUnits": "56726145116741",
+			"startTime": "1669420800"
+		},
+		{
+			"endTime": "1669593600",
+			"saversDepth": "57995875628632",
+			"saversUnits": "57765289178483",
+			"startTime": "1669507200"
+		},
+		{
+			"endTime": "1669680000",
+			"saversDepth": "58363609432709",
+			"saversUnits": "58107663247447",
+			"startTime": "1669593600"
+		},
+		{
+			"endTime": "1669766400",
+			"saversDepth": "58726601050868",
+			"saversUnits": "58445601762624",
+			"startTime": "1669680000"
+		},
+		{
+			"endTime": "1669852800",
+			"saversDepth": "58177801642209",
+			"saversUnits": "57881646430125",
+			"startTime": "1669766400"
+		},
+		{
+			"endTime": "1669939200",
+			"saversDepth": "65290690436685",
+			"saversUnits": "64939755185563",
+			"startTime": "1669852800"
+		},
+		{
+			"endTime": "1670025600",
+			"saversDepth": "65383847910356",
+			"saversUnits": "65017839203801",
+			"startTime": "1669939200"
+		},
+		{
+			"endTime": "1670112000",
+			"saversDepth": "66089254802525",
+			"saversUnits": "65704346289628",
+			"startTime": "1670025600"
+		},
+		{
+			"endTime": "1670198400",
+			"saversDepth": "66069419945283",
+			"saversUnits": "65668426288897",
+			"startTime": "1670112000"
+		},
+		{
+			"endTime": "1670284800",
+			"saversDepth": "71436293902647",
+			"saversUnits": "70982565596346",
+			"startTime": "1670198400"
+		},
+		{
+			"endTime": "1670371200",
+			"saversDepth": "78161640842596",
+			"saversUnits": "77651055701981",
+			"startTime": "1670284800"
+		},
+		{
+			"endTime": "1670457600",
+			"saversDepth": "73334766044528",
+			"saversUnits": "72843145441452",
+			"startTime": "1670371200"
+		},
+		{
+			"endTime": "1670544000",
+			"saversDepth": "73519309104149",
+			"saversUnits": "73012456322819",
+			"startTime": "1670457600"
+		},
+		{
+			"endTime": "1670630400",
+			"saversDepth": "75024294769081",
+			"saversUnits": "74493728873356",
+			"startTime": "1670544000"
+		},
+		{
+			"endTime": "1670716800",
+			"saversDepth": "81842450211380",
+			"saversUnits": "81251268750407",
+			"startTime": "1670630400"
+		},
+		{
+			"endTime": "1670803200",
+			"saversDepth": "81962181396883",
+			"saversUnits": "81359393533517",
+			"startTime": "1670716800"
+		},
+		{
+			"endTime": "1670889600",
+			"saversDepth": "83861596341409",
+			"saversUnits": "83227347981052",
+			"startTime": "1670803200"
+		},
+		{
+			"endTime": "1670976000",
+			"saversDepth": "103275506735966",
+			"saversUnits": "102469454580142",
+			"startTime": "1670889600"
+		},
+		{
+			"endTime": "1671062400",
+			"saversDepth": "103390982147139",
+			"saversUnits": "102568652864659",
+			"startTime": "1670976000"
+		},
+		{
+			"endTime": "1671148800",
+			"saversDepth": "103415220787447",
+			"saversUnits": "102577559507387",
+			"startTime": "1671062400"
+		},
+		{
+			"endTime": "1671235200",
+			"saversDepth": "103671491289647",
+			"saversUnits": "102797668829754",
+			"startTime": "1671148800"
+		},
+		{
+			"endTime": "1671321600",
+			"saversDepth": "106703786439400",
+			"saversUnits": "105791969656666",
+			"startTime": "1671235200"
+		},
+		{
+			"endTime": "1671408000",
+			"saversDepth": "111184421178702",
+			"saversUnits": "110216871416185",
+			"startTime": "1671321600"
+		},
+		{
+			"endTime": "1671494400",
+			"saversDepth": "113144881944991",
+			"saversUnits": "112138798346367",
+			"startTime": "1671408000"
+		},
+		{
+			"endTime": "1671580800",
+			"saversDepth": "113983428870867",
+			"saversUnits": "112935940956897",
+			"startTime": "1671494400"
+		},
+		{
+			"endTime": "1671667200",
+			"saversDepth": "114091237320235",
+			"saversUnits": "113017651041901",
+			"startTime": "1671580800"
+		},
+		{
+			"endTime": "1671753600",
+			"saversDepth": "125028397528863",
+			"saversUnits": "123815662495579",
+			"startTime": "1671667200"
+		},
+		{
+			"endTime": "1671840000",
+			"saversDepth": "122089847974459",
+			"saversUnits": "120874557743413",
+			"startTime": "1671753600"
+		},
+		{
+			"endTime": "1671926400",
+			"saversDepth": "123102769013696",
+			"saversUnits": "121856407101269",
+			"startTime": "1671840000"
+		},
+		{
+			"endTime": "1672012800",
+			"saversDepth": "123319579188080",
+			"saversUnits": "122041691306739",
+			"startTime": "1671926400"
+		},
+		{
+			"endTime": "1672099200",
+			"saversDepth": "123396368995817",
+			"saversUnits": "122094596112714",
+			"startTime": "1672012800"
+		},
+		{
+			"endTime": "1672185600",
+			"saversDepth": "128598967404379",
+			"saversUnits": "127223981463808",
+			"startTime": "1672099200"
+		},
+		{
+			"endTime": "1672272000",
+			"saversDepth": "136654296028396",
+			"saversUnits": "135165345975489",
+			"startTime": "1672185600"
+		},
+		{
+			"endTime": "1672358400",
+			"saversDepth": "139752452994646",
+			"saversUnits": "138209916940678",
+			"startTime": "1672272000"
+		},
+		{
+			"endTime": "1672444800",
+			"saversDepth": "141198707686736",
+			"saversUnits": "139610618914972",
+			"startTime": "1672358400"
+		}
+	],
+	"meta": {
+		"endSaversDepth": "141198707686736",
+		"endTime": "1672444800",
+		"endUnits": "139610618914972",
+		"startSaversDepth": "0",
+		"startTime": "1663804800",
+		"startUnits": "0"
+	}
+}
