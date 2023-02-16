@@ -14,8 +14,6 @@
     "storybook": "start-storybook -h localhost -p 6006 -s public",
     "test": "react-scripts test --colors",
     "test:update": "react-scripts test -u",
-    "markdown:build": "markdown-source-import **/src/**/*.md",
-    "postinstall": "husky install",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "format": "prettier --write \"**/*.{js,ts,tsx}\""
   },
