@@ -1,5 +1,5 @@
 import WalletConnect from '@walletconnect/web3-provider'
-// import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
+import CoinbaseWalletSDK from '@coinbase/wallet-sdk'
 import Torus from '@toruslabs/torus-embed'
 import Ledger from '@web3modal/ledger-provider'
 import Trezor from '@web3modal/trezor-provider'
@@ -39,13 +39,13 @@ export const getProviderOptions = () => {
     safe: {},
     cipher: {},
 
-    // coinbasewallet: {
-    //   package: CoinbaseWalletSDK,
-    //   options: {
-    //     appName: 'WalletConnect Example App',
-    //     infuraId: INFURA_ID
-    //   }
-    // },
+    coinbasewallet: {
+      package: CoinbaseWalletSDK,
+      options: {
+        appName: 'WalletConnect Example App',
+        infuraId: INFURA_ID
+      }
+    },
     web3auth: {
       package: Web3Auth,
       options: {
@@ -61,12 +61,12 @@ export const getProviderOptions = () => {
     torus: {
       package: Torus
     },
-    // ledger: {
-    //   package: Ledger
-    // },
-    // trezor: {
-    //   package: Trezor
-    // }
+    ledger: {
+      package: Ledger
+    },
+    trezor: {
+      package: Trezor
+    }
   }
   return providerOptions
 }

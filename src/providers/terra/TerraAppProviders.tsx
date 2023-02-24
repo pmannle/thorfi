@@ -5,7 +5,7 @@ import {
   // NetworkInfo,
   // ReadonlyWalletSession,
   // WalletControllerChainOptions,
-  WalletProvider,
+  // WalletProvider,
 } from '@terra-money/wallet-provider';
 import { useReadonlyWalletDialog } from 'components/dialogs/useReadonlyWalletDialog';
 import { AppProviders } from 'configurations/app';
@@ -21,25 +21,20 @@ export function TerraAppProviders({
   children,
   // walletConnectChainIds,
 }: UIElementProps) {
-  const [openReadonlyWalletSelector, readonlyWalletSelectorElement] =
-    useReadonlyWalletDialog();
+  // const [openReadonlyWalletSelector, readonlyWalletSelectorElement] =
+  //   useReadonlyWalletDialog();
 
-  const createReadonlyWalletSession = useCallback(
-    (networks: NetworkInfo[]): Promise<ReadonlyWalletSession | null> => {
-      return openReadonlyWalletSelector({
-        networks,
-      });
-    },
-    [openReadonlyWalletSelector],
-  );
+  // const createReadonlyWalletSession = useCallback(
+  //   (networks: NetworkInfo[]): Promise<ReadonlyWalletSession | null> => {
+  //     return openReadonlyWalletSelector({
+  //       networks,
+  //     });
+  //   },
+  //   [openReadonlyWalletSelector],
+  // );
 
   return (
-    <WalletProvider
-    // defaultNetwork={walletConnectChainIds[2]}
-    // walletConnectChainIds={walletConnectChainIds}
-    // connectorOpts={{ bridge: 'https://walletconnect.terra.dev/' }}
-    // createReadonlyWalletSession={createReadonlyWalletSession}
-    >
+    <div>
       {/* // <TerraNetworkProvider> */}
       <ThemeProvider
         initialTheme="light"
@@ -49,7 +44,7 @@ export function TerraAppProviders({
         {/* <TerraNetworkGuard> */}
         <QueryProvider>
           {/* <TerraAccountProvider> */}
-          <AppProviders dialogs={readonlyWalletSelectorElement}>
+          <AppProviders>
             {/* <TerraBalancesProvider> */}
             {/* <RouterWalletStatusRecheck /> */}
             {children}
@@ -60,6 +55,6 @@ export function TerraAppProviders({
         {/* </TerraNetworkGuard> */}
       </ThemeProvider>
       {/* // </TerraNetworkProvider> */}
-    </WalletProvider>
+    </div>
   );
 }

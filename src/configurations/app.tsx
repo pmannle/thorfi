@@ -54,11 +54,9 @@ function Providers({ children }: { children: ReactNode }) {
 }
 
 export function AppProviders({
-  children,
-  dialogs,
+  children
 }: {
   children: ReactNode;
-  dialogs?: ReactNode;
 }) {
   const [_openRequestReload, requestReloadElement] = useRequestReloadDialog();
 
@@ -77,7 +75,6 @@ export function AppProviders({
       <GlobalStyle />
       {children}
       {/* <SnackbarContainer /> */}
-      {dialogs}
       {requestReloadElement}
     </Providers>
   );
