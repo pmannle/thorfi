@@ -50,6 +50,7 @@ import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
 import { Box } from '@material-ui/core';
 import { useLiquidityPoolsQuery } from '@thorfi-protocol/liquidityPools';
 
+
 export interface DashboardProps {
   className?: string;
 }
@@ -76,11 +77,11 @@ function DashboardBase({ className }: DashboardProps) {
 
   const {
     constants: { blocksPerYear },
-  } = useAnchorWebapp();
+  } = { constants: { blocksPerYear: 0 } };
 
-  const { data: { borrowRate, epochState } = {} } = useMarketStableCoinQuery();
+  const { data: { borrowRate, epochState } } = { data: { borrowRate: 0, epochState: 0 } };
 
-  const depositApy = useDepositApy();
+  const depositApy = 0;
 
   const stableCoinLegacy = useMemo(() => {
     if (!borrowRate || !epochState) {
@@ -93,8 +94,8 @@ function DashboardBase({ className }: DashboardProps) {
     };
   }, [blocksPerYear, borrowRate, epochState, depositApy]);
 
-  const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
-  const { data: marketUST } = useMarketUstQuery();
+  const { data: { moneyMarketEpochState } } = { data: { moneyMarketEpochState: 0 } };
+  const { data: marketUST } = { data: { marketUST: [] } };
   const { data: marketSaversStats } = useSaversPoolStatsQuery();
   const { data: liquidityPools } = useLiquidityPoolsQuery();
 
@@ -347,8 +348,8 @@ function DashboardBase({ className }: DashboardProps) {
                               <AnimateNumber format={formatUST}>
                                 {showSelectedPool.totalAnnualisedReturn
                                   ? (showSelectedPool.totalAnnualisedReturn as u<
-                                      UST<number>
-                                    >)
+                                    UST<number>
+                                  >)
                                   : (0 as u<UST<number>>)}
                               </AnimateNumber>
                               <span>%</span>
@@ -366,8 +367,8 @@ function DashboardBase({ className }: DashboardProps) {
                               <AnimateNumber format={formatUTokenDecimal2}>
                                 {showSelectedPool.saversDepthUSD
                                   ? (showSelectedPool.saversDepthUSD as u<
-                                      UST<number>
-                                    >)
+                                    UST<number>
+                                  >)
                                   : (0 as u<UST<number>>)}
                               </AnimateNumber>
                             </p>
@@ -542,11 +543,11 @@ function DashboardBase({ className }: DashboardProps) {
                   </td>
                   <td>
                     <div className="value">
-                      <AnimateNumber format={formatRate}>
+                      {/* <AnimateNumber format={formatRate}>
                         {stableCoinLegacy
                           ? stableCoinLegacy.depositRate
                           : (0 as Rate<number>)}
-                      </AnimateNumber>
+                      </AnimateNumber> */}
                       <span>%</span>
                     </div>
                   </td>
@@ -575,7 +576,7 @@ function DashboardBase({ className }: DashboardProps) {
             </HorizontalScrollTable>
           </Section>
 
-          <CollateralMarket className="collaterals" />
+          {/* <CollateralMarket className="collaterals" /> */}
         </div>
 
         <Footer style={{ margin: '60px 0' }} />

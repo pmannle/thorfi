@@ -4,6 +4,8 @@ import { useChainOptions } from '@terra-money/wallet-provider';
 import CryptoContext from '@thorfi-protocol/CryptoContext';
 import NetworkManager from "@xdefi/wallets-connector";
 import WalletConnect from '@thorfi-protocol/WalletConnect';
+import { Dashboard } from 'pages/dashboard';
+
 // import { getProviderOptions } from "@thorfi-protocol/utils";
 
 export function App() {
@@ -30,7 +32,7 @@ export function App() {
     // </NetworkManager >
 
     <CryptoContext>
-      <TerraApp chainOptions={chainOptions} />
+      <TerraApp />
     </CryptoContext>
 
 

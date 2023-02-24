@@ -1,4 +1,4 @@
-import { WalletControllerChainOptions } from '@terra-money/wallet-provider';
+// import { WalletControllerChainOptions } from '@terra-money/wallet-provider';
 import { AstroportGuideBanner } from 'components/AstroportGuideBanner';
 import { GlobalStyle } from 'components/GlobalStyle';
 import { Header } from 'components/Header';
@@ -13,28 +13,28 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import '../configurations/chartjs';
 
-type TerraAppProps = {
-  chainOptions: WalletControllerChainOptions | null;
-};
+// type TerraAppProps = {
+//   chainOptions: WalletControllerChainOptions | null;
+// };
 
-export function TerraApp({ chainOptions }: TerraAppProps) {
+export function TerraApp() {
   return (
-    chainOptions && (
-      <TerraAppProviders {...chainOptions}>
-        <div>
-          <GlobalStyle />
-          <Header />
-          <AstroportGuideBanner />
-          <Routes>
-            <Route index={true} element={<Dashboard />} />
-            <Route path="/earn" element={<Earn />} />
-            <Route path="/borrow" element={<Borrow />} />
-            <Route path="/mypage" element={<Mypage />} />
-            <Route path="/terms" element={<TermsOfService />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </div>
-      </TerraAppProviders>
-    )
+    // chainOptions && (
+    <TerraAppProviders>
+      <div>
+        <GlobalStyle />
+        <Header />
+        {/* <AstroportGuideBanner /> */}
+        <Routes>
+          <Route index={true} element={<Dashboard />} />
+          <Route path="/earn" element={<Earn />} />
+          <Route path="/borrow" element={<Borrow />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+    </TerraAppProviders>
+    // )
   );
 }

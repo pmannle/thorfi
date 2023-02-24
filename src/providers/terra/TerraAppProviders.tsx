@@ -2,25 +2,25 @@ import React, { useCallback } from 'react';
 import { UIElementProps } from '@libs/ui';
 import { RouterWalletStatusRecheck } from '@libs/use-router-wallet-status-recheck';
 import {
-  NetworkInfo,
-  ReadonlyWalletSession,
-  WalletControllerChainOptions,
+  // NetworkInfo,
+  // ReadonlyWalletSession,
+  // WalletControllerChainOptions,
   WalletProvider,
 } from '@terra-money/wallet-provider';
 import { useReadonlyWalletDialog } from 'components/dialogs/useReadonlyWalletDialog';
 import { AppProviders } from 'configurations/app';
-import { TerraAccountProvider } from './TerraAccountProvider';
-import { TerraBalancesProvider } from './TerraBalancesProvider';
-import { TerraNetworkProvider } from './TerraNetworkProvider';
+// import { TerraAccountProvider } from './TerraAccountProvider';
+// import { TerraBalancesProvider } from './TerraBalancesProvider';
+// import { TerraNetworkProvider } from './TerraNetworkProvider';
 import { ThemeProvider } from 'contexts/theme';
 import { lightTheme, darkTheme } from 'themes/terra';
 import { QueryProvider } from 'providers/QueryProvider';
-import { TerraNetworkGuard } from './TerraNetworkGaurd';
+// import { TerraNetworkGuard } from './TerraNetworkGaurd';
 
 export function TerraAppProviders({
   children,
-  walletConnectChainIds,
-}: UIElementProps & WalletControllerChainOptions) {
+  // walletConnectChainIds,
+}: UIElementProps) {
   const [openReadonlyWalletSelector, readonlyWalletSelectorElement] =
     useReadonlyWalletDialog();
 
@@ -35,31 +35,31 @@ export function TerraAppProviders({
 
   return (
     <WalletProvider
-      defaultNetwork={walletConnectChainIds[2]}
-      walletConnectChainIds={walletConnectChainIds}
-      connectorOpts={{ bridge: 'https://walletconnect.terra.dev/' }}
-      createReadonlyWalletSession={createReadonlyWalletSession}
+    // defaultNetwork={walletConnectChainIds[2]}
+    // walletConnectChainIds={walletConnectChainIds}
+    // connectorOpts={{ bridge: 'https://walletconnect.terra.dev/' }}
+    // createReadonlyWalletSession={createReadonlyWalletSession}
     >
-      <TerraNetworkProvider>
-        <ThemeProvider
-          initialTheme="light"
-          lightTheme={lightTheme}
-          darkTheme={darkTheme}
-        >
-          <TerraNetworkGuard>
-            <QueryProvider>
-              <TerraAccountProvider>
-                <AppProviders dialogs={readonlyWalletSelectorElement}>
-                  <TerraBalancesProvider>
-                    <RouterWalletStatusRecheck />
-                    {children}
-                  </TerraBalancesProvider>
-                </AppProviders>
-              </TerraAccountProvider>
-            </QueryProvider>
-          </TerraNetworkGuard>
-        </ThemeProvider>
-      </TerraNetworkProvider>
+      {/* // <TerraNetworkProvider> */}
+      <ThemeProvider
+        initialTheme="light"
+        lightTheme={lightTheme}
+        darkTheme={darkTheme}
+      >
+        {/* <TerraNetworkGuard> */}
+        <QueryProvider>
+          {/* <TerraAccountProvider> */}
+          <AppProviders dialogs={readonlyWalletSelectorElement}>
+            {/* <TerraBalancesProvider> */}
+            {/* <RouterWalletStatusRecheck /> */}
+            {children}
+            {/* </TerraBalancesProvider> */}
+          </AppProviders>
+          {/* </TerraAccountProvider> */}
+        </QueryProvider>
+        {/* </TerraNetworkGuard> */}
+      </ThemeProvider>
+      {/* // </TerraNetworkProvider> */}
     </WalletProvider>
   );
 }
