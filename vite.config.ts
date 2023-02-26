@@ -55,5 +55,9 @@ export default defineConfig({
         nodePolyfills()
       ]
     },
+    // ↓ Needed for build if using WalletConnect and other providers
+    commonjsOptions: {
+      transformMixedEsModules: true
+    }
   },
 });

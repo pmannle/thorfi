@@ -6,13 +6,13 @@ import NetworkManager from "@xdefi/wallets-connector";
 import WalletConnect from '@thorfi-protocol/WalletConnect';
 import { Dashboard } from 'pages/dashboard';
 
-// import { getProviderOptions } from "@thorfi-protocol/utils";
+import { getProviderOptions } from "@thorfi-protocol/utils";
 
 export function App() {
   const chainOptions = useChainOptions();
 
-  // const [options] = useState(() => getProviderOptions());
-  // console.log("Providers", options);
+  const [options] = useState(() => getProviderOptions());
+  console.log("Providers", options);
 
   /*
     <CryptoContext>
@@ -32,7 +32,14 @@ export function App() {
     // </NetworkManager >
 
     <CryptoContext>
-      <TerraApp />
+      < NetworkManager
+        options={options}
+        network="mainnet"
+        cacheEnabled={true}
+        isSingleProviderEnabled={true}
+      >
+        <TerraApp />
+      </NetworkManager>
     </CryptoContext>
 
 

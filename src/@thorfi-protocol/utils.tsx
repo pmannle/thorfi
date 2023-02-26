@@ -20,12 +20,12 @@ import { Client as ClientEvm } from '@xchainjs/xchain-evm'
 // import Icon from "react-crypto-icons";
 
 
-const ETHERSCAN_API: any = process.env.REACT_APP_ETHERSCAN_API
-const ALCHEMY_API: any = process.env.REACT_APP_ALCHEMY_API
+const ETHERSCAN_API: any = 'JXPXDYW6VUSEZDC2TAITB5D2YSYC7XTQA9'
+const ALCHEMY_API: any = 'sSe6luFreeV2K_n8CaAaqQDR7K5Fhwc-'
 // const COVALENT_API:any = process.env.REACT_APP_COVELANT
 
 export const getProviderOptions = () => {
-  const INFURA_ID = process.env.REACT_APP_INFURA_ID
+  const INFURA_ID = '47a7cb097c99498eb31ed9cb91b7b589'
   const providerOptions = {
     xdefi: {},
     injected: {
@@ -39,13 +39,13 @@ export const getProviderOptions = () => {
     safe: {},
     cipher: {},
 
-    coinbasewallet: {
-      package: CoinbaseWalletSDK,
-      options: {
-        appName: 'WalletConnect Example App',
-        infuraId: INFURA_ID
-      }
-    },
+    // coinbasewallet: {
+    //   package: CoinbaseWalletSDK,
+    //   options: {
+    //     appName: 'WalletConnect Example App',
+    //     infuraId: INFURA_ID
+    //   }
+    // },
     web3auth: {
       package: Web3Auth,
       options: {
@@ -61,12 +61,12 @@ export const getProviderOptions = () => {
     torus: {
       package: Torus
     },
-    ledger: {
-      package: Ledger
-    },
-    trezor: {
-      package: Trezor
-    }
+    // ledger: {
+    //   package: Ledger
+    // },
+    // trezor: {
+    //   package: Trezor
+    // }
   }
   return providerOptions
 }
