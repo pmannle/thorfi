@@ -22,18 +22,18 @@ export function useBorrowOverviewData() {
   // ---------------------------------------------
   const {
     constants: { blocksPerYear },
-  } = useAnchorWebapp();
+  } = { constants: { blocksPerYear: 0 } };
 
   // ---------------------------------------------
   // queries
   // ---------------------------------------------
   const { data: { borrowRate, oraclePrices, bAssetLtvs } = {} } =
-    useBorrowMarketQuery();
+  { data: { borrowRate: 0, oraclePrices: 0, bAssetLtvs: 0 } }
 
   const { data: { marketBorrowerInfo, overseerCollaterals } = {} } =
-    useBorrowBorrowerQuery();
+  { data: { marketBorrowerInfo: 0, overseerCollaterals: 0 } }
 
-  const { data: { borrowerDistributionAPYs } = {} } = useBorrowAPYQuery();
+  const { data: { borrowerDistributionAPYs } = {} } = { data: { borrowerDistributionAPYs: 0  } };
 
   // ---------------------------------------------
   // computes

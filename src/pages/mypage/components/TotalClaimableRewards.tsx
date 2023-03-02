@@ -2,8 +2,9 @@ import { formatOutput } from '@anchor-protocol/formatter';
 import {
   formatUST,
   formatUSTWithPostfixUnits,
+  formatUTokenIntegerWithoutPostfixUnits,
 } from '@anchor-protocol/notation';
-import { UST } from '@anchor-protocol/types';
+import { u, UST } from '@anchor-protocol/types';
 import { demicrofy } from '@libs/formatter';
 import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
@@ -12,7 +13,7 @@ import { Section } from '@libs/neumorphism-ui/components/Section';
 import { AnimateNumber } from '@libs/ui';
 import { Sub } from 'components/Sub';
 import { fixHMR } from 'fix-hmr';
-import { Reward, useRewards } from 'pages/mypage/logics/useRewards';
+// import { Reward, useRewards } from 'pages/mypage/logics/useRewards';
 import { useAssetPriceInUstQuery } from 'queries';
 import React, { useMemo } from 'react';
 import big from 'big.js';
@@ -23,23 +24,24 @@ export interface TotalClaimableRewardsProps {
   className?: string;
 }
 
-const hasReward = (rewards: Reward[] | undefined, target: string) =>
-  rewards?.find((reward) =>
-    reward.symbol.toLowerCase().includes(target.toLowerCase()),
-  );
+const hasReward = (rewards: Reward[] | undefined, target: string) => []
+// rewards?.find((reward) =>
+//   reward.symbol.toLowerCase().includes(target.toLowerCase()),
+// );
 
 function TotalClaimableRewardsBase({ className }: TotalClaimableRewardsProps) {
-  const { data: ancPrice } = useAssetPriceInUstQuery('anc');
-  const { data: astroPrice } = useAssetPriceInUstQuery('astro');
+  const { data: ancPrice } = { data: { ancPrice: 0 } }// useAssetPriceInUstQuery('anc');
+  const { data: astroPrice } = { data: { astroPrice: 0 } } // useAssetPriceInUstQuery('astro');
 
-  const { rewards: allRewards, rewardsAmountInUst } = useRewards();
-  const rewards = useMemo(
-    () =>
-      allRewards && allRewards.filter(({ amount }) => !big(amount).eq(big(0))),
-    [allRewards],
-  );
+  const { rewards: allRewards, rewardsAmountInUst } = { rewards: { allRewards: [] }, rewardsAmountInUst: 0 }// useRewards();
+  const rewards = big(0)
+  // useMemo(
+  //   () =>
+  //     allRewards && allRewards.filter(({ amount }) => !big(amount).eq(big(0))),
+  //   [allRewards],
+  // );
 
-  const hasAstroReward = useMemo(() => hasReward(rewards, 'ASTRO'), [rewards]);
+  const hasAstroReward = useMemo(() => false, [rewards]);
 
   return (
     <Section className={className}>
@@ -53,7 +55,7 @@ function TotalClaimableRewardsBase({ className }: TotalClaimableRewardsProps) {
           </IconSpan>
         </h4>
         <p>
-          {rewards &&
+          {/* {rewards &&
             rewards.map(({ amount, symbol }, index) => (
               <React.Fragment key={symbol}>
                 <AnimateNumber format={formatOutput}>
@@ -65,14 +67,14 @@ function TotalClaimableRewardsBase({ className }: TotalClaimableRewardsProps) {
                   {index < rewards.length - 1 && ' + '}
                 </Sub>
               </React.Fragment>
-            ))}
+            ))} */}
         </p>
         <p>
-          <AnimateNumber format={formatUSTWithPostfixUnits}>
-            {rewardsAmountInUst
-              ? demicrofy(rewardsAmountInUst)
-              : (0 as UST<number>)}
-          </AnimateNumber>{' '}
+          <AnimateNumber
+            format={formatUTokenIntegerWithoutPostfixUnits}
+          >
+            {(0 as u<UST<number>>)}
+          </AnimateNumber>
           UST
         </p>
       </header>
@@ -80,8 +82,10 @@ function TotalClaimableRewardsBase({ className }: TotalClaimableRewardsProps) {
       <div className="anc-price">
         <h5>ANC PRICE</h5>
         <p>
-          <AnimateNumber format={formatUST}>
-            {ancPrice ? ancPrice : (0 as UST<number>)}
+          <AnimateNumber
+            format={formatUTokenIntegerWithoutPostfixUnits}
+          >
+            {(0 as u<UST<number>>)}
           </AnimateNumber>
           <Sub> UST</Sub>
         </p>
@@ -91,8 +95,10 @@ function TotalClaimableRewardsBase({ className }: TotalClaimableRewardsProps) {
         <div className="anc-price">
           <h5>ASTRO PRICE</h5>
           <p>
-            <AnimateNumber format={formatUST}>
-              {astroPrice ? astroPrice : (0 as UST<number>)}
+            <AnimateNumber
+              format={formatUTokenIntegerWithoutPostfixUnits}
+            >
+              {(0 as u<UST<number>>)}
             </AnimateNumber>
             <Sub> UST</Sub>
           </p>

@@ -15,7 +15,7 @@ interface TxHistoryReturn {
 }
 
 export function useMypageTxHistoryQuery(): TxHistoryReturn {
-  const { connected, terraWalletAddress } = useAccount();
+  const { connected, terraWalletAddress } =  { connected: 0, terraWalletAddress: 0 } // useAccount();
 
   const { indexerApiEndpoint: endpoint } = useAnchorWebapp();
 

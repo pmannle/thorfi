@@ -13,7 +13,7 @@ interface EarnApyProjectionProps {
   rate: Rate<Big>;
 }
 export const EarnApyProjection = ({ height, rate }: EarnApyProjectionProps) => {
-  const timestamp = useEstimatedTimestamp(height);
+  const timestamp = 0;
 
   return (
     <IconSpan>

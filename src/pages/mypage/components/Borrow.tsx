@@ -18,15 +18,16 @@ import styled from 'styled-components';
 import { CollateralItem, TotalCollateralValue } from './TotalCollateralValue';
 
 export function Borrow() {
-  const { connected } = useAccount();
+  const { connected } = { connected: 0 } // useAccount();
 
-  const { data: { oraclePrices, overseerWhitelist } = {} } =
-    useBorrowMarketQuery();
+  const { data: { oraclePrices, overseerWhitelist } = {} } = { data: { oraclePrices: 0, overseerWhitelist: 0 } }
+  // useBorrowMarketQuery();
 
-  const { data: { overseerCollaterals } = {} } = useBorrowBorrowerQuery();
+  const { data: { overseerCollaterals } = {} } = { data: { overseerCollaterals: 0 } } // useBorrowBorrowerQuery();
 
   const { borrowedValue, netAPR, currentLtv, borrowLimit, dangerLtv } =
-    useBorrowOverviewData();
+    { borrowedValue: 0, netAPR: 0, currentLtv: 0, borrowLimit: 0, dangerLtv: 0 }
+  // useBorrowOverviewData();
 
   const { totalCollateralValue, collaterals } = useMemo(() => {
     if (!overseerCollaterals || !oraclePrices || !overseerWhitelist) {
@@ -50,16 +51,16 @@ export function Borrow() {
       totalCollateralValue,
       collaterals: ustAmounts.map(
         (ustAmount, i) =>
-          ({
-            label:
-              overseerWhitelist.elems[i].tokenDisplay?.symbol ??
-              overseerWhitelist.elems[i].symbol,
-            ratio: (totalCollateralValue.gt(0)
-              ? big(ustAmount).div(totalCollateralValue).toFixed()
-              : '0') as Rate,
-            ust: ustAmount.toFixed() as u<UST>,
-            asset: lockedAmounts[i] as u<bAsset>,
-          } as CollateralItem),
+        ({
+          label:
+            overseerWhitelist.elems[i].tokenDisplay?.symbol ??
+            overseerWhitelist.elems[i].symbol,
+          ratio: (totalCollateralValue.gt(0)
+            ? big(ustAmount).div(totalCollateralValue).toFixed()
+            : '0') as Rate,
+          ust: ustAmount.toFixed() as u<UST>,
+          asset: lockedAmounts[i] as u<bAsset>,
+        } as CollateralItem),
       ),
     };
   }, [oraclePrices, overseerCollaterals, overseerWhitelist]);

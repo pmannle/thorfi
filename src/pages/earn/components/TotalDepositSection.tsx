@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { computeTotalDeposit } from '@anchor-protocol/app-fns';
-import { useEarnEpochStatesQuery } from '@anchor-protocol/app-provider';
+// import { useEarnEpochStatesQuery } from '@anchor-protocol/app-provider';
 import {
   formatUST,
   formatUSTWithPostfixUnits,
@@ -14,11 +14,11 @@ import { InfoTooltip } from '@libs/neumorphism-ui/components/InfoTooltip';
 import { Section } from '@libs/neumorphism-ui/components/Section';
 import { AnimateNumber } from '@libs/ui';
 import { SubAmount } from 'components/primitives/SubAmount';
-import { useAccount } from 'contexts/account';
-import { useBalances } from 'contexts/balances';
+// import { useAccount } from 'contexts/account';
+// import { useBalances } from 'contexts/balances';
 import { useDepositDialog } from './useDepositDialog';
 import { useWithdrawDialog } from './useWithdrawDialog';
-import Big from 'big.js';
+import big, { Big } from 'big.js';
 
 export interface TotalDepositSectionProps {
   className?: string;
@@ -28,23 +28,23 @@ export function TotalDepositSection({ className }: TotalDepositSectionProps) {
   // ---------------------------------------------
   // dependencies
   // ---------------------------------------------
-  const { connected } = useAccount();
+  // const { connected } = useAccount();
 
   // ---------------------------------------------
   // queries
   // ---------------------------------------------
-  const { uaUST } = useBalances();
+  // const { uaUST } = useBalances();
 
-  const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
+  // const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
 
   // ---------------------------------------------
   // computes
   // ---------------------------------------------
   const { totalDeposit } = useMemo(() => {
     return {
-      totalDeposit: computeTotalDeposit(uaUST, moneyMarketEpochState),
+      totalDeposit: big(0),
     };
-  }, [moneyMarketEpochState, uaUST]);
+  }, []);
 
   // ---------------------------------------------
   // dialogs

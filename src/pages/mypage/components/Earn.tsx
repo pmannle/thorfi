@@ -25,14 +25,14 @@ function EarnBase({ className }: EarnProps) {
   // ---------------------------------------------
   // dependencies
   // ---------------------------------------------
-  const { connected } = useAccount();
+  const { connected } = { connected: 0 } // useAccount();
 
   // ---------------------------------------------
   // queries
   // ---------------------------------------------
-  const { uaUST } = useBalances();
+  const { uaUST } = { uaUST: 0 } // useBalances();
 
-  const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
+  const { data: { moneyMarketEpochState } = {} } = { data: { moneyMarketEpochState: 0 } } // useEarnEpochStatesQuery();
 
   // ---------------------------------------------
   // computes

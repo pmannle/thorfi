@@ -3,9 +3,9 @@ import { PaddedLayout } from 'components/layouts/PaddedLayout';
 import { FlexTitleContainer, PageTitle } from 'components/primitives/PageTitle';
 import { links, screen } from 'env';
 import { Overview } from 'pages/borrow/components/Overview';
-import { ParticipateInLiquidationsButton } from 'pages/borrow/components/ParticipateInLiquidationsButton';
+// import { ParticipateInLiquidationsButton } from 'pages/borrow/components/ParticipateInLiquidationsButton';
 import styled from 'styled-components';
-import { CollateralList } from './components/CollateralList';
+// import { CollateralList } from './components/CollateralList';
 import { ReactComponent as InfoIcon } from './assets/info.svg';
 import { ReactComponent as LinkIcon } from './assets/link.svg';
 import { MessageBox } from 'components/MessageBox';
@@ -22,7 +22,7 @@ function BorrowBase({ className }: BorrowProps) {
       </FlexTitleContainer>
 
       <Overview className="borrow" />
-      <CollateralList className="collateral-list" />
+      {/* <CollateralList className="collateral-list" /> */}
     </PaddedLayout>
   );
 }
@@ -199,7 +199,7 @@ export const Borrow = styled(BorrowBase)`
 
   // tablet
   @media (min-width: ${screen.tablet.min}px) and (max-width: ${screen.tablet
-      .max}px) {
+    .max}px) {
     .market {
       flex-direction: column;
       align-items: flex-start;

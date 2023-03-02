@@ -46,31 +46,31 @@ interface Item {
 function TotalValueBase({ className }: TotalValueProps) {
   const { theme } = useTheme();
 
-  const { connected } = useAccount();
+  const { connected } = { connected: 0 } // useAccount();
 
-  const tokenBalances = useBalances();
+  const tokenBalances = 0 // useBalances();
 
   const {
     ust: { formatOutput, demicrofy, symbol },
   } = useFormatters();
 
-  const { data: { moneyMarketEpochState } = {} } = useEarnEpochStatesQuery();
+  const { data: { moneyMarketEpochState } = {} } = { data: { moneyMarketEpochState: 0 } } // useEarnEpochStatesQuery();
 
   const [openSend, sendElement] = useSendDialog();
 
-  const { ancUstLp, ustBorrow } = useRewards();
+  const { ancUstLp, ustBorrow } = { ancUstLp: 0, ustBorrow: 0 }// useRewards();
 
-  const { data: ancPrice } = useAssetPriceInUstQuery('anc');
+  const { data: ancPrice } = { data: { ancPrice: 0 } } // useAssetPriceInUstQuery('anc');
 
-  const { data: { userGovStakingInfo } = {} } =
-    useRewardsAncGovernanceRewardsQuery();
+  const { data: { userGovStakingInfo } = {} } = { data: { userGovStakingInfo: 0 } }
+  // useRewardsAncGovernanceRewardsQuery();
 
-  const { data: { oraclePrices } = {} } = useBorrowMarketQuery();
+  const { data: { oraclePrices } = {} } = { data: { oraclePrices: [] } }// useBorrowMarketQuery();
 
-  const { data: { marketBorrowerInfo, overseerCollaterals } = {} } =
-    useBorrowBorrowerQuery();
+  const { data: { marketBorrowerInfo, overseerCollaterals } = {} } = { data: { marketBorrowerInfo: 0, overseerCollaterals: 0 } }
+  // useBorrowBorrowerQuery();
 
-  const { data: bAssetBalanceTotal } = useBAssetInfoAndBalanceTotalQuery();
+  const { data: bAssetBalanceTotal } = { data: { bAssetBalanceTotal: 0 } } // useBAssetInfoAndBalanceTotalQuery();
 
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
@@ -92,8 +92,8 @@ function TotalValueBase({ className }: TotalValueProps) {
     const borrowing =
       overseerCollaterals && oraclePrices && marketBorrowerInfo && ustBorrow
         ? (computeCollateralsTotalUST(overseerCollaterals, oraclePrices)
-            .minus(marketBorrowerInfo.loan_amount)
-            .plus(ustBorrow.rewardValue) as u<UST<Big>>)
+          .minus(marketBorrowerInfo.loan_amount)
+          .plus(ustBorrow.rewardValue) as u<UST<Big>>)
         : ('0' as u<UST>);
     const holdings = computeHoldings(
       tokenBalances,
@@ -105,14 +105,14 @@ function TotalValueBase({ className }: TotalValueProps) {
     const pool =
       ancUstLp && ancPrice
         ? (big(big(ancUstLp.poolAssets.anc).mul(ancPrice)).plus(
-            ancUstLp.poolAssets.ust,
-          ) as u<UST<Big>>)
+          ancUstLp.poolAssets.ust,
+        ) as u<UST<Big>>)
         : ('0' as u<UST>);
 
     const farming = ancUstLp
       ? (big(ancUstLp.stakedValue).plus(ancUstLp.rewardsAmountInUst) as u<
-          UST<Big>
-        >)
+        UST<Big>
+      >)
       : ('0' as u<UST>);
     const govern =
       userGovStakingInfo && ancPrice

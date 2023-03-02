@@ -12,11 +12,11 @@ import { useBorrowDialog } from './useBorrowDialog';
 import { useRepayDialog } from './useRepayDialog';
 
 export function LoanButtons() {
-  const { data: borrowMarket } = useBorrowMarketQuery();
+  // useBorrowMarketQuery();
 
-  const { data: borrowBorrower } = useBorrowBorrowerQuery();
+  const { data: borrowBorrower } = { data: { borrowBorrower: 0 } }// useBorrowBorrowerQuery();
 
-  const { connected } = useAccount();
+  const { connected } = { connected: false } // useAccount();
 
   const [openBorrowDialog, borrowDialogElement] = useBorrowDialog();
 

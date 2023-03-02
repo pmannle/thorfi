@@ -50,7 +50,7 @@ export function ExpectedInterestSection({
   const { uaUST = '0' as u<aUST> } = useBalances();
 
   const { data: { moneyMarketEpochState, overseerEpochState } = {} } =
-    useEarnEpochStatesQuery();
+    { data: { moneyMarketEpochState: 0, overseerEpochState: 0 } }
 
   const apy = useDepositApy();
 
@@ -67,10 +67,10 @@ export function ExpectedInterestSection({
         tab.value === 'month'
           ? 12
           : tab.value === 'week'
-          ? 52
-          : tab.value === 'day'
-          ? 365
-          : 1,
+            ? 52
+            : tab.value === 'day'
+              ? 365
+              : 1,
       ) as u<UST<Big>>;
   }, [moneyMarketEpochState, overseerEpochState, tab.value, uaUST, apy]);
 

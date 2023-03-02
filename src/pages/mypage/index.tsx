@@ -6,8 +6,8 @@ import React, { useMemo, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 import { Earn } from './components/Earn';
-import { Govern } from './components/Govern';
-import { Rewards } from './components/Rewards';
+// import { Govern } from './components/Govern';
+// import { Rewards } from './components/Rewards';
 import { TotalClaimableRewards } from './components/TotalClaimableRewards';
 import { TotalValue } from './components/TotalValue';
 import { TransactionHistory } from './components/TransactionHistory';
@@ -23,10 +23,10 @@ interface Item {
 
 const TAB_ITEMS: Item[] = [
   { label: 'All', value: 'all' },
-  { label: 'Rewards', value: 'rewards' },
+  // { label: 'Rewards', value: 'rewards' },
   { label: 'Earn', value: 'earn' },
   { label: 'Borrow', value: 'borrow' },
-  { label: 'Govern', value: 'govern' },
+  // { label: 'Govern', value: 'govern' },
   { label: 'History', value: 'history' },
 ];
 
@@ -75,12 +75,7 @@ function MypageBase({ className }: MypageProps) {
         </>
       )}
 
-      {(isSmallLayout || tab.value === 'all' || tab.value === 'govern') && (
-        <>
-          <h2>GOVERN</h2>
-          <Govern />
-        </>
-      )}
+
 
       {(isSmallLayout || tab.value === 'all' || tab.value === 'history') && (
         <>

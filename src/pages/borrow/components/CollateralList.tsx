@@ -32,8 +32,8 @@ const renderBuyLink = (collateral: WhitelistCollateral) => {
     collateral.symbol === 'bETH'
       ? 'https://anchor.lido.fi/'
       : collateral.symbol === 'bATOM'
-      ? 'https://app.pstake.finance/anchor'
-      : null;
+        ? 'https://app.pstake.finance/anchor'
+        : null;
 
   return (
     href && (
@@ -60,11 +60,11 @@ interface CollateralInfo {
 export function CollateralList(props: UIElementProps) {
   const { className } = props;
 
-  const { connected } = useAccount();
+  const { connected } = { connected: false } // useAccount();
 
-  const { data: borrowMarket } = useBorrowMarketQuery();
+  const { data: borrowMarket } = { data: { borrowMarket: 0 } }// useBorrowMarketQuery();
 
-  const { data: borrowBorrower } = useBorrowBorrowerQuery();
+  const { data: borrowBorrower } = { data: { borrowBorrower: 0 } }  // useBorrowBorrowerQuery();
 
   const [openProvideCollateralDialog, provideCollateralDialogElement] =
     useProvideCollateralDialog();
@@ -72,7 +72,7 @@ export function CollateralList(props: UIElementProps) {
   const [openRedeemCollateralDialog, redeemCollateralDialogElement] =
     useRedeemCollateralDialog();
 
-  const { data: whitelist } = useWhitelistCollateralQuery();
+  const { data: whitelist } = { data: { whitelist: [] } } // useWhitelistCollateralQuery();
 
   const {
     ust: { formatOutput: formatUSTOutput, demicrofy: demicrofyUST },
@@ -100,19 +100,19 @@ export function CollateralList(props: UIElementProps) {
           price: microfyPrice(oracle?.price, collateral.decimals),
           liquidationPrice:
             borrowBorrower &&
-            borrowBorrower.overseerCollaterals.collaterals.length === 1 &&
-            collateral
+              borrowBorrower.overseerCollaterals.collaterals.length === 1 &&
+              collateral
               ? microfyPrice(
-                  computeLiquidationPrice(
-                    collateral.collateral_token,
-                    borrowBorrower.marketBorrowerInfo,
-                    borrowBorrower.overseerBorrowLimit,
-                    borrowBorrower.overseerCollaterals,
-                    borrowMarket.overseerWhitelist,
-                    borrowMarket.oraclePrices,
-                  ),
-                  collateral.decimals,
-                )
+                computeLiquidationPrice(
+                  collateral.collateral_token,
+                  borrowBorrower.marketBorrowerInfo,
+                  borrowBorrower.overseerBorrowLimit,
+                  borrowBorrower.overseerCollaterals,
+                  borrowMarket.overseerWhitelist,
+                  borrowMarket.oraclePrices,
+                ),
+                collateral.decimals,
+              )
               : undefined,
           lockedAmount: collateralAmount?.[1] ?? ('0' as u<bAsset>),
           lockedAmountInUST: big(collateralAmount?.[1] ?? 0).mul(
