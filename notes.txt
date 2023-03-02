@@ -1,0 +1,4 @@
+
+
+    "@web3-react/metamask": "^8.0.18-beta.0",
+    "@web3-react/walletconnect": "8.0.25-beta.0",

@@ -4,7 +4,6 @@ import { useChainOptions } from '@terra-money/wallet-provider';
 import CryptoContext from '@thorfi-protocol/CryptoContext';
 import NetworkManager from "@xdefi/wallets-connector";
 import WalletConnect from '@thorfi-protocol/WalletConnect';
-import { Dashboard } from 'pages/dashboard';
 
 import { getProviderOptions } from "@thorfi-protocol/utils";
 
@@ -27,20 +26,23 @@ export function App() {
     //   network="mainnet"
     //   cacheEnabled={true}
     //   isSingleProviderEnabled={true}
-    // >
-    //   <WalletConnect></WalletConnect>
+    // > <CryptoContext>
+    //     <WalletConnect></WalletConnect>
+    //   </CryptoContext>
     // </NetworkManager >
 
-    <CryptoContext>
-      < NetworkManager
-        options={options}
-        network="mainnet"
-        cacheEnabled={true}
-        isSingleProviderEnabled={true}
-      >
+
+    < NetworkManager
+      options={options}
+      network="mainnet"
+      cacheEnabled={true}
+      isSingleProviderEnabled={true}
+    >
+      <CryptoContext>
         <TerraApp />
-      </NetworkManager>
-    </CryptoContext>
+      </CryptoContext>
+    </NetworkManager>
+
 
 
 

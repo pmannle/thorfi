@@ -17,28 +17,28 @@ import styled from 'styled-components';
 import { CryptoState } from './CryptoContext';
 // import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles(() => ({
-  button__connected: {
-    // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    // width: '160px',
-  },
-  button: {
-    // width: '160px'
-  },
-  icon__size: {
-    width: '32px',
-    height: '32px',
-    color: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-  },
-  icon_gradient_url: {
-    fill: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><linearGradient id='grad'><stop offset='0%' stop-color='%23ff00cc'/><stop offset='100%' stop-color='%23333399'/></linearGradient></svg>#grad") purple)`,
-  },
-  button_row: {
-    display: 'flex',
-    flexDirection: 'row',
-    height: '40px',
-  },
-}));
+// const useStyles = makeStyles(() => ({
+//   button__connected: {
+//     // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+//     // width: '160px',
+//   },
+//   button: {
+//     // width: '160px'
+//   },
+//   icon__size: {
+//     width: '32px',
+//     height: '32px',
+//     color: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+//   },
+//   icon_gradient_url: {
+//     fill: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><linearGradient id='grad'><stop offset='0%' stop-color='%23ff00cc'/><stop offset='100%' stop-color='%23333399'/></linearGradient></svg>#grad") purple)`,
+//   },
+//   button_row: {
+//     display: 'flex',
+//     flexDirection: 'row',
+//     height: '40px',
+//   },
+// }));
 
 // Inherit Xdefi button and overide styles
 const LogOutButton = styled(DisconnectBtn)`
@@ -52,7 +52,7 @@ const LogOutButton = styled(DisconnectBtn)`
 `;
 
 const WalletConnect = () => {
-  const classes = useStyles();
+  //const classes = useStyles();
   // const history = useHistory()
 
   const {
@@ -103,20 +103,23 @@ const WalletConnect = () => {
   useWalletEvents(onConnectHandler, onCloseHandler, onErrorHandler);
 
   return (
-    <div className={classes.button_row}>
+    // <div className={classes.button_row}>
+    <div>
       {!isConnected && (
         <WalletsModal
           isDark={true}
           trigger={(props) => (
+            // <button {...props}>Connect</button>
             <Button
               {...props}
-              className={
-                isConnected ? classes.button__connected : classes.button
-              }
+              // className={
+              //   // isConnected ? classes.button__connected : classes.button
+              // }
               variant="outlined"
             >
               {isConnected ? (
-                <GiWallet className={classes.icon__size} />
+                // <GiWallet className={classes.icon__size} />
+                <GiWallet />
               ) : (
                 'Connect Wallet'
               )}
@@ -128,11 +131,12 @@ const WalletConnect = () => {
       {isConnected && (
         <>
           <Button
-            className={classes.button__connected}
+            // className={classes.button__connected}
             variant="outlined"
             onClick={() => console.log('click') /*history.push('/stake/')  */}
           >
-            <GiWallet className={classes.icon__size} />
+            {/* <GiWallet className={classes.icon__size} /> */}
+            <GiWallet />
           </Button>
           <LogOutButton>{/* <AiOutlineLogout size='25px' /> */}</LogOutButton>
         </>
