@@ -6,15 +6,15 @@ import {
 import { TokenIcon } from '@anchor-protocol/token-icons';
 import { Rate, u, UST } from '@anchor-protocol/types';
 import {
-  useAnchorWebapp,
-  useEarnEpochStatesQuery,
+  // useAnchorWebapp,
+  // useEarnEpochStatesQuery,
   useSaversHistoryQuery,
-  useMarketCollateralsQuery,
-  useMarketDepositAndBorrowQuery,
-  useMarketStableCoinQuery,
-  useMarketUstQuery,
+  // useMarketCollateralsQuery,
+  // useMarketDepositAndBorrowQuery,
+  // useMarketStableCoinQuery,
+  // useMarketUstQuery,
   convertDataToAPR,
-} from '@anchor-protocol/app-provider';
+} from '@thorfi-protocol/saversHistory';
 import {
   d2Formatter,
   formatAssetName,
@@ -161,8 +161,8 @@ function DashboardBase({ className }: DashboardProps) {
     }
   }, [saversHistoricalData]);
 
-  const { data: marketDepositAndBorrow } = useMarketDepositAndBorrowQuery();
-  const { data: marketCollaterals } = useMarketCollateralsQuery();
+  const { data: marketDepositAndBorrow } = { data: { marketDepositAndBorrow: 0 } } //useMarketDepositAndBorrowQuery();
+  const { data: marketCollaterals } = { data: { marketCollaterals: 0 } } //useMarketCollateralsQuery();
 
   const saverTotals = useMemo(() => {
     if (!marketSaversStats || !liquidityPools) {
@@ -199,36 +199,37 @@ function DashboardBase({ className }: DashboardProps) {
 
     return {
       saversCount: totalSaversStats?.saversCount,
-      totalCollaterals: marketCollaterals?.now.total_value,
+      // totalCollaterals: marketCollaterals?.now.total_value,
       totalValueSaved: big(totalSaversStats?.totalUSDSaved) as u<UST<Big>>,
       totalEarned: big(totalSaversStats?.totalEarn / 1e8) as u<UST<Big>>,
       meanAPR: big(totalSaversStats.meanAPR) as Rate<Big>,
     };
   }, [pool, marketSaversStats]);
 
-  const stableCoin = useMemo(() => {
-    if (
-      !marketUST ||
-      !marketDepositAndBorrow ||
-      marketDepositAndBorrow.history.length === 0
-    ) {
-      return 0;
-    }
+  const stableCoin = 0
+  // useMemo(() => {
+  //   if (
+  //     !marketUST ||
+  //     !marketDepositAndBorrow ||
+  //     marketDepositAndBorrow.history.length === 0
+  //   ) {
+  //     return 0;
+  //   }
 
-    const last = marketDepositAndBorrow.now;
-    const last1DayBefore =
-      marketDepositAndBorrow.history.find(findPrevDay(last.timestamp)) ??
-      marketDepositAndBorrow.history[marketDepositAndBorrow.history.length - 2];
+  //   const last = marketDepositAndBorrow.now;
+  //   const last1DayBefore =
+  //     marketDepositAndBorrow.history.find(findPrevDay(last.timestamp)) ??
+  //     marketDepositAndBorrow.history[marketDepositAndBorrow.history.length - 2];
 
-    return {
-      totalDeposit: last.total_ust_deposits,
-      totalBorrow: last.total_borrowed,
-      totalDepositDiff: big(0) as Rate<Big>,
-      totalBorrowDiff: big(0) as Rate<Big>,
-      borrowAPR: big(0) as Rate<Big>,
-      borrowAPRDiff: 'TODO: API not ready...',
-    };
-  }, [blocksPerYear, marketDepositAndBorrow, marketUST]);
+  //   return {
+  //     totalDeposit: last.total_ust_deposits,
+  //     totalBorrow: last.total_borrowed,
+  //     totalDepositDiff: big(0) as Rate<Big>,
+  //     totalBorrowDiff: big(0) as Rate<Big>,
+  //     borrowAPR: big(0) as Rate<Big>,
+  //     borrowAPRDiff: 'TODO: API not ready...',
+  //   };
+  // }, [blocksPerYear, marketDepositAndBorrow, marketUST]);
 
   return (
     <div className={className}>
@@ -259,11 +260,11 @@ function DashboardBase({ className }: DashboardProps) {
                       marketSaversStats={marketSaversStats}
                       saverTotals={saverTotals}
                       totalDeposit={saverTotals?.saversCount ?? ('0' as u<UST>)}
-                      totalCollaterals={
-                        saverTotals?.totalCollaterals ?? ('1' as u<UST>)
-                      }
+                      // totalCollaterals={
+                      //   saverTotals?.totalCollaterals ?? ('1' as u<UST>)
+                      // }
                       totalDepositColor={theme.colors.secondary}
-                      totalCollateralsColor={theme.textColor}
+                      // totalCollateralsColor={theme.textColor}
                       setPool={setPool}
                     />
                   </div>
@@ -416,7 +417,7 @@ function DashboardBase({ className }: DashboardProps) {
             </Section>
           </div>
 
-          <Section className="stablecoin">
+          {/* <Section className="stablecoin">
             <header>
               <div>
                 <h2>
@@ -543,11 +544,11 @@ function DashboardBase({ className }: DashboardProps) {
                   </td>
                   <td>
                     <div className="value">
-                      {/* <AnimateNumber format={formatRate}>
+                      { <AnimateNumber format={formatRate}>
                         {stableCoinLegacy
                           ? stableCoinLegacy.depositRate
                           : (0 as Rate<number>)}
-                      </AnimateNumber> */}
+                      </AnimateNumber> }
                       <span>%</span>
                     </div>
                   </td>
@@ -574,7 +575,7 @@ function DashboardBase({ className }: DashboardProps) {
                 </tr>
               </tbody>
             </HorizontalScrollTable>
-          </Section>
+          </Section> */}
 
           {/* <CollateralMarket className="collaterals" /> */}
         </div>

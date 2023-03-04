@@ -5,7 +5,7 @@ import {
 } from '@thorfi-protocol/saversHistoryQuery';
 import BigNumber from 'bignumber.js';
 import { useQueries, UseQueryResult } from 'react-query';
-import { useAnchorWebapp } from '../@anchor-protocol/app-provider/contexts/context';
+// import { useAnchorWebapp } from '../@anchor-protocol/app-provider/contexts/context';
 
 export function convertDataToAPR(rows: any, lookback: any) {
   let daysInYear = 365 / lookback;
@@ -42,7 +42,7 @@ export function convertDataToAPR(rows: any, lookback: any) {
 export function useSaversHistoryQuery(
   queryKeys: any,
 ): UseQueryResult<MarketSaversData | undefined> | {} {
-  const { indexerApiEndpoint, queryErrorReporter } = useAnchorWebapp();
+  // const { indexerApiEndpoint, queryErrorReporter } = useAnchorWebapp();
 
   const queries = useQueries(
     queryKeys.map((query: any) => ({

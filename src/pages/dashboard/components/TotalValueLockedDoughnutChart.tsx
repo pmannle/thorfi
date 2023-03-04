@@ -8,9 +8,9 @@ import { DoughnutChart } from './DoughnutChart';
 
 export interface TotalValueLockedDoughnutChartProps {
   totalDeposit: u<UST>;
-  totalCollaterals: u<UST>;
+  // totalCollaterals: u<UST>;
   totalDepositColor: string;
-  totalCollateralsColor: string;
+  // totalCollateralsColor: string;
   marketSaversStats: SaversPoolData;
   saverTotals: any;
   setPool: Function;
