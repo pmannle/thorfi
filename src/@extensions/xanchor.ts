@@ -4,7 +4,7 @@ import {
   ERC20Addr,
   HumanAddr,
   u,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import Big from 'big.js';
 import { WhitelistCollateral } from 'queries';
 

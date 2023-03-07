@@ -2,7 +2,7 @@ import {
   computeBorrowedAmount,
   computeBorrowLimit,
 } from '@anchor-protocol/app-fns';
-import { bAsset, moneyMarket, Rate, u, UST } from '@anchor-protocol/types';
+import { bAsset, moneyMarket, Rate, u, UST } from '@thorfi-protocol/types';
 import { FormReturn } from '@libs/use-form';
 import big, { Big } from 'big.js';
 import { computeLtv } from '../../logics/borrow/computeLtv';

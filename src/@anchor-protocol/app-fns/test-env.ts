@@ -1,4 +1,4 @@
-import { CW20Addr, HumanAddr } from '@anchor-protocol/types';
+import { CW20Addr, HumanAddr } from '@thorfi-protocol/types';
 
 export const TEST_ADDRESSES = {
   bluna: {

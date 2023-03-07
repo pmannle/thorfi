@@ -1,4 +1,4 @@
-import { ANC, JSDateTime, u, UST } from '@anchor-protocol/types';
+import { ANC, JSDateTime, u, UST } from '@thorfi-protocol/types';
 
 export interface MarketBuybackData {
   offer_amount: u<UST>;

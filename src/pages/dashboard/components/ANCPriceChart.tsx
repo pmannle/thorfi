@@ -1,4 +1,4 @@
-import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
+import { formatUSTWithPostfixUnits } from '@thorfi-protocol/notation';
 import { MarketSaversHistory } from '@thorfi-protocol/saversHistoryQuery';
 import { rulerLightColor, rulerShadowColor } from '@libs/styled-neumorphism';
 import big from 'big.js';
@@ -153,7 +153,7 @@ export class ANCPriceChart extends Component<ANCPriceChartProps> {
                   const price = formatUSTWithPostfixUnits(item.annualizedAPR);
                   const date = isLast ? 'Now' : mediumDay(item.timestamp);
                   div1.innerHTML = `${price} UST <span>${date}</span>`;
-                } catch {}
+                } catch { }
               }
 
               if (hr) {

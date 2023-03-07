@@ -1,5 +1,5 @@
-import { formatLuna } from '@anchor-protocol/notation';
-import { Gas, HumanAddr, Rate, u, UST } from '@anchor-protocol/types';
+import { formatLuna } from '@thorfi-protocol/notation';
+import { Gas, HumanAddr, Rate, u, UST } from '@thorfi-protocol/types';
 import {
   pickAttributeValue,
   pickEvent,

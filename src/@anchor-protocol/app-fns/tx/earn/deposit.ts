@@ -1,8 +1,8 @@
 import {
   formatAUSTWithPostfixUnits,
   formatUSTWithPostfixUnits,
-} from '@anchor-protocol/notation';
-import { aUST, Gas, HumanAddr, Rate, u, UST } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { aUST, Gas, HumanAddr, Rate, u, UST } from '@thorfi-protocol/types';
 import {
   pickAttributeValue,
   pickEvent,

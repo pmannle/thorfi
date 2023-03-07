@@ -1,4 +1,4 @@
-import type { bAsset, u } from '@anchor-protocol/types';
+import type { bAsset, u } from '@thorfi-protocol/types';
 import big, { BigSource } from 'big.js';
 
 export function validateRedeemAmount(

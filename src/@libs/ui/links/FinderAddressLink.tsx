@@ -1,6 +1,6 @@
 import { truncate } from '@libs/formatter';
 import React from 'react';
-import { getAccountUrl } from 'utils/terrascope';
+import { getAccountUrl } from 'utils/thorscope';
 
 export interface FinderAddressLinkProps {
   chainID: string;

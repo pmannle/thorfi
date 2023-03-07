@@ -1,4 +1,4 @@
-import { formatLP } from '@anchor-protocol/notation';
+import { formatLP } from '@thorfi-protocol/notation';
 import {
   AncUstLP,
   CW20Addr,
@@ -7,7 +7,7 @@ import {
   Rate,
   u,
   UST,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import {
   pickAttributeValueByKey,
   pickEvent,

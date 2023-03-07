@@ -97,7 +97,7 @@ export * from './queries/market/stableCoin';
 export * from './queries/market/state';
 export * from './queries/market/ust';
 export * from './queries/market/utils/dedupeTimestamp';
-export * from './queries/mypage/txHistory';
+export * from '../../@thorfi-protocol/queries/mypage/txHistory';
 export * from './queries/rewards/ancGovernanceRewards';
 export * from './queries/rewards/ancUstLpRewards';
 export * from './queries/rewards/claimableUstBorrowRewards';

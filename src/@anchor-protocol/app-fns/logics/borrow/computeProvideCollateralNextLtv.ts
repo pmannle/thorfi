@@ -1,4 +1,4 @@
-import type { bAsset, Rate, u } from '@anchor-protocol/types';
+import type { bAsset, Rate, u } from '@thorfi-protocol/types';
 import big, { Big, BigSource } from 'big.js';
 
 // Loan_amount / ((Borrow_info.balance - Borrow_info.spendable + provided_collateral) * Oracleprice)

@@ -1,5 +1,5 @@
-import { formatANC } from '@anchor-protocol/notation';
-import { ANC, CW20Addr, Gas, HumanAddr, Rate } from '@anchor-protocol/types';
+import { formatANC } from '@thorfi-protocol/notation';
+import { ANC, CW20Addr, Gas, HumanAddr, Rate } from '@thorfi-protocol/types';
 import {
   pickAttributeValueByKey,
   pickEvent,

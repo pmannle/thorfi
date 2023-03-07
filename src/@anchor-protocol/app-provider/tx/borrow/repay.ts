@@ -1,5 +1,5 @@
 import { borrowRepayTx } from '@anchor-protocol/app-fns';
-import { u, UST } from '@anchor-protocol/types';
+import { u, UST } from '@thorfi-protocol/types';
 import { useRefetchQueries } from '@libs/app-provider';
 import { useStream } from '@rx-stream/react';
 import { useConnectedWallet } from '@terra-money/wallet-provider';

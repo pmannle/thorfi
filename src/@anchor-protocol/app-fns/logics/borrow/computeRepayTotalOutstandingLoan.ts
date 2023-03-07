@@ -1,5 +1,5 @@
-import type { u, UST } from '@anchor-protocol/types';
-import { moneyMarket } from '@anchor-protocol/types';
+import type { u, UST } from '@thorfi-protocol/types';
+import { moneyMarket } from '@thorfi-protocol/types';
 import { microfy } from '@libs/formatter';
 import big, { Big } from 'big.js';
 

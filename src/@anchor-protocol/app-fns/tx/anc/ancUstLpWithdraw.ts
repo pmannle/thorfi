@@ -2,7 +2,7 @@ import {
   formatANCWithPostfixUnits,
   formatLP,
   formatUSTWithPostfixUnits,
-} from '@anchor-protocol/notation';
+} from '@thorfi-protocol/notation';
 import {
   ANC,
   AncUstLP,
@@ -13,7 +13,7 @@ import {
   Rate,
   u,
   UST,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import {
   pickAttributeValueByKey,
   pickEvent,

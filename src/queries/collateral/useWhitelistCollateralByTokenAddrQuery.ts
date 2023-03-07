@@ -1,4 +1,4 @@
-import { useNetwork } from '@anchor-protocol/app-provider/contexts/network';
+import { useNetwork } from '@thorfi-protocol/network';
 import { CW20Addr } from '@libs/types';
 import { useAnchorQuery } from 'queries/useAnchorQuery';
 import { UseQueryResult } from 'react-query';

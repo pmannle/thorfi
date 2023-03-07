@@ -1,5 +1,5 @@
 import { useMarketCollateralsQuery } from '@anchor-protocol/app-provider';
-import { formatUTokenIntegerWithoutPostfixUnits } from '@anchor-protocol/notation';
+import { formatUTokenIntegerWithoutPostfixUnits } from '@thorfi-protocol/notation';
 import { formatRate } from '@libs/formatter';
 import { Section } from '@libs/neumorphism-ui/components/Section';
 import { u, UST, Rate } from '@libs/types';

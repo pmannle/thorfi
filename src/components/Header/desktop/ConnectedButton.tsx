@@ -1,9 +1,9 @@
-import { Wallet } from '@anchor-protocol/icons';
+import { Wallet } from '@thorfi-protocol/icons';
 import { truncate } from '@libs/formatter';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import styled from 'styled-components';
-import { u, UST } from '@anchor-protocol/types';
+import { u, UST } from '@thorfi-protocol/types';
 import { useFormatters } from '@anchor-protocol/formatter/useFormatters';
 
 interface ConnectedButtonProps
@@ -32,7 +32,9 @@ function ConnectedButtonBase({
         <span className="wallet-icon">
           <Wallet />
         </span>
-        <span className="wallet-address">{truncate(walletAddress)}</span>
+        <span className="wallet-address">{
+          truncate(walletAddress)
+        }</span>
         <div className="wallet-balance">
           {`${formatOutput(demicrofy(totalUST))} ${symbol}`}
         </div>

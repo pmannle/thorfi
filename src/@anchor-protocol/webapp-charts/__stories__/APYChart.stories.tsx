@@ -1,5 +1,5 @@
 import { APYChart } from '@anchor-protocol/webapp-charts/APYChart';
-import { Rate } from '@anchor-protocol/types';
+import { Rate } from '@thorfi-protocol/types';
 import React from 'react';
 
 export default {

@@ -17,7 +17,7 @@ import { ERC20Addr, u, UST } from '@libs/types';
 import { TxEvent } from './useTx';
 import { useRefetchQueries } from '@libs/app-provider';
 import { EvmTxProgressWriter } from './EvmTxProgressWriter';
-import { CollateralAmount } from '@anchor-protocol/types';
+import { CollateralAmount } from '@thorfi-protocol/types';
 import Big from 'big.js';
 import { WhitelistCollateral } from 'queries';
 import { microfy } from '@anchor-protocol/formatter';

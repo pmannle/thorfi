@@ -1,4 +1,4 @@
-import { JSDateTime } from '@anchor-protocol/types';
+import { JSDateTime } from '@thorfi-protocol/types';
 
 export interface MypageTxHistory {
   tx_type: string;

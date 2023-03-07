@@ -1,4 +1,4 @@
-import type { u, UST } from '@anchor-protocol/types';
+import type { u, UST } from '@thorfi-protocol/types';
 import { microfy } from '@libs/formatter';
 import { Big, BigSource } from 'big.js';
 

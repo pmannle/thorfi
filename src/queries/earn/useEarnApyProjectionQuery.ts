@@ -6,7 +6,7 @@ import { min, max, abs } from '@libs/big-math';
 import { createQueryFn } from '@libs/react-query-utils';
 import { ANCHOR_QUERY_KEY } from '@anchor-protocol/app-provider/env';
 import { wasmFetch, QueryClient, WasmQuery } from '@libs/query-client';
-import { moneyMarket } from '@anchor-protocol/types';
+import { moneyMarket } from '@thorfi-protocol/types';
 import { terraNativeBalancesQuery } from '@libs/app-fns';
 import { useAnchorQuery } from 'queries/useAnchorQuery';
 import { computeApy } from '@anchor-protocol/app-fns';

@@ -1,4 +1,4 @@
-import { EVMAddr, HumanAddr, crossAnchor } from '@anchor-protocol/types';
+import { EVMAddr, HumanAddr, crossAnchor } from '@thorfi-protocol/types';
 import {
   QueryClient,
   wasmFetch,

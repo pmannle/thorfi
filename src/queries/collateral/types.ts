@@ -1,4 +1,4 @@
-import { CW20Addr, ERC20Addr, moneyMarket } from '@anchor-protocol/types';
+import { CW20Addr, ERC20Addr, moneyMarket } from '@thorfi-protocol/types';
 import { WasmQuery } from '@libs/query-client';
 
 export interface WhitelistWasmQuery {

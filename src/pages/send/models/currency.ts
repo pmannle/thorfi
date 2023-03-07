@@ -1,4 +1,4 @@
-import { CW20Addr, Token, u, UST } from '@anchor-protocol/types';
+import { CW20Addr, Token, u, UST } from '@thorfi-protocol/types';
 import { AnchorBank } from '@anchor-protocol/app-provider/hooks/useAnchorBank';
 import { BigSource } from 'big.js';
 

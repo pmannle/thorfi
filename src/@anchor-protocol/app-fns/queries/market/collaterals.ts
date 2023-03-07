@@ -1,4 +1,4 @@
-import { bAsset, JSDateTime, u, UST } from '@anchor-protocol/types';
+import { bAsset, JSDateTime, u, UST } from '@thorfi-protocol/types';
 import { dedupeTimestamp } from './utils/dedupeTimestamp';
 
 export interface MarketCollateralsHistory {

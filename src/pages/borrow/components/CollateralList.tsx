@@ -9,7 +9,7 @@ import {
   demicrofy,
 } from '@anchor-protocol/formatter';
 import { TokenIcon } from '@anchor-protocol/token-icons';
-import { bAsset, u, UST } from '@anchor-protocol/types';
+import { bAsset, u, UST } from '@thorfi-protocol/types';
 import { BorderButton } from '@libs/neumorphism-ui/components/BorderButton';
 import { HorizontalScrollTable } from '@libs/neumorphism-ui/components/HorizontalScrollTable';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';

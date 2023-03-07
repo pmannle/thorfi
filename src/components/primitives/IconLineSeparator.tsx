@@ -1,4 +1,4 @@
-import { ArrowDown } from '@anchor-protocol/icons';
+import { ArrowDown } from '@thorfi-protocol/icons';
 import c from 'color';
 import React, { ComponentType, DetailedHTMLProps, HTMLAttributes } from 'react';
 import styled from 'styled-components';

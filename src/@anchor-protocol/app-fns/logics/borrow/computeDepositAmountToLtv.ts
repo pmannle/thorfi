@@ -1,6 +1,6 @@
 import { BAssetLtvs, computeBorrowLimit } from '@anchor-protocol/app-fns';
-import type { bAsset, CW20Addr, Rate, u } from '@anchor-protocol/types';
-import { moneyMarket } from '@anchor-protocol/types';
+import type { bAsset, CW20Addr, Rate, u } from '@thorfi-protocol/types';
+import { moneyMarket } from '@thorfi-protocol/types';
 import big, { Big, BigSource } from 'big.js';
 
 export const computeDepositAmountToLtv =

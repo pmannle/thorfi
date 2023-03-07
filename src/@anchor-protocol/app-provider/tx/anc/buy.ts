@@ -1,5 +1,5 @@
 import { ancBuyTx } from '@anchor-protocol/app-fns';
-import { Rate, u, UST } from '@anchor-protocol/types';
+import { Rate, u, UST } from '@thorfi-protocol/types';
 import { useFixedFee, useRefetchQueries } from '@libs/app-provider';
 import { formatExecuteMsgNumber } from '@libs/formatter';
 import { useStream } from '@rx-stream/react';

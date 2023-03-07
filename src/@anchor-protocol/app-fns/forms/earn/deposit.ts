@@ -1,4 +1,4 @@
-import { Rate, u, UST } from '@anchor-protocol/types';
+import { Rate, u, UST } from '@thorfi-protocol/types';
 import { computeMaxUstBalanceForUstTransfer } from '@libs/app-fns';
 import { max, min } from '@libs/big-math';
 import { microfy } from '@libs/formatter';

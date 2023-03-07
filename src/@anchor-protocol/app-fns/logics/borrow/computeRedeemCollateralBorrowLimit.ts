@@ -1,6 +1,6 @@
 import { computeBorrowLimit } from '@anchor-protocol/app-fns';
-import type { bAsset, CW20Addr, u, UST } from '@anchor-protocol/types';
-import { moneyMarket } from '@anchor-protocol/types';
+import type { bAsset, CW20Addr, u, UST } from '@thorfi-protocol/types';
+import { moneyMarket } from '@thorfi-protocol/types';
 import big, { Big, BigSource } from 'big.js';
 import { BAssetLtvs } from '../../queries/borrow/market';
 

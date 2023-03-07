@@ -1,4 +1,4 @@
-import { ANC, cw20, CW20Addr, HumanAddr } from '@anchor-protocol/types';
+import { ANC, cw20, CW20Addr, HumanAddr } from '@thorfi-protocol/types';
 import {
   QueryClient,
   wasmFetch,

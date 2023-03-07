@@ -1,5 +1,5 @@
-import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
-import { aUST, u, UST } from '@anchor-protocol/types';
+import { formatUSTWithPostfixUnits } from '@thorfi-protocol/notation';
+import { aUST, u, UST } from '@thorfi-protocol/types';
 import { useEarnEpochStatesQuery } from '@anchor-protocol/app-provider';
 import { demicrofy } from '@libs/formatter';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';

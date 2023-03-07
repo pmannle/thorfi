@@ -12,7 +12,7 @@ import {
   useBorrowBorrowerQuery,
   useBorrowMarketQuery,
 } from '@anchor-protocol/app-provider';
-import { Rate, u, UST } from '@anchor-protocol/types';
+import { Rate, u, UST } from '@thorfi-protocol/types';
 import big, { Big } from 'big.js';
 import { useMemo } from 'react';
 

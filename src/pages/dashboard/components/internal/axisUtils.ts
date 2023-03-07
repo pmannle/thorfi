@@ -1,4 +1,4 @@
-import { JSDateTime } from '@anchor-protocol/types';
+import { JSDateTime } from '@thorfi-protocol/types';
 import { differenceInDays, format, toDate } from 'date-fns';
 
 export function shortDay(datetime: JSDateTime): string {

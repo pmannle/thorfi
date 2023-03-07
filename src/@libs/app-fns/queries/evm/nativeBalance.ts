@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { EVMAddr, u } from '../../../types';
-import { Eth } from '../../../../@anchor-protocol/types';
+import { Eth } from '../../../../@thorfi-protocol/types';
 
 export const ZERO_ETH_BALANCE = '0' as u<Eth>;
 

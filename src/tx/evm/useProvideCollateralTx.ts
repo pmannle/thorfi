@@ -14,7 +14,7 @@ import { ContractReceipt } from '@ethersproject/contracts';
 import { BackgroundTxResult, useBackgroundTx } from './useBackgroundTx';
 import { formatOutput, microfy } from '@anchor-protocol/formatter';
 import { TxEvent } from './useTx';
-import { bAsset, NoMicro } from '@anchor-protocol/types';
+import { bAsset, NoMicro } from '@thorfi-protocol/types';
 import { useRefetchQueries } from '@libs/app-provider';
 import { EvmTxProgressWriter } from './EvmTxProgressWriter';
 import { WhitelistCollateral } from 'queries';

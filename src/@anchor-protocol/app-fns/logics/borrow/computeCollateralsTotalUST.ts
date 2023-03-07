@@ -1,4 +1,4 @@
-import { bAsset, CW20Addr, moneyMarket, u, UST } from '@anchor-protocol/types';
+import { bAsset, CW20Addr, moneyMarket, u, UST } from '@thorfi-protocol/types';
 import { sum, vectorMultiply, vectorPlus } from '@libs/big-math';
 import { Big, BigSource } from 'big.js';
 import { vectorizeOraclePrices } from './vectorizeOraclePrices';

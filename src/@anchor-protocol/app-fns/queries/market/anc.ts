@@ -1,4 +1,4 @@
-import { ANC } from '@anchor-protocol/types';
+import { ANC } from '@thorfi-protocol/types';
 import { JSDateTime, u, UST } from '@libs/types';
 import { dedupeTimestamp } from './utils/dedupeTimestamp';
 

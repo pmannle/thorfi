@@ -1,4 +1,4 @@
-import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
+import { formatUSTWithPostfixUnits } from '@thorfi-protocol/notation';
 import { MarketDepositAndBorrow } from '@anchor-protocol/app-fns';
 import { demicrofy } from '@libs/formatter';
 import big from 'big.js';
@@ -127,7 +127,7 @@ export class StablecoinChart extends Component<StablecoinChartProps> {
 
                   div1.innerHTML = `${deposits} UST <span>${date}</span>`;
                   div2.innerHTML = `${borrows} UST <span>${date}</span>`;
-                } catch {}
+                } catch { }
               }
 
               if (hr) {

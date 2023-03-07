@@ -9,7 +9,7 @@ import {
   Luna,
   Token,
   UST,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import { formatDemimal, formatInteger, MICRO } from '@libs/formatter';
 import { u } from '@libs/types';
 import big, { BigSource } from 'big.js';

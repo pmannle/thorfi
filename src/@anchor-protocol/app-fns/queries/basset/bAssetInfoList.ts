@@ -1,4 +1,4 @@
-import { moneyMarket } from '@anchor-protocol/types';
+import { moneyMarket } from '@thorfi-protocol/types';
 import { QueryClient, wasmFetch, WasmQuery } from '@libs/query-client';
 import { HumanAddr } from '@libs/types';
 import { BAssetInfo, bAssetInfoQuery } from './bAssetInfo';

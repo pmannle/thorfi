@@ -3,8 +3,8 @@ import { useBorrowRedeemCollateralForm } from '@anchor-protocol/app-provider';
 import {
   LUNA_INPUT_MAXIMUM_DECIMAL_POINTS,
   LUNA_INPUT_MAXIMUM_INTEGER_POINTS,
-} from '@anchor-protocol/notation';
-import { bAsset, NoMicro, Rate, u } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { bAsset, NoMicro, Rate, u } from '@thorfi-protocol/types';
 import { TxResultRendering } from '@libs/app-fns';
 import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
 import { Dialog } from '@libs/neumorphism-ui/components/Dialog';
@@ -38,7 +38,7 @@ import big from 'big.js';
 
 export interface RedeemCollateralDialogParams
   extends UIElementProps,
-    RedeemCollateralFormParams {
+  RedeemCollateralFormParams {
   txResult: StreamResult<TxResultRendering> | null;
   uTokenBalance: u<bAsset>;
   proceedable: boolean;
@@ -99,7 +99,7 @@ function RedeemCollateralDialogBase(props: RedeemCollateralDialogProps) {
             collateral.decimals,
           ),
         });
-      } catch {}
+      } catch { }
     },
     [input, states.ltvToAmount, collateral.decimals],
   );
@@ -182,11 +182,11 @@ function RedeemCollateralDialogBase(props: RedeemCollateralDialogProps) {
             >
               {states.withdrawableAmount
                 ? formatOutput(
-                    demicrofy(states.withdrawableAmount, collateral.decimals),
-                    {
-                      decimals: 3,
-                    },
-                  )
+                  demicrofy(states.withdrawableAmount, collateral.decimals),
+                  {
+                    decimals: 3,
+                  },
+                )
                 : 0}{' '}
               {states.collateral.symbol}
             </span>

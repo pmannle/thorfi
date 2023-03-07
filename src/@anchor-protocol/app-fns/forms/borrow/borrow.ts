@@ -9,7 +9,7 @@ import {
 } from '@anchor-protocol/app-fns';
 import { validateCollateralAmount } from '@anchor-protocol/app-fns/logics/borrow/validateCollateralAmount';
 import { DeploymentTarget } from '@anchor-protocol/app-provider';
-import { CollateralAmount, moneyMarket, Rate } from '@anchor-protocol/types';
+import { CollateralAmount, moneyMarket, Rate } from '@thorfi-protocol/types';
 import { formatRate } from '@libs/formatter';
 import { CW20Addr, u, UST } from '@libs/types';
 import { FormReturn } from '@libs/use-form';

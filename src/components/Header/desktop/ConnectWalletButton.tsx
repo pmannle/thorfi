@@ -3,7 +3,7 @@ import { IconOnlyWalletButton } from 'components/Header/desktop/IconOnlyWalletBu
 import { useMediaQuery } from 'react-responsive';
 import { ConnectedButton } from './ConnectedButton';
 import { NotConnectedButton } from './NotConnectedButton';
-import { u, UST } from '@anchor-protocol/types';
+import { u, UST } from '@thorfi-protocol/types';
 
 export interface ConnectWalletButtonProps {
   initializing?: boolean;

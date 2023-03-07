@@ -1,4 +1,4 @@
-import { JSDateTime, u, UST } from '@anchor-protocol/types';
+import { JSDateTime, u, UST } from '@thorfi-protocol/types';
 import { group } from 'd3-array';
 import { gmt9am } from 'utils/gmt9am';
 

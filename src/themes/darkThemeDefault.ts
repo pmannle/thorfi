@@ -53,6 +53,8 @@ export const defaultDarkTheme = {
   textColor: WHITE,
   dimTextColor: DARK_GRAY_100,
 
+  black: BLACK,
+
   colors: {
     positive: GREEN_100,
     negative: RED_100,

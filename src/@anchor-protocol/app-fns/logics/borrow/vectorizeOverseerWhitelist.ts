@@ -1,4 +1,4 @@
-import { moneyMarket } from '@anchor-protocol/types';
+import { moneyMarket } from '@thorfi-protocol/types';
 import { createCollateralVector } from '../../models/collaterals';
 
 export const vectorizeOverseerWhitelist = createCollateralVector(

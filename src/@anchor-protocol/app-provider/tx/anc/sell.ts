@@ -1,6 +1,6 @@
 import { ancSellTx } from '@anchor-protocol/app-fns';
 import { useAnchorBank } from '@anchor-protocol/app-provider';
-import { ANC, Rate, UST } from '@anchor-protocol/types';
+import { ANC, Rate, UST } from '@thorfi-protocol/types';
 import { useFixedFee, useRefetchQueries } from '@libs/app-provider';
 import { formatExecuteMsgNumber } from '@libs/formatter';
 import { useStream } from '@rx-stream/react';

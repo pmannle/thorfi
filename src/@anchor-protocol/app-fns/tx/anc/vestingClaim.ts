@@ -1,5 +1,5 @@
-import { formatANCWithPostfixUnits } from '@anchor-protocol/notation';
-import { Gas, Rate, u, UST, ANC, HumanAddr } from '@anchor-protocol/types';
+import { formatANCWithPostfixUnits } from '@thorfi-protocol/notation';
+import { Gas, Rate, u, UST, ANC, HumanAddr } from '@thorfi-protocol/types';
 import {
   pickAttributeValueByKey,
   pickEvent,

@@ -1,11 +1,11 @@
-import { MypageTxHistory } from '@anchor-protocol/app-fns';
+import { MypageTxHistory } from '@thorfi-protocol/queries/mypage/txHistory';
 import { rulerLightColor, rulerShadowColor } from '@libs/styled-neumorphism';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import useResizeObserver from 'use-resize-observer/polyfilled';
 import { CallMade } from '@material-ui/icons';
-import { useNetwork } from '@anchor-protocol/app-provider';
-import { getTransactionDetailUrl } from 'utils/terrascope';
+import { useNetwork } from '@thorfi-protocol/network';
+import { getTransactionDetailUrl } from 'utils/thorscope';
 
 export interface TransactionHistoryListProps {
   className?: string;
@@ -98,19 +98,19 @@ export const StyledTransactionHistoryList = styled(TransactionHistoryListBase)`
     &:not(:first-child) {
       border-top: 1px solid
         ${({ theme }) =>
-          rulerLightColor({
-            intensity: theme.intensity,
-            color: theme.sectionBackgroundColor,
-          })};
+    rulerLightColor({
+      intensity: theme.intensity,
+      color: theme.sectionBackgroundColor,
+    })};
     }
 
     &:not(:last-child) {
       border-bottom: 1px solid
         ${({ theme }) =>
-          rulerShadowColor({
-            intensity: theme.intensity,
-            color: theme.sectionBackgroundColor,
-          })};
+    rulerShadowColor({
+      intensity: theme.intensity,
+      color: theme.sectionBackgroundColor,
+    })};
     }
 
     > a {

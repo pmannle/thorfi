@@ -1,5 +1,5 @@
-import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
-import { Rate, u, UST } from '@anchor-protocol/types';
+import { formatUSTWithPostfixUnits } from '@thorfi-protocol/notation';
+import { Rate, u, UST } from '@thorfi-protocol/types';
 import { demicrofy, formatRate } from '@libs/formatter';
 import { HorizontalGraphBar } from '@libs/neumorphism-ui/components/HorizontalGraphBar';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
@@ -46,23 +46,23 @@ export function BorrowUsageGraph(props: BorrowUsageGraphProps) {
     },
     big(currentLtv).gt(0)
       ? {
-          variant: 'label',
-          label: `${formatRate(currentLtv as Rate<BigSource>)}%`,
-          color: currentLtv.gte(0.9)
-            ? theme.colors.negative
-            : currentLtv.gte(ANCHOR_SAFE_RATIO)
+        variant: 'label',
+        label: `${formatRate(currentLtv as Rate<BigSource>)}%`,
+        color: currentLtv.gte(0.9)
+          ? theme.colors.negative
+          : currentLtv.gte(ANCHOR_SAFE_RATIO)
             ? theme.colors.warning
             : theme.colors.primary,
-          value: currentLtv.toNumber(),
-          tooltip: undefined,
-        }
+        value: currentLtv.toNumber(),
+        tooltip: undefined,
+      }
       : {
-          variant: 'label',
-          label: '',
-          color: theme.colors.primary,
-          value: 0,
-          tooltip: undefined,
-        },
+        variant: 'label',
+        label: '',
+        color: theme.colors.primary,
+        value: 0,
+        tooltip: undefined,
+      },
   ];
 
   return (

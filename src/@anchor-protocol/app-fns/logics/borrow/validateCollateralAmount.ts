@@ -1,4 +1,4 @@
-import type { CollateralAmount, u } from '@anchor-protocol/types';
+import type { CollateralAmount, u } from '@thorfi-protocol/types';
 import Big from 'big.js';
 
 export function validateCollateralAmount(

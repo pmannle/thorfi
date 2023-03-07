@@ -1,5 +1,5 @@
 import React from 'react';
-import { CollateralAmount, u, UST } from '@anchor-protocol/types';
+import { CollateralAmount, u, UST } from '@thorfi-protocol/types';
 import type { DialogProps } from '@libs/use-dialog';
 import { useAccount } from 'contexts/account';
 import { useCallback } from 'react';

@@ -1,4 +1,4 @@
-import { formatLuna } from '@anchor-protocol/notation';
+import { formatLuna } from '@thorfi-protocol/notation';
 import {
   bLuna,
   CW20Addr,
@@ -8,7 +8,7 @@ import {
   Rate,
   u,
   UST,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import {
   pickAttributeValueByKey,
   pickEvent,

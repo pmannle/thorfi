@@ -1,8 +1,11 @@
 import { earnDepositTx } from '@anchor-protocol/app-fns';
-import { u, UST } from '@anchor-protocol/types';
+import { u, UST } from '@thorfi-protocol/types';
 import { useRefetchQueries } from '@libs/app-provider';
 import { useStream } from '@rx-stream/react';
-import { useConnectedWallet } from '@terra-money/wallet-provider';
+// import { useConnectedWallet } from '@terra-money/wallet-provider';
+// import { useConnectedWallet } from '@libs/evm-wallet/providers/EvmWalletProvider';
+import { useEvmWallet,
+} from '@libs/evm-wallet';
 import { useCallback } from 'react';
 import { useAnchorWebapp } from '../../contexts/context';
 import { ANCHOR_TX_KEY } from '../../env';
@@ -14,7 +17,7 @@ export interface EarnDepositTxParams {
 }
 
 export function useEarnDepositTx() {
-  const connectedWallet = useConnectedWallet();
+  const connectedWallet = useEvmWallet();
 
   const { constants, txErrorReporter, queryClient, contractAddress } =
     useAnchorWebapp();
@@ -29,11 +32,11 @@ export function useEarnDepositTx() {
 
       return earnDepositTx({
         // fabricateMarketDepositStableCoin
-        walletAddr: connectedWallet.walletAddress,
-        marketAddr: contractAddress.moneyMarket.market,
+        walletAddr: connectedWallet.address,
+        // marketAddr: contractAddress.moneyMarket.market,
         depositAmount,
         // post
-        network: connectedWallet.network,
+        network: connectedWallet.provider?._network,
         post: connectedWallet.post,
         txFee,
         gasFee: constants.gasWanted,
@@ -51,9 +54,9 @@ export function useEarnDepositTx() {
     },
     [
       connectedWallet,
-      contractAddress.moneyMarket.market,
-      constants.gasWanted,
-      constants.gasAdjustment,
+      // contractAddress.moneyMarket.market,
+      // constants.gasWanted,
+      // constants.gasAdjustment,
       queryClient,
       txErrorReporter,
       refetchQueries,

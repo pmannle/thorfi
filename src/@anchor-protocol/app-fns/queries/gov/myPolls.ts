@@ -1,4 +1,4 @@
-import { ANC, anchorToken, HumanAddr, u } from '@anchor-protocol/types';
+import { ANC, anchorToken, HumanAddr, u } from '@thorfi-protocol/types';
 import { QueryClient, wasmFetch, WasmQuery } from '@libs/query-client';
 
 export type MyPoll = anchorToken.gov.PollResponse & {

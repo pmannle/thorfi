@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import { UIElementProps } from '@libs/ui';
 import {
   NetworkContext,
-  TESTNET,
+  // TESTNET,
   MAINNET,
-} from '@anchor-protocol/app-provider/contexts/network';
+} from '@thorfi-protocol/network';
 import { useEvmWallet } from '@libs/evm-wallet';
 import { EvmChainId } from '@anchor-protocol/crossanchor-sdk';
 
@@ -21,7 +21,7 @@ const EvmNetworkProvider = ({ children }: UIElementProps) => {
       case EvmChainId.AVALANCHE:
         return MAINNET;
     }
-    return TESTNET;
+    return MAINNET;
   }, [chainId]);
 
   return (

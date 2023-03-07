@@ -1,7 +1,7 @@
 import { Tooltip } from '@libs/neumorphism-ui/components/Tooltip';
 import React, { Children, ComponentType, ReactElement } from 'react';
 import styled from 'styled-components';
-import * as icons from '../';
+import * as icons from '..';
 
 export default {
   title: 'assets/Icons',
@@ -35,7 +35,7 @@ const Grid = styled(
       {Children.toArray(children.map((child) => <div>{child}</div>))}
     </section>
   ),
-)<{ size: number }>`
+) <{ size: number }>`
   display: grid;
   grid-template-columns: repeat(5, ${({ size }) => size}px);
   grid-template-rows: repeat(

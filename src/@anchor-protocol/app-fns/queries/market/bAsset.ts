@@ -5,7 +5,7 @@ import {
   HumanAddr,
   moneyMarket,
   NativeDenom,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import {
   QueryClient,
   wasmFetch,

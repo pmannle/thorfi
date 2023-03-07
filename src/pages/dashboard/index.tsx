@@ -2,17 +2,10 @@ import {
   formatUST,
   formatUTokenInteger,
   formatUTokenIntegerWithoutPostfixUnits,
-} from '@anchor-protocol/notation';
-import { TokenIcon } from '@anchor-protocol/token-icons';
-import { Rate, u, UST } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { Rate, u, UST } from '@thorfi-protocol/types';
 import {
-  // useAnchorWebapp,
-  // useEarnEpochStatesQuery,
   useSaversHistoryQuery,
-  // useMarketCollateralsQuery,
-  // useMarketDepositAndBorrowQuery,
-  // useMarketStableCoinQuery,
-  // useMarketUstQuery,
   convertDataToAPR,
 } from '@thorfi-protocol/saversHistory';
 import {

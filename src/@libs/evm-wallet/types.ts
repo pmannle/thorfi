@@ -2,6 +2,7 @@ export enum ConnectType {
   None = 'None',
   MetaMask = 'MetaMask',
   WalletConnect = 'WalletConnect',
+  Xdefi = 'Xdefi',
 }
 
 export type Connection = {

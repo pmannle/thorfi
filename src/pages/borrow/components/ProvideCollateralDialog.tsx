@@ -2,8 +2,8 @@ import { useBorrowProvideCollateralForm } from '@anchor-protocol/app-provider';
 import {
   LUNA_INPUT_MAXIMUM_DECIMAL_POINTS,
   LUNA_INPUT_MAXIMUM_INTEGER_POINTS,
-} from '@anchor-protocol/notation';
-import { bAsset, NoMicro, Rate, u } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { bAsset, NoMicro, Rate, u } from '@thorfi-protocol/types';
 import { Dialog } from '@libs/neumorphism-ui/components/Dialog';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
 import { InfoTooltip } from '@libs/neumorphism-ui/components/InfoTooltip';
@@ -37,7 +37,7 @@ import { BroadcastTxStreamResult } from 'pages/earn/components/types';
 
 export interface ProvideCollateralDialogParams
   extends UIElementProps,
-    ProvideCollateralFormParams {
+  ProvideCollateralFormParams {
   txResult: StreamResult<TxResultRendering> | null;
   uTokenBalance: u<bAsset>;
   proceedable: boolean;
@@ -101,7 +101,7 @@ function ProvideCollateralDialogBase(props: ProvideCollateralDialogProps) {
             collateral.decimals,
           ),
         );
-      } catch {}
+      } catch { }
     },
     [updateDepositAmount, ltvToAmount, collateral.decimals],
   );

@@ -1,5 +1,5 @@
 import { BorrowMarket } from '@anchor-protocol/app-fns';
-import { moneyMarket } from '@anchor-protocol/types';
+import { moneyMarket } from '@thorfi-protocol/types';
 import { CW20TokenDisplayInfo } from '@libs/app-fns';
 import { TokenDisplayInfoByAddr } from '../../utils/tokenDisplay';
 

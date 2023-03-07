@@ -15,30 +15,6 @@ import { Button, makeStyles } from '@material-ui/core';
 // import { AiOutlineLogout } from "react-icons/ai";
 import styled from 'styled-components';
 import { CryptoState } from './CryptoContext';
-// import { useHistory } from 'react-router-dom';
-
-// const useStyles = makeStyles(() => ({
-//   button__connected: {
-//     // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-//     // width: '160px',
-//   },
-//   button: {
-//     // width: '160px'
-//   },
-//   icon__size: {
-//     width: '32px',
-//     height: '32px',
-//     color: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-//   },
-//   icon_gradient_url: {
-//     fill: `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><linearGradient id='grad'><stop offset='0%' stop-color='%23ff00cc'/><stop offset='100%' stop-color='%23333399'/></linearGradient></svg>#grad") purple)`,
-//   },
-//   button_row: {
-//     display: 'flex',
-//     flexDirection: 'row',
-//     height: '40px',
-//   },
-// }));
 
 // Inherit Xdefi button and overide styles
 const LogOutButton = styled(DisconnectBtn)`

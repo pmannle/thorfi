@@ -1,4 +1,4 @@
-import type { Rate } from '@anchor-protocol/types';
+import type { Rate } from '@thorfi-protocol/types';
 import big, { Big } from 'big.js';
 import { computeApr } from './computeApr';
 

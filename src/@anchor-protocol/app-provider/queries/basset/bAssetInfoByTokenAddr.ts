@@ -1,5 +1,5 @@
 import { bAssetInfoByTokenAddrQuery } from '@anchor-protocol/app-fns';
-import { CW20Addr } from '@anchor-protocol/types';
+import { CW20Addr } from '@thorfi-protocol/types';
 import { createQueryFn } from '@libs/react-query-utils';
 import { useQuery, UseQueryResult } from 'react-query';
 import { useAnchorWebapp } from '../../contexts/context';

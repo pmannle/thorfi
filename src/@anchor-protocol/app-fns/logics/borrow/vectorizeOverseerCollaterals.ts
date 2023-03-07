@@ -1,4 +1,4 @@
-import { bAsset, moneyMarket, u } from '@anchor-protocol/types';
+import { bAsset, moneyMarket, u } from '@thorfi-protocol/types';
 import { createCollateralVector } from '../../models/collaterals';
 
 export const vectorizeOverseerCollaterals = createCollateralVector(

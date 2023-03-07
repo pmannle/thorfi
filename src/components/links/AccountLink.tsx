@@ -2,7 +2,7 @@ import { useNetwork } from '@anchor-protocol/app-provider';
 import { truncate as _truncate } from '@libs/formatter';
 import React from 'react';
 import styled from 'styled-components';
-import { getAccountUrl } from 'utils/terrascope';
+import { getAccountUrl } from 'utils/thorscope';
 
 export interface AccountLinkProps {
   address: string;

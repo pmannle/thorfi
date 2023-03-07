@@ -6,8 +6,8 @@ import {
 import {
   UST_INPUT_MAXIMUM_DECIMAL_POINTS,
   UST_INPUT_MAXIMUM_INTEGER_POINTS,
-} from '@anchor-protocol/notation';
-import { UST } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { UST } from '@thorfi-protocol/types';
 import { Dialog } from '@libs/neumorphism-ui/components/Dialog';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
 import { NumberInput } from '@libs/neumorphism-ui/components/NumberInput';

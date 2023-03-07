@@ -1,4 +1,4 @@
-import { Menu, MenuClose, MenuWallet } from '@anchor-protocol/icons';
+import { Menu, MenuClose, MenuWallet } from '@thorfi-protocol/icons';
 import { IconToggleButton } from '@libs/neumorphism-ui/components/IconToggleButton';
 import { useMenus, RouteMenu } from 'configurations/menu';
 import { mobileHeaderHeight } from 'env';

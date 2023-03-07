@@ -1,4 +1,4 @@
-import { Luna, NoMicro, u } from '@anchor-protocol/types';
+import { Luna, NoMicro, u } from '@thorfi-protocol/types';
 import { Big, BigSource } from 'big.js';
 
 describe('types/currencies', () => {

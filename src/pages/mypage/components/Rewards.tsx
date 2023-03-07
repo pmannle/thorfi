@@ -2,7 +2,7 @@ import {
   formatANCWithPostfixUnits,
   formatLP,
   formatUSTWithPostfixUnits,
-} from '@anchor-protocol/notation';
+} from '@thorfi-protocol/notation';
 import { demicrofy, formatRate } from '@libs/formatter';
 import { HorizontalScrollTable } from '@libs/neumorphism-ui/components/HorizontalScrollTable';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
@@ -99,8 +99,8 @@ export function RewardsBase({ className }: RewardsProps) {
                 <p>
                   {govGorvernance?.staked
                     ? formatANCWithPostfixUnits(
-                        demicrofy(govGorvernance.staked),
-                      )
+                      demicrofy(govGorvernance.staked),
+                    )
                     : 0}{' '}
                   ANC
                 </p>
@@ -109,8 +109,8 @@ export function RewardsBase({ className }: RewardsProps) {
                     ≈{' '}
                     {govGorvernance?.stakedValue
                       ? formatUSTWithPostfixUnits(
-                          demicrofy(govGorvernance.stakedValue),
-                        )
+                        demicrofy(govGorvernance.stakedValue),
+                      )
                       : 0}{' '}
                     UST
                   </IconSpan>
@@ -120,8 +120,8 @@ export function RewardsBase({ className }: RewardsProps) {
                 <p>
                   {govGorvernance?.stakable
                     ? formatANCWithPostfixUnits(
-                        demicrofy(govGorvernance.stakable),
-                      )
+                      demicrofy(govGorvernance.stakable),
+                    )
                     : 0}{' '}
                   ANC
                 </p>
@@ -130,8 +130,8 @@ export function RewardsBase({ className }: RewardsProps) {
                     ≈{' '}
                     {govGorvernance?.stakableValue
                       ? formatUSTWithPostfixUnits(
-                          demicrofy(govGorvernance.stakableValue),
-                        )
+                        demicrofy(govGorvernance.stakableValue),
+                      )
                       : 0}{' '}
                     UST
                   </IconSpan>
@@ -171,14 +171,14 @@ export function RewardsBase({ className }: RewardsProps) {
                     ≈{' '}
                     {ancUstLp?.withdrawableAssets
                       ? formatANCWithPostfixUnits(
-                          demicrofy(ancUstLp.withdrawableAssets.anc),
-                        )
+                        demicrofy(ancUstLp.withdrawableAssets.anc),
+                      )
                       : 0}{' '}
                     ANC +{' '}
                     {ancUstLp?.withdrawableAssets
                       ? formatUSTWithPostfixUnits(
-                          demicrofy(ancUstLp.withdrawableAssets.ust),
-                        )
+                        demicrofy(ancUstLp.withdrawableAssets.ust),
+                      )
                       : 0}{' '}
                     UST
                   </IconSpan>
@@ -200,8 +200,8 @@ export function RewardsBase({ className }: RewardsProps) {
                     ≈{' '}
                     {ancUstLp?.stakedValue
                       ? formatUSTWithPostfixUnits(
-                          demicrofy(ancUstLp.stakedValue),
-                        )
+                        demicrofy(ancUstLp.stakedValue),
+                      )
                       : 0}{' '}
                     UST
                   </IconSpan>
@@ -223,8 +223,8 @@ export function RewardsBase({ className }: RewardsProps) {
                     ≈{' '}
                     {ancUstLp?.stakableValue
                       ? formatUSTWithPostfixUnits(
-                          demicrofy(ancUstLp.stakableValue),
-                        )
+                        demicrofy(ancUstLp.stakableValue),
+                      )
                       : 0}{' '}
                     UST
                   </IconSpan>
@@ -289,8 +289,8 @@ export function RewardsBase({ className }: RewardsProps) {
                     ≈{' '}
                     {ustBorrow?.rewardValue
                       ? formatUSTWithPostfixUnits(
-                          demicrofy(ustBorrow.rewardValue),
-                        )
+                        demicrofy(ustBorrow.rewardValue),
+                      )
                       : 0}{' '}
                     UST
                   </IconSpan>

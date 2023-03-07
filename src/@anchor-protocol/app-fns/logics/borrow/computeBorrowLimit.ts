@@ -5,7 +5,7 @@ import {
   moneyMarket,
   u,
   UST,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import { sum, vectorMultiply } from '@libs/big-math';
 import { Big, BigSource } from 'big.js';
 import { BAssetLtvs } from '../../queries/borrow/market';

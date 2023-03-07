@@ -4,7 +4,7 @@ import {
   AnchorConstants,
   AnchorContractAddress,
 } from '@anchor-protocol/app-provider';
-import { CW20Addr, HumanAddr } from '@anchor-protocol/types';
+import { CW20Addr, HumanAddr } from '@thorfi-protocol/types';
 import { TERRA_QUERY_KEY, TxRefetchMap } from '@libs/app-provider';
 import { Gas, Rate } from '@libs/types';
 import { NetworkInfo } from '@terra-money/wallet-provider';

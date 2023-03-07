@@ -1,4 +1,4 @@
-import { CW20Addr } from '@anchor-protocol/types';
+import { CW20Addr } from '@thorfi-protocol/types';
 import { createCollateralVector } from '../../models/collaterals';
 import { BAssetLtv } from '../../queries/borrow/market';
 

@@ -1,5 +1,5 @@
 import { bondSwapTx } from '@anchor-protocol/app-fns';
-import { bLuna, Rate } from '@anchor-protocol/types';
+import { bLuna, Rate } from '@thorfi-protocol/types';
 import { useFixedFee, useRefetchQueries } from '@libs/app-provider';
 import { useStream } from '@rx-stream/react';
 import { useConnectedWallet } from '@terra-money/wallet-provider';

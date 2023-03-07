@@ -5,7 +5,7 @@ import {
   Num,
   u,
   UST,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import {
   QueryClient,
   wasmFetch,

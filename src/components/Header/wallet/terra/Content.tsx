@@ -10,7 +10,7 @@ import { HumanAddr } from '@libs/types';
 import styled from 'styled-components';
 import { useNetwork } from '@anchor-protocol/app-provider';
 import { TokenList } from '../TokenList';
-import { getAccountUrl } from 'utils/terrascope';
+import { getAccountUrl } from 'utils/thorscope';
 
 type Action = () => void;
 
@@ -188,19 +188,19 @@ export const Content = styled(ContentBase)`
         }
 
         background-color: ${({ theme }) =>
-          theme.palette.type === 'light' ? '#f1f1f1' : 'rgba(0, 0, 0, 0.15)'};
+    theme.palette.type === 'light' ? '#f1f1f1' : 'rgba(0, 0, 0, 0.15)'};
         color: ${({ theme }) =>
-          theme.palette.type === 'light'
-            ? '#666666'
-            : 'rgba(255, 255, 255, 0.6)'};
+    theme.palette.type === 'light'
+      ? '#666666'
+      : 'rgba(255, 255, 255, 0.6)'};
 
         &:hover {
           background-color: ${({ theme }) =>
-            theme.palette.type === 'light' ? '#e1e1e1' : 'rgba(0, 0, 0, 0.2)'};
+    theme.palette.type === 'light' ? '#e1e1e1' : 'rgba(0, 0, 0, 0.2)'};
           color: ${({ theme }) =>
-            theme.palette.type === 'light'
-              ? '#666666'
-              : 'rgba(255, 255, 255, 0.6)'};
+    theme.palette.type === 'light'
+      ? '#666666'
+      : 'rgba(255, 255, 255, 0.6)'};
         }
       }
     }

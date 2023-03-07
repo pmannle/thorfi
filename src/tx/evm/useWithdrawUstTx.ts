@@ -13,7 +13,7 @@ import { ContractReceipt } from 'ethers';
 import { TwoWayTxResponse } from '@anchor-protocol/crossanchor-sdk';
 import { BackgroundTxResult, useBackgroundTx } from './useBackgroundTx';
 import { useFormatters } from '@anchor-protocol/formatter/useFormatters';
-import { aUST } from '@anchor-protocol/types';
+import { aUST } from '@thorfi-protocol/types';
 import { TxEvent } from './useTx';
 import { useRefetchQueries } from '@libs/app-provider';
 import { EvmTxProgressWriter } from './EvmTxProgressWriter';

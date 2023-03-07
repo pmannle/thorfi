@@ -1,4 +1,4 @@
-import { moneyMarket, u, UST } from '@anchor-protocol/types';
+import { moneyMarket, u, UST } from '@thorfi-protocol/types';
 import { max } from '@libs/big-math';
 import big, { Big, BigSource } from 'big.js';
 import { computeRepayTotalBorrowed } from './computeRepayTotalBorrowed';

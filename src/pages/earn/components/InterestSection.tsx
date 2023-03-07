@@ -4,7 +4,7 @@ import {
   useEarnAPYHistoryQuery,
   useEarnEpochStatesQuery,
 } from '@anchor-protocol/app-provider';
-import { Rate } from '@anchor-protocol/types';
+import { Rate } from '@thorfi-protocol/types';
 import {
   APYChart,
   APYChartItem,

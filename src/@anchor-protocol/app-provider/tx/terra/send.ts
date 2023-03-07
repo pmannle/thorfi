@@ -1,4 +1,4 @@
-import { HumanAddr, Token, u, UST } from '@anchor-protocol/types';
+import { HumanAddr, Token, u, UST } from '@thorfi-protocol/types';
 import { terraSendTx } from '@anchor-protocol/app-fns';
 import { useRefetchQueries } from '@libs/app-provider';
 import { useStream } from '@rx-stream/react';

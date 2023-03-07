@@ -21,6 +21,7 @@ import { GlobalStyle } from '@libs/neumorphism-ui/themes/GlobalStyle';
 import { BackgroundTxRequestProvider } from 'tx/evm/background';
 import { EvmChainId } from '@anchor-protocol/crossanchor-sdk';
 import { EvmWrongNetwork } from 'components/EvmWrongNetwork';
+import { defaultDarkTheme } from 'themes/darkThemeDefault';
 
 const isSupportedChain = (evmChainId?: EvmChainId): boolean => {
   return Boolean(evmChainId) && SupportedChainIds.includes(evmChainId!);
@@ -31,7 +32,7 @@ const ChainGaurdian = (props: UIElementProps) => {
 
   const {
     target: { chain },
-  } = useDeploymentTarget();
+  } = { target: { chain: 'Ethereum' } } // useDeploymentTarget();
 
   const { chainId, connectionType } = useEvmWallet();
 
@@ -80,15 +81,15 @@ const ChainGaurdian = (props: UIElementProps) => {
 };
 
 export function EvmAppProviders({ children }: UIElementProps) {
-  const { target } = useDeploymentTarget();
+  const { target } = { target: { chain: 'Ethereum' } }// useDeploymentTarget();
 
   return (
     <EvmWalletProvider>
       <ThemeProvider
-        initialTheme="light"
+        initialTheme="dark"
         lightTheme={
           target.chain === Chain.Ethereum
-            ? ethereumLightTheme
+            ? defaultDarkTheme
             : avalancheLightTheme
         }
       >

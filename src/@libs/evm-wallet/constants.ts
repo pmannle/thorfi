@@ -12,6 +12,11 @@ export const AvailableConnections: Connection[] = [
     type: ConnectType.WalletConnect,
     icon: 'https://assets.terra.money/icon/wallet-provider/walletconnect.svg',
   },
+  {
+    name: 'XDefi',
+    type: ConnectType.Xdefi,
+    icon: 'https://assets.terra.money/icon/wallet-provider/walletconnect.svg',
+  },
 ];
 
 export const SupportedChainIds: EvmChainId[] = [

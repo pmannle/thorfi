@@ -1,4 +1,4 @@
-import type { bAsset, u } from '@anchor-protocol/types';
+import type { bAsset, u } from '@thorfi-protocol/types';
 import big from 'big.js';
 
 export function validateDepositAmount(

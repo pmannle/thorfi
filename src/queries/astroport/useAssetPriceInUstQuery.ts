@@ -6,7 +6,7 @@ import { createQueryFn } from '@libs/react-query-utils';
 import { HumanAddr, UST } from '@libs/types';
 import { useQuery, UseQueryResult } from 'react-query';
 import { QueryClient, wasmFetch, WasmQuery } from '@libs/query-client';
-import { astroport } from '@anchor-protocol/types';
+import { astroport } from '@thorfi-protocol/types';
 import big from 'big.js';
 
 interface AssetPriceWasmQuery {

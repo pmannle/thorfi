@@ -1,4 +1,4 @@
-import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
+import { formatUSTWithPostfixUnits } from '@thorfi-protocol/notation';
 import { TokenIcon } from '@anchor-protocol/token-icons';
 import { computeTotalDeposit } from '@anchor-protocol/app-fns';
 import { useEarnEpochStatesQuery } from '@anchor-protocol/app-provider';

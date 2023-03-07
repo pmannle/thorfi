@@ -1,8 +1,8 @@
 import {
   formatBAssetWithPostfixUnits,
   formatUSTWithPostfixUnits,
-} from '@anchor-protocol/notation';
-import { bAsset, Rate, u, UST } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { bAsset, Rate, u, UST } from '@thorfi-protocol/types';
 import { demicrofy, formatRate } from '@libs/formatter';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
 import { InfoTooltip } from '@libs/neumorphism-ui/components/InfoTooltip';

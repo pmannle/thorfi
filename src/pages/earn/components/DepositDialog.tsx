@@ -1,8 +1,8 @@
 import {
   UST_INPUT_MAXIMUM_DECIMAL_POINTS,
   UST_INPUT_MAXIMUM_INTEGER_POINTS,
-} from '@anchor-protocol/notation';
-import { UST } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { UST } from '@thorfi-protocol/types';
 import { EarnDepositFormReturn } from '@anchor-protocol/app-provider';
 import { Dialog } from '@libs/neumorphism-ui/components/Dialog';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
@@ -52,7 +52,7 @@ function DepositDialogBase(props: DepositDialogProps) {
     renderBroadcastTxResult,
   } = props;
 
-  const account = useAccount();
+  // const account = useAccount();
 
   const {
     ust: { formatOutput, formatInput, demicrofy, symbol },
@@ -112,9 +112,9 @@ function DepositDialogBase(props: DepositDialogProps) {
               style={
                 maxAmount
                   ? {
-                      textDecoration: 'underline',
-                      cursor: 'pointer',
-                    }
+                    textDecoration: 'underline',
+                    cursor: 'pointer',
+                  }
                   : undefined
               }
               onClick={() =>

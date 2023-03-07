@@ -3,7 +3,7 @@ import {
   earnWithdrawForm,
   EarnWithdrawFormStates,
 } from '@anchor-protocol/app-fns';
-import { UST } from '@anchor-protocol/types';
+import { UST } from '@thorfi-protocol/types';
 import { useFixedFee } from '@libs/app-provider';
 import { useForm } from '@libs/use-form';
 import { useAccount } from 'contexts/account';

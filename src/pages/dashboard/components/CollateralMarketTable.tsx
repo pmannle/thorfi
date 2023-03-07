@@ -3,9 +3,9 @@ import {
   formatUST,
   formatUSTWithPostfixUnits,
   formatBAssetWithPostfixUnits,
-} from '@anchor-protocol/notation';
+} from '@thorfi-protocol/notation';
 import { TokenIcon } from '@anchor-protocol/token-icons';
-import { bAsset } from '@anchor-protocol/types';
+import { bAsset } from '@thorfi-protocol/types';
 import { demicrofy } from '@libs/formatter';
 import { HorizontalScrollTable } from '@libs/neumorphism-ui/components/HorizontalScrollTable';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';

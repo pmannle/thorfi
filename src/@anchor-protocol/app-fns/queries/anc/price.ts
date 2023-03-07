@@ -6,7 +6,7 @@ import {
   Token,
   u,
   UST,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import { QueryClient, wasmFetch, WasmQuery } from '@libs/query-client';
 import big from 'big.js';
 

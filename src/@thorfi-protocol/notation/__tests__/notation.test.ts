@@ -1,4 +1,4 @@
-import { aUST, bLuna, Luna, Percent, Rate, UST } from '@anchor-protocol/types';
+import { aUST, bLuna, Luna, Percent, Rate, UST } from '@thorfi-protocol/types';
 import { formatPercentage, formatRate } from '@libs/formatter';
 import {
   formatAUST,
@@ -9,7 +9,7 @@ import {
   formatUST,
   formatUSTInput,
   formatUSTWithPostfixUnits,
-} from '../';
+} from '..';
 
 describe('notation', () => {
   test('should format numbers to the correct strings', () => {

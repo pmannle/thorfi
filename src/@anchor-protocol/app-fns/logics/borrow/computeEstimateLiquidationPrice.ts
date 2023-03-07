@@ -5,8 +5,8 @@ import type {
   Rate,
   u,
   UST,
-} from '@anchor-protocol/types';
-import { CW20Addr, moneyMarket } from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
+import { CW20Addr, moneyMarket } from '@thorfi-protocol/types';
 import { Big } from 'big.js';
 import { WhitelistCollateral } from 'queries';
 import { microfyPrice } from 'utils/microfyPrice';

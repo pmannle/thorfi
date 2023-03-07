@@ -1,5 +1,5 @@
 import { earnWithdrawTx } from '@anchor-protocol/app-fns';
-import { aUST, u, UST } from '@anchor-protocol/types';
+import { aUST, u, UST } from '@thorfi-protocol/types';
 import { useRefetchQueries } from '@libs/app-provider';
 import { useStream } from '@rx-stream/react';
 import { useConnectedWallet } from '@terra-money/wallet-provider';

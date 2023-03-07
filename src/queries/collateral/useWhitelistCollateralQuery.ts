@@ -1,8 +1,8 @@
-import { useNetwork } from '@anchor-protocol/app-provider/contexts/network';
+import { useNetwork } from '@thorfi-protocol/network';
 import { CW20TokenDisplayInfo } from '@libs/app-fns';
 import { useCW20TokenDisplayInfosQuery } from '@libs/app-provider';
 import { createQueryFn } from '@libs/react-query-utils';
-import { HumanAddr } from '@anchor-protocol/types';
+import { HumanAddr } from '@thorfi-protocol/types';
 import {
   bridgeAssetsQuery,
   useAnchorQuery,

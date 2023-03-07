@@ -1,4 +1,4 @@
-import { DateTime, Rate } from '@anchor-protocol/types';
+import { DateTime, Rate } from '@thorfi-protocol/types';
 import { hiveFetch } from '@libs/query-client';
 
 export interface BorrowAPYData {

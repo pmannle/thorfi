@@ -3,8 +3,8 @@ import {
   formatUST,
   formatUSTWithPostfixUnits,
   formatUTokenIntegerWithoutPostfixUnits,
-} from '@anchor-protocol/notation';
-import { u, UST } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { u, UST } from '@thorfi-protocol/types';
 import { demicrofy } from '@libs/formatter';
 import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';

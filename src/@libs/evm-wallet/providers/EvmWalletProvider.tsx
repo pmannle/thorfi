@@ -5,6 +5,8 @@ import { Web3Provider } from '@ethersproject/providers';
 import { UIElementProps } from '@libs/ui';
 import { MetaMask } from '@web3-react/metamask';
 import { Web3ReactProvider, useWeb3React } from './Web3ReactProvider';
+import { WalletConnectProvider } from "../../../walletconnect.bak/client";
+
 
 export type EvmWallet = {
   activate: (chainId?: number) => Promise<Error | undefined>;
@@ -47,8 +49,8 @@ function WalletProvider({ children }: UIElementProps) {
     const status: WalletStatus = isActivating
       ? WalletStatus.Initializing
       : isActive
-      ? WalletStatus.Connected
-      : WalletStatus.Disconnected;
+        ? WalletStatus.Connected
+        : WalletStatus.Disconnected;
 
     const activate = async (chainId?: number): Promise<Error | undefined> => {
       await connector.activate(chainId);
@@ -83,7 +85,7 @@ function WalletProvider({ children }: UIElementProps) {
       activate,
       watchAsset,
       connectionType,
-      availableConnectTypes: [ConnectType.MetaMask, ConnectType.WalletConnect],
+      availableConnectTypes: [ConnectType.MetaMask, ConnectType.WalletConnect, ConnectType.Xdefi],
       availableConnections: AvailableConnections,
       connection,
       address: account,

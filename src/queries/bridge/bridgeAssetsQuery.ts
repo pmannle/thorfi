@@ -1,6 +1,6 @@
 import { Chain, DeploymentTarget } from '@anchor-protocol/app-provider';
 import { EvmChainId } from '@anchor-protocol/crossanchor-sdk';
-import { CW20Addr, ERC20Addr } from '@anchor-protocol/types';
+import { CW20Addr, ERC20Addr } from '@thorfi-protocol/types';
 import {
   ChainId,
   CHAIN_ID_AVAX,

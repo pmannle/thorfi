@@ -5,7 +5,7 @@ import {
   // NetworkInfo,
   // ReadonlyWalletSession,
   // WalletControllerChainOptions,
-  // WalletProvider,
+  WalletProvider,
 } from '@terra-money/wallet-provider';
 import { useReadonlyWalletDialog } from 'components/dialogs/useReadonlyWalletDialog';
 import { AppProviders } from 'configurations/app';

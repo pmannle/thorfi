@@ -6,7 +6,7 @@ import {
   useBorrowBorrowerQuery,
   useBorrowMarketQuery,
 } from '@anchor-protocol/app-provider';
-import { bAsset, Rate, u, UST } from '@anchor-protocol/types';
+import { bAsset, Rate, u, UST } from '@thorfi-protocol/types';
 import { sum, vectorMultiply } from '@libs/big-math';
 import big, { Big } from 'big.js';
 import { useAccount } from 'contexts/account';

@@ -71,8 +71,8 @@ const ContentBase = (props: ContentProps) => {
     <WalletContent
       className={className}
       walletAddress={walletAddress}
-      connectionName={connection.name}
-      connectionIcon={connection.icon}
+      // connectionName={connection.name}
+      // connectionIcon={connection.icon}
       readonly={false}
       onDisconnectWallet={onDisconnectWallet}
     >

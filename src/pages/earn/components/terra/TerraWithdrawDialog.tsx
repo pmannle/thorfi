@@ -8,7 +8,7 @@ import { ViewAddressWarning } from 'components/ViewAddressWarning';
 import { useAccount } from 'contexts/account';
 import { WithdrawDialog } from '../WithdrawDialog';
 import { useEarnWithdrawTx } from '@anchor-protocol/app-provider/tx/earn/withdraw';
-import { aUST, u, UST } from '@anchor-protocol/types';
+import { aUST, u, UST } from '@thorfi-protocol/types';
 import { Big, BigSource } from 'big.js';
 import { DialogProps } from '@libs/use-dialog';
 

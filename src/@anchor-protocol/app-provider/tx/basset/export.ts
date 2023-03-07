@@ -1,5 +1,5 @@
 import { bAssetExportTx } from '@anchor-protocol/app-fns';
-import { bAsset } from '@anchor-protocol/types';
+import { bAsset } from '@thorfi-protocol/types';
 import { useFixedFee, useRefetchQueries } from '@libs/app-provider';
 import { CW20Addr } from '@libs/types';
 import { useStream } from '@rx-stream/react';

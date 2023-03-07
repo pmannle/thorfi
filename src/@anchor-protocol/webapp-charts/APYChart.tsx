@@ -1,4 +1,4 @@
-import { Rate } from '@anchor-protocol/types';
+import { Rate } from '@thorfi-protocol/types';
 import { formatRate } from '@libs/formatter';
 import { scaleLinear } from 'd3-scale';
 import { curveNatural, line } from 'd3-shape';
@@ -157,16 +157,16 @@ export function APYChartBase({
         ? index < 1
           ? 'start'
           : index > maxX - 1
-          ? 'end'
-          : 'middle'
+            ? 'end'
+            : 'middle'
         : 'middle';
 
     const shiftX =
       textAnchor === 'start'
         ? rectWidth / 2
         : textAnchor === 'end'
-        ? rectWidth / -2
-        : 0;
+          ? rectWidth / -2
+          : 0;
 
     return (
       <>

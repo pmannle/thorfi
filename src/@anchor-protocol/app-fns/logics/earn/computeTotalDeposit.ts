@@ -1,4 +1,4 @@
-import { aUST, moneyMarket, u, UST } from '@anchor-protocol/types';
+import { aUST, moneyMarket, u, UST } from '@thorfi-protocol/types';
 import big, { Big } from 'big.js';
 
 export function computeTotalDeposit(

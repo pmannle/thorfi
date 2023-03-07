@@ -1,4 +1,4 @@
-import { CW20Addr } from '@anchor-protocol/types';
+import { CW20Addr } from '@thorfi-protocol/types';
 import { WhitelistCollateral } from 'queries';
 
 export function pickCollateral(

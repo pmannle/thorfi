@@ -1,4 +1,4 @@
-import { anchorToken } from '@anchor-protocol/types';
+import { anchorToken } from '@thorfi-protocol/types';
 import { govVotersQuery } from '@anchor-protocol/app-fns';
 import { useCallback, useEffect, useState } from 'react';
 import { useAnchorWebapp } from '../../contexts/context';

@@ -1,4 +1,4 @@
-import { DateTime, Rate } from '@anchor-protocol/types';
+import { DateTime, Rate } from '@thorfi-protocol/types';
 
 export interface EarnAPYHistoryData {
   apyHistory: {

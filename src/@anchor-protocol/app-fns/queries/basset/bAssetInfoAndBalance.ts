@@ -1,4 +1,4 @@
-import { bAsset, cw20, HumanAddr, moneyMarket } from '@anchor-protocol/types';
+import { bAsset, cw20, HumanAddr, moneyMarket } from '@thorfi-protocol/types';
 import { cw20BalanceQuery } from '@libs/app-fns';
 import { QueryClient } from '@libs/query-client';
 

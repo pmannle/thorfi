@@ -1,4 +1,4 @@
-import { basset, HumanAddr } from '@anchor-protocol/types';
+import { basset, HumanAddr } from '@thorfi-protocol/types';
 import {
   QueryClient,
   wasmFetch,

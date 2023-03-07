@@ -1,4 +1,4 @@
-import { basset, cw20, moneyMarket, Token } from '@anchor-protocol/types';
+import { basset, cw20, moneyMarket, Token } from '@thorfi-protocol/types';
 import { cw20TokenInfoQuery } from '@libs/app-fns';
 import {
   QueryClient,

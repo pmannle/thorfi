@@ -1,4 +1,4 @@
-import { anchorToken, HumanAddr } from '@anchor-protocol/types';
+import { anchorToken, HumanAddr } from '@thorfi-protocol/types';
 import {
   QueryClient,
   wasmFetch,

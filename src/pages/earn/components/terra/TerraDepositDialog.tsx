@@ -1,4 +1,4 @@
-import { u, UST } from '@anchor-protocol/types';
+import { u, UST } from '@thorfi-protocol/types';
 import { useEarnDepositForm } from '@anchor-protocol/app-provider';
 import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
 import { useConfirm } from '@libs/neumorphism-ui/components/useConfirm';
@@ -12,7 +12,7 @@ import { DepositDialog } from '../DepositDialog';
 import { DialogProps } from '@libs/use-dialog';
 
 export function TerraDepositDialog(props: DialogProps<{}, void>) {
-  const account = useAccount();
+  // const account = useAccount();
 
   const [openConfirm, confirmElement] = useConfirm();
 
@@ -28,9 +28,9 @@ export function TerraDepositDialog(props: DialogProps<{}, void>) {
       txFee: u<UST<BigSource>> | undefined,
       confirm: ReactNode,
     ) => {
-      if (!account.connected || !deposit) {
-        return;
-      }
+      // if (!account.connected || !deposit) {
+      //   return;
+      // }
 
       if (confirm) {
         const userConfirm = await openConfirm({
@@ -49,7 +49,8 @@ export function TerraDepositDialog(props: DialogProps<{}, void>) {
         txFee: txFee!.toString() as u<UST>,
       });
     },
-    [account.connected, deposit, openConfirm],
+    // [account.connected, deposit, openConfirm],
+    [deposit, openConfirm],
   );
 
   return (
@@ -61,13 +62,13 @@ export function TerraDepositDialog(props: DialogProps<{}, void>) {
             style={
               invalidNextTxFee
                 ? {
-                    backgroundColor: '#c12535',
-                  }
+                  backgroundColor: '#c12535',
+                }
                 : undefined
             }
             disabled={
-              !account.connected ||
-              !account.availablePost ||
+              // !account.connected ||
+              // !account.availablePost ||
               !deposit ||
               !availablePost
             }

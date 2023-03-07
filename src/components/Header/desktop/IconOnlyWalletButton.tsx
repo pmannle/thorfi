@@ -1,4 +1,4 @@
-import { MenuWallet } from '@anchor-protocol/icons';
+import { MenuWallet } from '@thorfi-protocol/icons';
 import { fixHMR } from 'fix-hmr';
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import styled from 'styled-components';

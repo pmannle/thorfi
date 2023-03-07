@@ -8,7 +8,7 @@ import big from 'big.js';
 import { demicrofy, formatOutput } from '@anchor-protocol/formatter';
 import { WithdrawableAsset, WithdrawableAssetProps } from './WithdrawableAsset';
 
-interface WithdrawableAssetsProps extends UIElementProps {}
+interface WithdrawableAssetsProps extends UIElementProps { }
 
 const WithdrawableAssetsBase = (props: WithdrawableAssetsProps) => {
   const { contractAddress } = useAnchorWebapp();
@@ -21,33 +21,37 @@ const WithdrawableAssetsBase = (props: WithdrawableAssetsProps) => {
     decimals: 6,
   });
 
-  const aUstCw20Balance = useCW20Balance(
-    contractAddress.cw20.aUST,
-    terraWalletAddress,
-  );
-  const aUstBalance = formatOutput(demicrofy(aUstCw20Balance, 6), {
-    decimals: 6,
-  });
+  const aUstCw20Balance = "0"
+  // useCW20Balance(
+  //   contractAddress.cw20.aUST,
+  //   terraWalletAddress,
+  // );
+  const aUstBalance = "0"
+  // formatOutput(demicrofy(aUstCw20Balance, 6), {
+  //   decimals: 6,
+  // });
 
   const withdrawableAssets = useMemo<WithdrawableAssetProps[]>(() => {
-    return [
-      {
-        tokenContract: contractAddress.cw20.aUST,
-        symbol: 'aUST',
-        balance: aUstBalance,
-      },
-      {
-        tokenContract: 'uusd',
-        symbol: 'UST',
-        balance: ustBalance,
-      },
-    ].filter(
-      (asset) =>
-        asset.balance.length > 0 &&
-        asset.balance.startsWith('<') === false &&
-        big(asset.balance).gt(0),
-    );
-  }, [contractAddress.cw20.aUST, aUstBalance, ustBalance]);
+    return []
+    // return [
+    //   {
+    //     tokenContract: contractAddress.cw20.aUST,
+    //     symbol: 'aUST',
+    //     balance: aUstBalance,
+    //   },
+    //   {
+    //     tokenContract: 'uusd',
+    //     symbol: 'UST',
+    //     balance: ustBalance,
+    //   },
+    // ].filter(
+    //   (asset) =>
+    //     asset.balance.length > 0 &&
+    //     asset.balance.startsWith('<') === false &&
+    //     big(asset.balance).gt(0),
+    // );
+    // }, [contractAddress.cw20.aUST, aUstBalance, ustBalance]);
+  }, [aUstBalance, ustBalance]);
 
   if (
     status !== 'connected' ||
@@ -90,13 +94,13 @@ export const WithdrawableAssets = styled(WithdrawableAssetsBase)`
 
     font-size: 12px;
     color: ${({ theme }) =>
-      theme.palette.type === 'light' ? '#666666' : 'rgba(255, 255, 255, 0.6)'};
+    theme.palette.type === 'light' ? '#666666' : 'rgba(255, 255, 255, 0.6)'};
 
     border-top: 1px solid
       ${({ theme }) =>
-        theme.palette.type === 'light'
-          ? '#e5e5e5'
-          : 'rgba(255, 255, 255, 0.1)'};
+    theme.palette.type === 'light'
+      ? '#e5e5e5'
+      : 'rgba(255, 255, 255, 0.1)'};
 
     .withdrawable-asset {
       display: flex;
@@ -107,9 +111,9 @@ export const WithdrawableAssets = styled(WithdrawableAssetsBase)`
       &:not(:last-child) {
         border-bottom: 1px dashed
           ${({ theme }) =>
-            theme.palette.type === 'light'
-              ? '#e5e5e5'
-              : 'rgba(255, 255, 255, 0.1)'};
+    theme.palette.type === 'light'
+      ? '#e5e5e5'
+      : 'rgba(255, 255, 255, 0.1)'};
       }
     }
   }

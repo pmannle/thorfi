@@ -8,7 +8,9 @@ import { Earn } from 'pages/earn';
 import { Mypage } from 'pages/mypage';
 import { TermsOfService } from 'pages/terms';
 
-import { TerraAppProviders } from 'providers/terra/TerraAppProviders';
+// import { TerraAppProviders } from 'providers/terra/TerraAppProviders';
+import { EvmAppProviders } from 'providers/evm/EvmAppProviders';
+
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import '../configurations/chartjs';
@@ -20,7 +22,9 @@ import '../configurations/chartjs';
 export function TerraApp() {
   return (
     // chainOptions && (
-    <TerraAppProviders>
+    // <TerraAppProviders>
+    <EvmAppProviders>
+
       <div>
         <GlobalStyle />
         <Header />
@@ -34,7 +38,8 @@ export function TerraApp() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
-    </TerraAppProviders>
+      {/* </TerraAppProviders> */}
+    </EvmAppProviders>
     // )
   );
 }

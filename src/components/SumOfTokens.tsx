@@ -1,5 +1,5 @@
 import React from 'react';
-import { u, Token as TokenAmount } from '@anchor-protocol/types';
+import { u, Token as TokenAmount } from '@thorfi-protocol/types';
 import { formatOutput } from '@anchor-protocol/formatter';
 import { demicrofy } from '@libs/formatter';
 

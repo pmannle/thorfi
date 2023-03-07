@@ -1,4 +1,4 @@
-import type { bAsset, u, UST } from '@anchor-protocol/types';
+import type { bAsset, u, UST } from '@thorfi-protocol/types';
 import { Big, BigSource } from 'big.js';
 
 // New Borrow Limit = ((Borrow_info.balance - Borrow_info.spendable + provided_collateral) * Oracleprice) * Max_LTV

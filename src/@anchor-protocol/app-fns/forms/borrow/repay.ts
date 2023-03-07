@@ -1,5 +1,5 @@
 import { DeploymentTarget } from '@anchor-protocol/app-provider';
-import { moneyMarket, Rate } from '@anchor-protocol/types';
+import { moneyMarket, Rate } from '@thorfi-protocol/types';
 import { u, UST } from '@libs/types';
 import { FormReturn } from '@libs/use-form';
 import big, { Big } from 'big.js';

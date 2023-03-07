@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import { UIElementProps } from '@libs/ui';
 import { BalancesContext } from 'contexts/balances';
 import { useAnchorWebapp } from '@anchor-protocol/app-provider';
-import { ANC, aUST, CollateralAmount, Native, u } from '@anchor-protocol/types';
+import { ANC, aUST, CollateralAmount, Native, u } from '@thorfi-protocol/types';
 import { useCW20Balance, useTerraNativeBalances } from '@libs/app-provider';
 import { useAccount } from 'contexts/account';
 import Big from 'big.js';

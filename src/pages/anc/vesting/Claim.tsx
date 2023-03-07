@@ -11,7 +11,7 @@ import { demicrofy } from '@libs/formatter';
 import {
   formatUST,
   formatANCWithPostfixUnits,
-} from '@anchor-protocol/notation';
+} from '@thorfi-protocol/notation';
 import styled from 'styled-components';
 import { useAncVestingClaimTx } from '@anchor-protocol/app-provider/tx/anc/ancVestingClaim';
 import { StreamStatus } from '@rx-stream/react';
@@ -20,7 +20,7 @@ import { validateTxFee } from '@anchor-protocol/app-fns';
 import { useNavigate } from 'react-router-dom';
 import { MessageBox } from 'components/MessageBox';
 import { useAncVestingAccountQuery } from '@anchor-protocol/app-provider/queries/anc/vestingClaim';
-import { ANC, u } from '@anchor-protocol/types';
+import { ANC, u } from '@thorfi-protocol/types';
 import { Dec } from '@terra-money/terra.js';
 import { useVestingClaimNotification } from 'components/Header/vesting/VestingClaimNotification';
 
@@ -74,7 +74,7 @@ function ClaimBase(props: UIElementProps) {
     const onExit =
       vestingClaimResult.status === StreamStatus.DONE
         ? () => navigate('/mypage')
-        : () => {};
+        : () => { };
 
     return (
       <CenteredLayout className={className} maxWidth={800}>

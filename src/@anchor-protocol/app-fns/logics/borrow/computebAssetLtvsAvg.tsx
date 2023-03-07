@@ -1,5 +1,5 @@
 import { BAssetLtv, BAssetLtvs } from '@anchor-protocol/app-fns';
-import { Rate } from '@anchor-protocol/types';
+import { Rate } from '@thorfi-protocol/types';
 import big from 'big.js';
 
 export function computebAssetLtvsAvg(bAssetLtvs: BAssetLtvs): BAssetLtv {

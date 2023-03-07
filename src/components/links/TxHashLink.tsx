@@ -1,7 +1,7 @@
 import { useNetwork } from '@anchor-protocol/app-provider';
 import { truncate } from '@libs/formatter';
 import React from 'react';
-import { getTransactionDetailUrl } from 'utils/terrascope';
+import { getTransactionDetailUrl } from 'utils/thorscope';
 
 export interface TxHashProps {
   txHash: string;

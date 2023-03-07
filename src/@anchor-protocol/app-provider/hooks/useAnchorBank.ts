@@ -9,7 +9,7 @@ import {
   aUST,
   bLuna,
   bLunaLunaLP,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import {
   useCW20Balance,
   useTerraNativeBalances,

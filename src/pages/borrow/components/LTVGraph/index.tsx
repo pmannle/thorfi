@@ -1,6 +1,6 @@
 import { ANCHOR_SAFE_RATIO } from '@anchor-protocol/app-fns';
-import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
-import type { Rate, u, UST } from '@anchor-protocol/types';
+import { formatUSTWithPostfixUnits } from '@thorfi-protocol/notation';
+import type { Rate, u, UST } from '@thorfi-protocol/types';
 import { demicrofy, formatDemimal, formatRate } from '@libs/formatter';
 import {
   HorizontalGraphBar,
@@ -112,8 +112,8 @@ const LTVGraphBase = (props: LTVGraphProps) => {
         value?.gte(0.9)
           ? 'negative'
           : value?.gte(ANCHOR_SAFE_RATIO)
-          ? 'warning'
-          : 'positive'
+            ? 'warning'
+            : 'positive'
       }
       min={0}
       max={1}
@@ -139,8 +139,8 @@ const LTVGraphBase = (props: LTVGraphProps) => {
           color: value?.gte(0.9)
             ? theme.colors.negative
             : value?.gte(ANCHOR_SAFE_RATIO)
-            ? theme.colors.warning
-            : theme.colors.positive,
+              ? theme.colors.warning
+              : theme.colors.positive,
           value: value
             ? Math.max(Math.min(value.toNumber(), big(1).toNumber()), 0)
             : 0,

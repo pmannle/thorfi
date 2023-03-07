@@ -1,4 +1,4 @@
-import { Gas, HumanAddr, Rate, Token, u, UST } from '@anchor-protocol/types';
+import { Gas, HumanAddr, Rate, Token, u, UST } from '@thorfi-protocol/types';
 import { TxResultRendering, TxStreamPhase } from '@libs/app-fns';
 import {
   _catchTxError,

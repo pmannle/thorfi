@@ -1,6 +1,6 @@
 import React from 'react';
 import { useBorrowRedeemCollateralTx } from '@anchor-protocol/app-provider';
-import { bAsset } from '@anchor-protocol/types';
+import { bAsset } from '@thorfi-protocol/types';
 import { useCW20Balance } from '@libs/app-provider';
 import type { DialogProps } from '@libs/use-dialog';
 import { useAccount } from 'contexts/account';

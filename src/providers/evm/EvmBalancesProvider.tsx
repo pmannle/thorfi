@@ -11,7 +11,7 @@ import {
   Native,
   ANC,
   CollateralAmount,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import { useEvmCrossAnchorSdk } from 'crossanchor';
 import Big from 'big.js';
 import { WhitelistCollateral } from 'queries';

@@ -4,7 +4,7 @@ import { NetworkInfo, TxResult } from '@terra-money/wallet-provider';
 import { CreateTxOptions } from '@terra-money/terra.js';
 import { BigSource } from 'big.js';
 import { TxReceipt, TxResultRendering, TxStreamPhase } from '../../models/tx';
-import { getTransactionDetailUrl } from 'utils/terrascope';
+import { getTransactionDetailUrl } from 'utils/thorscope';
 
 export class TxHelper {
   private _savedTx: CreateTxOptions | null = null;

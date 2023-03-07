@@ -10,7 +10,7 @@ import {
   useRewardsAncGovernanceRewardsQuery,
 } from '@anchor-protocol/app-provider';
 import { useFormatters } from '@anchor-protocol/formatter/useFormatters';
-import { u, UST } from '@anchor-protocol/types';
+import { u, UST } from '@thorfi-protocol/types';
 import { sum } from '@libs/big-math';
 import { BorderButton } from '@libs/neumorphism-ui/components/BorderButton';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';

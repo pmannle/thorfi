@@ -5,7 +5,7 @@ import {
   formatUST,
   formatUSTWithPostfixUnits,
   MILLION,
-} from '@anchor-protocol/notation';
+} from '@thorfi-protocol/notation';
 import { demicrofy, MICRO } from '@libs/formatter';
 import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
 import { BorderButton } from '@libs/neumorphism-ui/components/BorderButton';

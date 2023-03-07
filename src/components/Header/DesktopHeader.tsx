@@ -8,7 +8,7 @@ import LogoAvax from './assets/LogoAvax.svg';
 import LogoEth from './assets/LogoEth.svg';
 import LogoTerra from './assets/LogoTerra.svg';
 import { TransactionWidget } from './transactions/TransactionWidget';
-// import { EvmWalletSelector } from './wallet/evm/EvmWalletSelector';
+import { EvmWalletSelector } from './wallet/evm/EvmWalletSelector';
 // import { TerraWalletSelector } from './wallet/terra/TerraWalletSelector';
 
 export interface DesktopHeaderProps {
@@ -35,9 +35,9 @@ function DesktopHeaderBase({ className }: DesktopHeaderProps) {
       <div />
 
       <section className="wallet">
-        {/* <TransactionWidget className="transaction-widget" /> */}
-        {/* <TerraWalletSelector></TerraWalletSelector> */}
-        <WalletConnect></WalletConnect>
+        <TransactionWidget className="transaction-widget" />
+        <EvmWalletSelector></EvmWalletSelector>
+        {/* <WalletConnect></WalletConnect> */}
       </section>
 
       <GlobalStyle />

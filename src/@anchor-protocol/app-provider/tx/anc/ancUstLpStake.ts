@@ -1,5 +1,5 @@
 import { ancAncUstLpStakeTx } from '@anchor-protocol/app-fns';
-import { AncUstLP } from '@anchor-protocol/types';
+import { AncUstLP } from '@thorfi-protocol/types';
 import { useFixedFee, useRefetchQueries } from '@libs/app-provider';
 import { useStream } from '@rx-stream/react';
 import { useConnectedWallet } from '@terra-money/wallet-provider';

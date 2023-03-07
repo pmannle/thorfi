@@ -1,4 +1,4 @@
-import { Wallet } from '@anchor-protocol/icons';
+import { Wallet } from '@thorfi-protocol/icons';
 import { UIElementProps } from '@libs/ui';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
@@ -87,9 +87,8 @@ function LineBase({ className }: { className?: string }) {
       <line x1={0} x2={lineWidth} y1={lineHeight / 2} y2={lineHeight / 2} />
       <circle cx={lineWidth / 2} cy={lineHeight / 2} r={9} />
       <g
-        transform={`translate(${lineWidth / 2 - 6} ${
-          lineHeight / 2 - 6
-        }) scale(0.5)`}
+        transform={`translate(${lineWidth / 2 - 6} ${lineHeight / 2 - 6
+          }) scale(0.5)`}
       >
         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
       </g>
@@ -113,7 +112,7 @@ const Line = styled(LineBase)`
 
   circle {
     fill: ${({ theme }) =>
-      theme.palette.type === 'light' ? '#ffffff' : '#363c5f'};
+    theme.palette.type === 'light' ? '#ffffff' : '#363c5f'};
     stroke: ${({ theme }) => theme.colors.positive};
     stroke-width: 1px;
   }

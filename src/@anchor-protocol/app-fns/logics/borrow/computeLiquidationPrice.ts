@@ -1,4 +1,4 @@
-import { CW20Addr, moneyMarket, Rate, UST } from '@anchor-protocol/types';
+import { CW20Addr, moneyMarket, Rate, UST } from '@thorfi-protocol/types';
 import big from 'big.js';
 
 export function computeLiquidationPrice(

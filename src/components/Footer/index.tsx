@@ -1,4 +1,4 @@
-import { Discord } from '@anchor-protocol/icons';
+import { Discord } from '@thorfi-protocol/icons';
 import {
   useLastSyncedHeightQuery,
   useNetwork,
@@ -18,9 +18,9 @@ import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { BlockInfo } from './BlockInfo';
-import { Chain } from '@anchor-protocol/app-provider';
-import { EvmBlockInfo } from './EvmBlockInfo';
-import { getBlockUrl } from 'utils/terrascope';
+// import { Chain } from '@anchor-protocol/app-provider';
+// import { EvmBlockInfo } from './EvmBlockInfo';
+import { getBlockUrl } from 'utils/thorscope';
 
 export interface FooterProps {
   className?: string;
@@ -29,25 +29,25 @@ export interface FooterProps {
 
 function FooterBase({ className, style }: FooterProps) {
   const { network } = useNetwork();
-  const { data: lastSyncedHeight = 0 } = useLastSyncedHeightQuery();
+  const { data: lastSyncedHeight = 0 } = { data: { lastSyncedHeight: 0 } } // useLastSyncedHeightQuery();
 
   const { themeColor, switchable, updateTheme } = useTheme();
 
-  const appVersion = import.meta.env.VITE_APP_VERSION;
+  const appVersion = '0.01';
 
   return (
     <footer className={className} style={style}>
       <Info>
         <div className="blocks">
           <a
-            href={getBlockUrl(network.chainID, lastSyncedHeight)}
+            href={getBlockUrl()}
             target="_blank"
             rel="noreferrer"
           >
             <BlockInfo
-              chainName={Chain.Terra}
-              networkName={network.name}
-              blockNumber={lastSyncedHeight}
+              chainName={'Thorchain'}
+              networkName={'mainnet'}
+              blockNumber={['9,823,341']}
             />
           </a>
         </div>
@@ -59,7 +59,7 @@ function FooterBase({ className, style }: FooterProps) {
       <div>
         <IconButton
           component="a"
-          href="https://discord.gg/9aUYgpKZ9c"
+          href="#"
           target="_blank"
           rel="noreferrer"
         >
@@ -67,7 +67,7 @@ function FooterBase({ className, style }: FooterProps) {
         </IconButton>
         <IconButton
           component="a"
-          href="https://twitter.com/anchor_protocol"
+          href="#"
           target="_blank"
           rel="noreferrer"
         >
@@ -75,7 +75,7 @@ function FooterBase({ className, style }: FooterProps) {
         </IconButton>
         <IconButton
           component="a"
-          href="https://t.me/anchor_official"
+          href="#"
           target="_blank"
           rel="noreferrer"
         >
@@ -83,7 +83,7 @@ function FooterBase({ className, style }: FooterProps) {
         </IconButton>
         <IconButton
           component="a"
-          href="https://github.com/Anchor-Protocol"
+          href="#"
           target="_blank"
           rel="noreferrer"
         >

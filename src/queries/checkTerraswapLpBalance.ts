@@ -1,5 +1,5 @@
 import { useAnchorWebapp } from '@anchor-protocol/app-provider';
-import { ANC, anchorToken, AncUstLP, cw20 } from '@anchor-protocol/types';
+import { ANC, anchorToken, AncUstLP, cw20 } from '@thorfi-protocol/types';
 import {
   QueryClient,
   wasmFetch,

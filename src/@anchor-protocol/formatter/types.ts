@@ -1,5 +1,5 @@
 import { NoMicro, Token, u, UST } from '@libs/types';
-import { ANC, aUST, Native } from '@anchor-protocol/types';
+import { ANC, aUST, Native } from '@thorfi-protocol/types';
 import { BigSource } from 'big.js';
 
 export interface FormatterOptions {

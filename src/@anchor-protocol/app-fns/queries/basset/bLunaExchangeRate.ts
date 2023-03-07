@@ -1,4 +1,4 @@
-import { bluna, HumanAddr } from '@anchor-protocol/types';
+import { bluna, HumanAddr } from '@thorfi-protocol/types';
 import {
   QueryClient,
   wasmFetch,

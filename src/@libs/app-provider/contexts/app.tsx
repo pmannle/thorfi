@@ -1,5 +1,5 @@
 import { useNetwork } from '@anchor-protocol/app-provider';
-import { GasPrice, lastSyncedHeightQuery } from '@libs/app-fns';
+// import { GasPrice, lastSyncedHeightQuery } from '@libs/app-fns';
 import {
   HiveQueryClient,
   LcdQueryClient,

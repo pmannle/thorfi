@@ -1,5 +1,5 @@
 import React from 'react';
-import { bAsset, NoMicro, u } from '@anchor-protocol/types';
+import { bAsset, NoMicro, u } from '@thorfi-protocol/types';
 import type { DialogProps } from '@libs/use-dialog';
 import { useAccount } from 'contexts/account';
 import { useCallback } from 'react';

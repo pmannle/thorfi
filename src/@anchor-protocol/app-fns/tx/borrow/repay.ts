@@ -3,8 +3,8 @@ import {
   computeBorrowLimit,
   computeBorrowedAmount,
 } from '@anchor-protocol/app-fns';
-import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
-import { Gas, HumanAddr, Rate, u, UST } from '@anchor-protocol/types';
+import { formatUSTWithPostfixUnits } from '@thorfi-protocol/notation';
+import { Gas, HumanAddr, Rate, u, UST } from '@thorfi-protocol/types';
 import {
   pickAttributeValue,
   pickEvent,

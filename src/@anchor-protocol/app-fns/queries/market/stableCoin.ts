@@ -1,4 +1,4 @@
-import { HumanAddr, moneyMarket, u, UST } from '@anchor-protocol/types';
+import { HumanAddr, moneyMarket, u, UST } from '@thorfi-protocol/types';
 import {
   QueryClient,
   wasmFetch,

@@ -3,7 +3,7 @@ import {
   borrowProvideCollateralForm,
 } from '@anchor-protocol/app-fns';
 import { BorrowMarketWithDisplay } from '@anchor-protocol/app-provider';
-import { bAsset } from '@anchor-protocol/types';
+import { bAsset } from '@thorfi-protocol/types';
 import { useFixedFee } from '@libs/app-provider';
 import { u } from '@libs/types';
 import { useForm } from '@libs/use-form';

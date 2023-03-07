@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { formatUSTWithPostfixUnits } from '@anchor-protocol/notation';
-import { Rate, u, UST } from '@anchor-protocol/types';
+import { formatUSTWithPostfixUnits } from '@thorfi-protocol/notation';
+import { Rate, u, UST } from '@thorfi-protocol/types';
 import { demicrofy, formatRate } from '@libs/formatter';
 import { BorderButton } from '@libs/neumorphism-ui/components/BorderButton';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';

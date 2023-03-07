@@ -23,8 +23,8 @@ import {
   LUNA_INPUT_MAXIMUM_INTEGER_POINTS,
   UST_INPUT_MAXIMUM_DECIMAL_POINTS,
   UST_INPUT_MAXIMUM_INTEGER_POINTS,
-} from '@anchor-protocol/notation';
-import { HumanAddr, Token, u, UST } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { HumanAddr, Token, u, UST } from '@thorfi-protocol/types';
 import { useFixedFee } from '@libs/app-provider';
 import { min } from '@libs/big-math';
 import { demicrofy, microfy } from '@libs/formatter';
@@ -214,7 +214,7 @@ function ComponentBase({
     (nextCurrencyValue: string) => {
       setCurrency(
         currencies.find(({ value }) => nextCurrencyValue === value) ??
-          currencies[0],
+        currencies[0],
       );
 
       setAmount('' as Token);

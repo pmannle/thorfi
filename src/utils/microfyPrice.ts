@@ -1,4 +1,4 @@
-import { NoMicro, UST } from '@anchor-protocol/types';
+import { NoMicro, UST } from '@thorfi-protocol/types';
 import big from 'big.js';
 
 export const microfyPrice = (

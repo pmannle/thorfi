@@ -10,8 +10,8 @@ import {
   formatUSTInput,
   UST_INPUT_MAXIMUM_DECIMAL_POINTS,
   UST_INPUT_MAXIMUM_INTEGER_POINTS,
-} from '@anchor-protocol/notation';
-import { CollateralAmount, Rate, u, UST } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { CollateralAmount, Rate, u, UST } from '@thorfi-protocol/types';
 import { TxResultRendering } from '@libs/app-fns';
 import { demicrofy, formatRate } from '@libs/formatter';
 import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
@@ -60,8 +60,8 @@ export interface BorrowDialogParams extends UIElementProps, BorrowFormParams {
 
 interface TxRenderFnProps {
   txResult:
-    | StreamInProgress<TxResultRendering<unknown>>
-    | StreamDone<TxResultRendering<unknown>>;
+  | StreamInProgress<TxResultRendering<unknown>>
+  | StreamDone<TxResultRendering<unknown>>;
   closeDialog: () => void;
 }
 
@@ -175,7 +175,7 @@ function BorrowDialogBase(props: BorrowDialogProps) {
         input({
           borrowAmount: formatUSTInput(demicrofy(nextAmount)),
         });
-      } catch {}
+      } catch { }
     },
     [input, states.borrowLimit, states.borrowedAmount],
   );

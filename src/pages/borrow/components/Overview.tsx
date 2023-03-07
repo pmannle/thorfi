@@ -3,12 +3,12 @@ import {
   BorrowAPR,
   BorrowValue,
   CollateralValue,
-} from '@anchor-protocol/icons';
+} from '@thorfi-protocol/icons';
 import {
   formatUST,
   formatUSTWithPostfixUnits,
   MILLION,
-} from '@anchor-protocol/notation';
+} from '@thorfi-protocol/notation';
 import { demicrofy, formatRate, MICRO } from '@libs/formatter';
 import { IconCircle } from '@libs/neumorphism-ui/components/IconCircle';
 import { IconSpan } from '@libs/neumorphism-ui/components/IconSpan';
@@ -168,7 +168,7 @@ function Component({ className }: OverviewProps) {
                   Distribution APR
                   <b>
                     {borrowerDistributionAPYs &&
-                    borrowerDistributionAPYs.length > 0
+                      borrowerDistributionAPYs.length > 0
                       ? formatRate(borrowerDistributionAPYs[0].DistributionAPY)
                       : 0}
                     %
@@ -303,7 +303,7 @@ const StyledComponent = styled(Component)`
 
   article > div {
     background: ${({ theme }) =>
-      theme.palette.type === 'light' ? '#fcfcfc' : '#262940'};
+    theme.palette.type === 'light' ? '#fcfcfc' : '#262940'};
     box-shadow: 0 8px 14px -8px rgba(0, 0, 0, 0.07);
     border-radius: 22px;
     padding: 35px 40px;

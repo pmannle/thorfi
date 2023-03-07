@@ -4,8 +4,8 @@ import {
   formatUSTInput,
   UST_INPUT_MAXIMUM_DECIMAL_POINTS,
   UST_INPUT_MAXIMUM_INTEGER_POINTS,
-} from '@anchor-protocol/notation';
-import { Rate, u, UST } from '@anchor-protocol/types';
+} from '@thorfi-protocol/notation';
+import { Rate, u, UST } from '@thorfi-protocol/types';
 import { TxResultRendering } from '@libs/app-fns';
 import { demicrofy, formatRate } from '@libs/formatter';
 import { ActionButton } from '@libs/neumorphism-ui/components/ActionButton';
@@ -75,7 +75,7 @@ function RepayDialogBase(props: RepayDialogProps) {
         input({
           repayAmount: formatUSTInput(demicrofy(nextAmount)),
         });
-      } catch {}
+      } catch { }
     },
     [input, states.ltvToAmount],
   );

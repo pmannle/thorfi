@@ -7,29 +7,7 @@ import React, {
 } from 'react';
 import SaversAPI from './thorchain';
 
-const defaultContext = {
-  currency: 'USD',
-  fiat_symbol: '$',
-  accounts: false,
-  multi: false,
-  configs: false,
-  chains: false,
-  isConnected: false,
-  pools: [],
-  setCurrency: (currency: string) => {},
-  setSymbol: (symbol: string) => {},
-  setAccounts: (accounts: any) => {},
-  setMulti: (multi: any) => {},
-  setConfigs: (configs: any) => {},
-  setChains: (chains: any) => {},
-  setIsConnected: (isConnected: boolean) => {},
-  setPools: (pools: any) => {},
-  onConnectHandler: () => {},
-  onCloseHandler: () => {},
-  onErrorHandler: () => {},
-};
-
-const Crypto = createContext(defaultContext);
+const Crypto = createContext(undefined);
 
 const CryptoContext = ({ children }) => {
   const [currency, setCurrency] = useState('USD');

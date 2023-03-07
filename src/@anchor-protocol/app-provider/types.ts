@@ -1,4 +1,4 @@
-import { Gas } from '@anchor-protocol/types';
+import { Gas } from '@thorfi-protocol/types';
 import { AppConstants, AppContractAddress } from '@libs/app-provider';
 import { CW20Addr, HumanAddr } from '@libs/types';
 

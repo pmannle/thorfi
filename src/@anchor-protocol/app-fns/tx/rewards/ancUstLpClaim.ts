@@ -1,4 +1,4 @@
-import { formatANCWithPostfixUnits } from '@anchor-protocol/notation';
+import { formatANCWithPostfixUnits } from '@thorfi-protocol/notation';
 import {
   ANC,
   Astro,
@@ -8,7 +8,7 @@ import {
   Rate,
   u,
   UST,
-} from '@anchor-protocol/types';
+} from '@thorfi-protocol/types';
 import {
   pickAttributeValueByKey,
   pickEvent,

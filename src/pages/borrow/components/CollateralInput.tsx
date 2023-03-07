@@ -1,6 +1,6 @@
 import { microfy } from '@anchor-protocol/formatter';
 import { TokenIcon } from '@anchor-protocol/token-icons';
-import { CollateralAmount, u } from '@anchor-protocol/types';
+import { CollateralAmount, u } from '@thorfi-protocol/types';
 import { demicrofy } from '@libs/formatter';
 import { NumberInput } from '@libs/neumorphism-ui/components/NumberInput';
 import {
@@ -87,8 +87,8 @@ const Component = (props: CollateralInputProps) => {
               target.value?.length === 0
                 ? undefined
                 : (Big(
-                    microfy(Big(target.value), collateral.decimals ?? 6),
-                  ) as u<CollateralAmount<Big>>);
+                  microfy(Big(target.value), collateral.decimals ?? 6),
+                ) as u<CollateralAmount<Big>>);
 
             onAmountChange(amount);
           }

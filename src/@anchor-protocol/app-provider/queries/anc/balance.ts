@@ -1,4 +1,4 @@
-import { HumanAddr } from '@anchor-protocol/types';
+import { HumanAddr } from '@thorfi-protocol/types';
 import { AncBalance, ancBalanceQuery } from '@anchor-protocol/app-fns';
 import { EMPTY_QUERY_RESULT } from '@libs/app-provider';
 import { createQueryFn } from '@libs/react-query-utils';

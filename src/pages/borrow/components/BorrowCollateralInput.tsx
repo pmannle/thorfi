@@ -1,4 +1,4 @@
-import { CollateralAmount, u } from '@anchor-protocol/types';
+import { CollateralAmount, u } from '@thorfi-protocol/types';
 import { HorizontalGraphBar } from '@libs/neumorphism-ui/components/HorizontalGraphBar';
 import { HorizontalGraphSlider } from '@libs/neumorphism-ui/components/HorizontalGraphSlider';
 import Big from 'big.js';
@@ -32,10 +32,10 @@ const trunc = (value: number): number => {
 
 export interface BorrowCollateralInputProps
   extends UIElementProps,
-    Pick<
-      CollateralInputProps,
-      'amount' | 'collateral' | 'onCollateralChange' | 'onAmountChange'
-    > {
+  Pick<
+    CollateralInputProps,
+    'amount' | 'collateral' | 'onCollateralChange' | 'onAmountChange'
+  > {
   maxCollateralAmount?: u<CollateralAmount<Big>>;
   warningMessage?: string;
 }
