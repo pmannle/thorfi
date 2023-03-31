@@ -12,6 +12,7 @@ interface WalletContentProps extends UIElementProps {
   connectionName: string;
   connectionIcon: string;
   readonly: boolean;
+  provider: any;
   onDisconnectWallet: () => void;
 }
 
@@ -24,6 +25,7 @@ export function WalletContentBase(props: WalletContentProps) {
     connectionIcon,
     readonly,
     onDisconnectWallet,
+    provider,
   } = props;
 
   const [isCopied, setCopied] = useClipboard(walletAddress, {
@@ -74,12 +76,12 @@ export const WalletContent = styled(WalletContentBase)`
       padding: 5px 10px;
 
       background-color: ${({ theme }) =>
-        theme.palette.type === 'light' ? '#f1f1f1' : 'rgba(0, 0, 0, 0.15)'};
+    theme.palette.type === 'light' ? '#f1f1f1' : 'rgba(0, 0, 0, 0.15)'};
       color: ${({ theme }) => theme.dimTextColor};
 
       &:hover {
         background-color: ${({ theme }) =>
-          theme.palette.type === 'light' ? '#e1e1e1' : 'rgba(0, 0, 0, 0.2)'};
+    theme.palette.type === 'light' ? '#e1e1e1' : 'rgba(0, 0, 0, 0.2)'};
         color: ${({ theme }) => theme.textColor};
       }
     }
@@ -96,12 +98,12 @@ export const WalletContent = styled(WalletContentBase)`
     outline: none;
 
     background-color: ${({ theme }) =>
-      theme.palette.type === 'light' ? '#f1f1f1' : 'rgba(0, 0, 0, 0.15)'};
+    theme.palette.type === 'light' ? '#f1f1f1' : 'rgba(0, 0, 0, 0.15)'};
     color: ${({ theme }) => theme.dimTextColor};
 
     &:hover {
       background-color: ${({ theme }) =>
-        theme.palette.type === 'light' ? '#e1e1e1' : 'rgba(0, 0, 0, 0.2)'};
+    theme.palette.type === 'light' ? '#e1e1e1' : 'rgba(0, 0, 0, 0.2)'};
       color: ${({ theme }) => theme.textColor};
     }
 

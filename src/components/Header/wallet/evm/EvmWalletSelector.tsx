@@ -37,9 +37,7 @@ const EvmWalletSelectorBase = ({ className }: UIElementProps) => {
     setChains,
     onConnectHandler,
     onCloseHandler,
-    onErrorHandler,
-    providerId,
-    setProviderId
+    onErrorHandler
   } = CryptoState();
 
   let _multi = useConnectedMultiAccounts();
@@ -81,15 +79,9 @@ const EvmWalletSelectorBase = ({ className }: UIElementProps) => {
 
   const context = useContext(WalletsContext)
 
-  const handleDisconnect = useCallback(async () => {
-    if (context) {
-      await context.disconnect(providerId)
-    }
-  }, [context, providerId])
+  const providerId = context ? context.providers[0] : undefined
 
-
-
-  const { disconnect } = useWeb3React();
+  // const { disconnect } = useWeb3React();
 
   const { connection, status } = useEvmWallet();
 
@@ -99,10 +91,19 @@ const EvmWalletSelectorBase = ({ className }: UIElementProps) => {
 
   const onClose = useCallback(() => setOpen(false), []);
 
-  const disconnectWallet = useCallback(() => {
-    onClose();
-    disconnect();
-  }, [disconnect, onClose]);
+  // const disconnectWallet = useCallback(() => {
+  //   onClose();
+  //   disconnect();
+  // }, [disconnect, onClose]);
+
+  const handleDisconnect = useCallback(async () => {
+    if (context) {
+      await context.disconnect(providerId)
+      // onClose();
+      // disconnect();
+
+    }
+  }, [context, providerId])
 
 
 

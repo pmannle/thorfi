@@ -36,8 +36,8 @@ function DesktopHeaderBase({ className }: DesktopHeaderProps) {
 
       <section className="wallet">
         <TransactionWidget className="transaction-widget" />
-        <EvmWalletSelector></EvmWalletSelector>
-        {/* <WalletConnect></WalletConnect> */}
+        {/* <EvmWalletSelector></EvmWalletSelector> */}
+        <WalletConnect></WalletConnect>
       </section>
 
       <GlobalStyle />

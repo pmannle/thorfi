@@ -57,7 +57,10 @@ export function WalletProvider({
     const isConnected = !!pids.find((providerId) => providerId === id)
 
     const connectToProvider = useCallback(async () => {
-        if (isAvailable && context && !needInstall) {
+
+        if (
+            isAvailable && context && !needInstall
+        ) {
             setLoading(true)
             try {
                 await context.connector.connectTo(id, supportedChains)
