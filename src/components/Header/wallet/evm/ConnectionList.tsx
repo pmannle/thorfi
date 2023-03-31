@@ -41,9 +41,9 @@ const ConnectionList = (props: ConnectionListProps) => {
 
   const { onClose } = props;
 
-  const { connect } = useWeb3React();
+  // const { connect } = useWeb3React();
 
-  const { availableConnections } = useEvmWallet();
+  // const { availableConnections } = useEvmWallet();
 
   const [isChainSelectorVisible, setIsChainSelectorVisible] =
     useState<boolean>(false)
